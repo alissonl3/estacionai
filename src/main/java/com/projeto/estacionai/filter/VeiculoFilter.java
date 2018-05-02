@@ -1,5 +1,6 @@
 package com.projeto.estacionai.filter;
 
+
 public class VeiculoFilter {
 	
 	public VeiculoFilter() {}

@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/lista-veiculos.css}" />
 </head>
 
+
 <body>
 
 		<section layout:fragment="content">
@@ -16,7 +17,7 @@
 					<div class="row">
 						<div class="col-xs-8">
 							<h1>
-								Lista vinhos
+								Lista veiculos
 							</h1>
 						</div>
 
@@ -104,7 +105,7 @@
 							</tr>
 
 							<tr th:if="${veiculos.empty}">
-								<td colspan="5">Nenhum vinho cadastrado</td>
+								<td colspan="5">Nenhum veiculo cadastrado</td>
 							</tr>
 						</tbody>
 					</table>
