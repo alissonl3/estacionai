@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * 
- * @author ALISSON
+ * @author ALISSON 
  *
  */
 
@@ -21,11 +21,21 @@ public class Veiculo {
 		
 	}
 	
-	public Veiculo(@NotBlank String placa, @NotNull boolean mensalista) {
+	
+	
+
+	public Veiculo(@NotBlank String placa, @NotBlank String modelo, @NotBlank String marca, @NotNull int ano,
+			@NotBlank String tipo) {
 		super();
 		this.placa = placa;
-		this.mensalista = mensalista;
+		this.modelo = modelo;
+		this.marca = marca;
+		this.ano = ano;
+		this.tipo = tipo;
 	}
+
+
+
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -34,8 +44,18 @@ public class Veiculo {
 	@NotBlank
 	private String placa;
 	
+	@NotBlank
+	private String modelo;
+	
+	@NotBlank
+	private String marca;
+	
 	@NotNull
-	private boolean mensalista;
+	private Integer ano;
+	
+	@NotBlank
+	private String tipo;
+	
 
 	public Long getId() {
 		return id;
@@ -53,13 +73,62 @@ public class Veiculo {
 		this.placa = placa;
 	}
 
-	public boolean isMensalista() {
-		return mensalista;
+
+	public String getModelo() {
+		return modelo;
 	}
 
-	public void setMensalista(boolean mensalista) {
-		this.mensalista = mensalista;
+
+
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
 	}
+
+
+
+
+	public String getMarca() {
+		return marca;
+	}
+
+
+
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+
+
+
+	public Integer getAno() {
+		return ano;
+	}
+
+
+
+
+	public void setAno(Integer ano) {
+		this.ano = ano;
+	}
+
+
+
+
+	public String getTipo() {
+		return tipo;
+	}
+
+
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+
 
 	@Override
 	public int hashCode() {

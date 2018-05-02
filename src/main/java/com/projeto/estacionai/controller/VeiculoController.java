@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.projeto.estacionai.filter.VeiculoFilter;
 import com.projeto.estacionai.model.Veiculo;
+import com.projeto.estacionai.repository.VeiculoRepositorySearch;
 import com.projeto.estacionai.service.VeiculoService;
 
 /**
  * 
- * @author ALISSON
+ * @author ALISSON 
  *
  */
 
@@ -29,28 +29,33 @@ public class VeiculoController {
 	
 	@Autowired
 	private VeiculoService service;
+	@Autowired
+	private VeiculoRepositorySearch search;
 	
 	@GetMapping
-	public ModelAndView listar(VeiculoFilter filtro)
+	public ModelAndView listar(Veiculo filtro)
 	{
 		
 		ModelAndView mv = new ModelAndView("veiculos/v-lista-veiculo");
-		if((filtro.getPlaca() == null || filtro.getPlaca().trim().equals("")) && (filtro.getMensalista() == null || filtro.getMensalista().trim().equals("")))
+		if((filtro.getPlaca() == null || filtro.getPlaca().trim().equals("")) && 
+			(filtro.getModelo() == null || filtro.getModelo().trim().equals("")) && 
+			(filtro.getAno() == null || filtro.getAno() < 1500) && 
+			(filtro.getTipo() == null || filtro.getTipo().trim().equals("")))
 		{
 			mv.addObject("veiculos", service.buscarTodos());
-			mv.addObject("filtro", new VeiculoFilter());
+			mv.addObject("filtro", new Veiculo());
 		}
 		else
 		{
 			
-			mv.addObject("veiculos", service.buscarEspecifico(filtro));
+			mv.addObject("veiculos", search.filtrar(filtro));
 			mv.addObject("filtro", filtro);
 		}
 		return mv;
 	}
 	
 	@PostMapping
-	public ModelAndView listarEspecifico(VeiculoFilter filtro)
+	public ModelAndView listarEspecifico(Veiculo filtro)
 	{
 		return listar(filtro);
 	}
