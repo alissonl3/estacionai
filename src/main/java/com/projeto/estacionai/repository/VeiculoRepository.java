@@ -16,10 +16,6 @@ import com.projeto.estacionai.model.Veiculo;
 @Repository
 public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
 	
-	public List<Veiculo> findByPlacaLikeOrMensalista(String placa, boolean mensalista);
-	
-	public List<Veiculo> findByPlacaLikeAndMensalista(String placa, boolean mensalista);
-	
 	public List<Veiculo> findByPlacaLike(String placa);
 
 }

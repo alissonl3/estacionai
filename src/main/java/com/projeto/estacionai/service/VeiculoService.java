@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projeto.estacionai.filter.VeiculoFilter;
 import com.projeto.estacionai.model.Veiculo;
 import com.projeto.estacionai.repository.VeiculoRepository;
 
@@ -42,36 +41,10 @@ public class VeiculoService {
 		return this.repository.getOne(id);
 	}
 	
-	private Veiculo convertMensalita(VeiculoFilter filtro)
+	public List<Veiculo> buscarEspecifico(Veiculo veiculo)
 	{
-
-		if(filtro.getMensalista().equals("true"))
-		{
-			return new Veiculo(filtro.getPlaca(), true); 
-		}
-		else if(filtro.getMensalista().equals("false"))
-		{
-			return new Veiculo(filtro.getPlaca(), false); 
-		}
 		
 		return null;
-	}
-	
-	public List<Veiculo> buscarEspecifico(VeiculoFilter filtro)
-	{
-		
-		Veiculo retorno = convertMensalita(filtro);
-		if(retorno == null)
-		{
-			
-			return this.repository.findByPlacaLike(filtro.getPlaca() + "%");
-		}
-		else
-		{
-			
-			return this.repository.findByPlacaLikeAndMensalista(retorno.getPlaca() + "%", retorno.isMensalista());
-		}
-		
 		
 	}
 
