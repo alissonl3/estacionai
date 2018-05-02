@@ -6,5 +6,7 @@ O Estacionaí é um software voltando para o gerenciamento de estabelecimentos d
 ## Autores
 
 **Guilherme Zamberlam Pomini**
+
 **Alisson Lopes**
+
 **Eduardo Gardia**
