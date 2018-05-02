@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * 
@@ -21,21 +23,29 @@ public class Cliente {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
 	private String nome;
 	
+	@NotBlank
 	private String telefone;
 	
+	@NotBlank
 	private String endereco;
 	
+	@NotBlank
 	private String cpf;
 	
-	private int tipoPagamento;
+	@NotNull
+	private Integer tipoPagamento;
 	
-	private int numeroVagas;
+	@NotNull
+	private Integer numeroVagas;
 	
 	// Funções
 	
-	Cliente(String nome, String telefone, String endereco, String cpf, int tipoP, int numeroV){
+	public Cliente() {}
+	
+	public Cliente(String nome, String telefone, String endereco, String cpf, Integer tipoP, Integer numeroV){
 		this.nome = nome;
 		this.endereco = endereco;
 		this.telefone = telefone;
@@ -44,10 +54,18 @@ public class Cliente {
 		this.numeroVagas = numeroV;
 	}
 	
-	// Gets e Sets Cliente
+	// Gets e Sets Cliente	
 
 	public String getNome() {
 		return nome;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setNome(String nome) {
@@ -78,19 +96,19 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	public int getTipoPagamento() {
+	public Integer getTipoPagamento() {
 		return tipoPagamento;
 	}
 
-	public void setTipoPagamento(int tipoPagamento) {
+	public void setTipoPagamento(Integer tipoPagamento) {
 		this.tipoPagamento = tipoPagamento;
 	}
 
-	public int getNumeroVagas() {
+	public Integer getNumeroVagas() {
 		return numeroVagas;
 	}
 
-	public void setNumeroVagas(int numeroVagas) {
+	public void setNumeroVagas(Integer numeroVagas) {
 		this.numeroVagas = numeroVagas;
 	}
 	
