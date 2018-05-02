@@ -9,4 +9,4 @@ O Estacionaí é um software voltando para o gerenciamento de estabelecimentos d
 
 **Alisson Lopes**
 
-**Eduardo Gardia**
+**Eduardo Blüthgen Garcia**
