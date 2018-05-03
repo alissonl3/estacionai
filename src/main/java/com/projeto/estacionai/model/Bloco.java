@@ -29,8 +29,12 @@ public class Bloco {
 	
         private int maxVagas;
         
+	public Bloco(){
+            this.vagas = new ArrayList<Vaga>();
+            this.maxVagas = 1;
+        }
 	
-	public Bloco(int maxVagas){
+        public Bloco(int maxVagas){
 		this.vagas = new ArrayList<Vaga>();
                 this.maxVagas = maxVagas;
 	}
@@ -47,8 +51,12 @@ public class Bloco {
 		return vagas;
 	}
         
-        private int getNumVagas(){
+        public int getNumVagas(){
             return vagas.size();
+        }
+        
+        public int getMaxVagas(){
+            return maxVagas;
         }
 
 	public boolean addVaga(Vaga vaga){
