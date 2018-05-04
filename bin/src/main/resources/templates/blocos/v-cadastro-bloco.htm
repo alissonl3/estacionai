@@ -16,16 +16,16 @@
 					<div class="row">
 						<div class="col-xs-8">
 							<h1>
-								Cadastro veiculo
+								Cadastro bloco
 							</h1>
 						</div>
 
 						<div class="col-xs-4">
 							<div class="aw-page-header-controls">
-								<a class="btn btn-primary" th:href="@{/veiculos}">
+								<a class="btn btn-primary" th:href="@{/blocos}">
 									<i class="fa fa-table"></i>
 
-									<span class="hidden-xs hidden-sm">Lista veiculos</span>
+									<span class="hidden-xs hidden-sm">Lista blocos</span>
 								</a>
 							</div>
 						</div>
@@ -35,7 +35,7 @@
 
 			<div class="container-fluid">
 				<form method="POST" class="form-vertical  js-form-loading"
-				th:object="${veiculo}" th:action="@{/veiculos/novo}">
+				th:object="${bloco}" th:action="@{/blocos/novo}">
 				
 				<div class="alert  alert-danger  alert-dismissible" role="alert" 
                 th:if="${#fields.hasAnyErrors()}">
@@ -57,39 +57,28 @@
 					<span th:text="${mensagem}">Mensagem sucesso!</span>
 				</div>
 				
-					<input id="id" type="hidden" th:field="*{id}" value="${veiculo.id}" />
-					<div class="form-group">
-						<label>*Placa</label>
-
-						<input id="placa" type="text" class="form-control" th:field="*{placa}" />
-					</div>
-					<div class="form-group">
-						<label >*Modelo</label>
-					      <input type="text" class="form-control" th:field="*{modelo}" placeholder="Digite o modelo">		  
-					 </div>
+					<input id="id" type="hidden" th:field="*{id}" value="${bloco.id}" />
+					<input id="numVagas" type="hidden" th:field="*{numVagas}" value="1" />
 					 <div class="form-group">
-					 <label >*Marca</label>
-					      <input type="text" class="form-control" th:field="*{marca}" placeholder="Digite a marca">		  
+					 <label >*Numero maximo de vagas</label>
+					      <input type="number" class="form-control" th:field="*{maxVagas}" placeholder="Informe o numero maximo de vagas">		  
 					 </div>
+					
 					 <div class="form-group">
-					 	<label>*Tipo:</label>
-						 <select id="tipo" th:field="*{tipo}">
-					    	<option value="CARRO" selected="selected">Carro</option>
-					    	<option value="MOTO">Moto</option>
-					    </select>
+					 	<label>*Selecione as vagas:</label>
+					    <select th:field="*{vagas}"  multiple >
+				            <option th:each="vaga : ${vagas}" 
+				                    th:value="${vaga.id}"
+				                    th:text="${vaga.id}">Vaga id</option>
+				        </select>
 				    </div>
-				    
-					 <div class="form-group">
-					 <label >*Ano</label>
-					      <input type="number" class="form-control" th:field="*{ano}" placeholder="Informe o ano">		  
-					 </div>
 					
 				
 
 					<div class="form-group">
-						<button class="btn  btn-primary" th:if="${veiculo.id == null}" type="submit">Salvar</button>
-						<button class="btn  btn-primary" th:if="${veiculo.id != null}" type="submit">Atualizar</button>
-						<a class="btn  btn-primary" th:if="${veiculo.id != null}" th:href="@{/veiculos/novo}">Novo</a>
+						<button class="btn  btn-primary" th:if="${bloco.id == null}" type="submit">Salvar</button>
+						<button class="btn  btn-primary" th:if="${bloco.id != null}" type="submit">Atualizar</button>
+						<a class="btn  btn-primary" th:if="${bloco.id != null}" th:href="@{/blocos/novo}">Novo</a>
 					</div>
 				</form>
 			</div>

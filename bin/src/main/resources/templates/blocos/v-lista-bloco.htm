@@ -17,16 +17,16 @@
 					<div class="row">
 						<div class="col-xs-8">
 							<h1>
-								Lista veiculos
+								Lista blocos
 							</h1>
 						</div>
 
 						<div class="col-xs-4">
 							<div class="aw-page-header-controls">
-								<a class="btn btn-primary" th:href="@{/veiculos/novo}">
+								<a class="btn btn-primary" th:href="@{/blocos/novo}">
 									<i class="fa fa-plus-square"></i>
 
-									<span class="hidden-xs hidden-sm">Cadastro veiculo</span>
+									<span class="hidden-xs hidden-sm">Cadastro bloco</span>
 								</a>
 							</div>
 						</div>
@@ -45,35 +45,19 @@
 					<span th:text="${mensagem}">Mensagem sucesso!</span>
 				</div>
 				
-				<form  th:object="${filtro}" th:action="@{/veiculos}" method="POST"
+				<form  th:object="${filtro}" th:action="@{/blocos}" method="POST"
 							class="form-default form-horizontal" >
-					<div class="form-group">
-							<label >Placa</label>
-					      <input type="text" class="form-control" th:field="*{placa}" placeholder="Digite a placa">		  
+					 <div class="form-group">
+					 <label >Id</label>
+					      <input type="number" class="form-control" th:field="*{id}" placeholder="Informe o id do bloco">		  
 					 </div>
 					 <div class="form-group">
-					 <label >Modelo</label>
-					      <input type="text" class="form-control" th:field="*{modelo}" placeholder="Digite o modelo">		  
-					 </div>
-					 <div class="form-group">
-					 <label >Marca</label>
-					      <input type="text" class="form-control" th:field="*{marca}" placeholder="Digite a marca">		  
-					 </div>
-					 <div class="form-group">
-					 	<label>Tipo:</label>
-						 <select id="tipo" th:field="*{tipo}">
-					    	<option value="" selected="selected">Carro e Moto</option>
-					    	<option value="CARRO" >Carro</option>
-					    	<option value="MOTO" >Moto</option>
-					    </select>
-				    </div>
-					 <div class="form-group">
-					 <label >Ano</label>
-					      <input type="number" class="form-control" th:field="*{ano}" placeholder="Informe o ano">		  
+					 <label >Numero maximo de vagas</label>
+					      <input type="number" class="form-control" th:field="*{maxVagas}" placeholder="Informe o numero maximo de vagas">		  
 					 </div>
 					<div class="form-group">
 					      <button class="btn  btn-primary" type="submit">Pesquisar</button>
-					      <a class="btn btn-primary" th:href="@{/veiculos}">
+					      <a class="btn btn-primary" th:href="@{/blocos}">
 							<span class="hidden-xs hidden-sm">Buscar todos</span>
 						</a>
 					</div>   
@@ -86,27 +70,21 @@
 						<thead class="aw-table-header-solid">
 							<tr>
 								<th class="av-table-vinhos-col-codigo">Código</th>
-								<th>Placa</th>
-								<th >Modelo</th>
-								<th >Tipo</th>
+								<th>Numero maximo de vagas</th>
 								<th class="av-table-vinhos-col-icons"></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="veiculo : ${veiculos}">
-								<td class="text-center" th:text=${veiculo.id}>1</td>
-
+							<tr th:each="bloco : ${blocos}">
 								<td>
-									<a th:href="@{/veiculos/editar/{id}(id=${veiculo.id})}" th:text=${veiculo.placa}>Placa</a>
+									<a th:href="@{/blocos/editar/{id}(id=${bloco.id})}" th:text=${bloco.id}>1</a>
 								</td>
 
-								<td  th:text=${veiculo.modelo}>Ford</td>
-
-								<td  th:text=${veiculo.tipo}>Moto</td>
+								<td  th:text=${bloco.maxVagas}>1</td>
 
 								<td class="text-center">
-									<form method="POST" th:onsubmit="'return confirm(\'Posso remover ' + ${veiculo.placa} + '?\');'"
-									th:action="@{/veiculos/{id}(id=${veiculo.id})}">
+									<form method="POST" th:onsubmit="'return confirm(\'Posso remover ' + ${bloco.id} + '?\');'"
+									th:action="@{/blocos/{id}(id=${bloco.id})}">
 										<input type="hidden" name="_method" value="DELETE" />
 									
 										<button type="submit" class="btn btn-danger btn-xs">
@@ -116,8 +94,8 @@
 								</td>
 							</tr>
 
-							<tr th:if="${veiculos.empty}">
-								<td colspan="5">Nenhum veiculo cadastrado</td>
+							<tr th:if="${blocos.empty}">
+								<td colspan="5">Nenhum bloco cadastrado</td>
 							</tr>
 						</tbody>
 					</table>
