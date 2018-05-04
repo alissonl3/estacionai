@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -25,18 +27,27 @@ public class Bloco {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	private List<Vaga> vagas;
+	@OneToMany(mappedBy = "bloco")
+        private List<Vaga> vagas;
 	
-        private int maxVagas;
+        @NotNull
+        private Integer maxVagas;
+        
+        private Integer numVagas;
         
 	public Bloco(){
-            this.vagas = new ArrayList<Vaga>();
-            this.maxVagas = 1;
         }
 	
-        public Bloco(int maxVagas){
+        public Bloco(Integer maxVagas){
 		this.vagas = new ArrayList<Vaga>();
                 this.maxVagas = maxVagas;
+	}
+        
+        public Bloco(List<Vaga> vagas, @NotNull Integer maxVagas,Integer numVagas) {
+		super();
+		this.vagas = vagas;
+		this.maxVagas = maxVagas;
+		this.numVagas = numVagas;
 	}
 
 	public Long getId() {
@@ -51,11 +62,19 @@ public class Bloco {
 		return vagas;
 	}
         
-        public int getNumVagas(){
-            return vagas.size();
+        public void setVagas(List<Vaga> vagas) {
+        	this.vagas = vagas;
         }
         
-        public int getMaxVagas(){
+        public Integer getNumVagas(){
+            return numVagas;
+        }
+        
+        public void setNumVagas(Integer numVagas){
+            this.numVagas = numVagas;
+        }
+        
+        public Integer getMaxVagas(){
             return maxVagas;
         }
 

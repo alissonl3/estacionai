@@ -13,10 +13,11 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author User
+ * @author Eduardo
  */
 @Repository
 public interface VagaRepository extends JpaRepository<Vaga, Long> {
     public List<Vaga> findByBlocoLike(Bloco bloco);
 
+    public List<Vaga> findByOcupadaFalse();
 }

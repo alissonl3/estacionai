@@ -6,8 +6,10 @@
 package com.projeto.estacionai.controller;
 
 import com.projeto.estacionai.model.Bloco;
+import com.projeto.estacionai.model.Vaga;
 import com.projeto.estacionai.repository.BlocoRepositorySearch;
 import com.projeto.estacionai.service.BlocoService;
+import com.projeto.estacionai.service.VagaService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,22 +34,25 @@ public class BlocoController {
 	private BlocoService service;
 	@Autowired
 	private BlocoRepositorySearch search;
+        @Autowired
+        private VagaService vagaService;
 	
 	@GetMapping
 	public ModelAndView listar(Bloco filtro)
 	{
 		
 		ModelAndView mv = new ModelAndView("blocos/v-lista-bloco");
-		if((filtro.getNumVagas() < 0 || filtro.getNumVagas() > 1000) && 
-			(filtro.getMaxVagas() <= 0 || filtro.getMaxVagas() > 1000))
+		System.out.println("valores: " + filtro.getNumVagas() + "," + filtro.getMaxVagas() + "," + filtro.getId());
+		if((filtro.getNumVagas() == null || filtro.getNumVagas() > 1000) && 
+			(filtro.getMaxVagas() == null || filtro.getMaxVagas() > 1000) &&
+			(filtro.getId() == null || filtro.getId() < 1))
 		{
 			mv.addObject("blocos", service.buscarTodos());
 			mv.addObject("filtro", new Bloco());
 		}
 		else
 		{
-			
-			mv.addObject("bloco", search.filtrar(filtro));
+			mv.addObject("blocos", search.filtrar(filtro));
 			mv.addObject("filtro", filtro);
 		}
 		return mv;
@@ -66,6 +71,7 @@ public class BlocoController {
 	{
 		ModelAndView mv = new ModelAndView("blocos/v-cadastro-bloco");
 		mv.addObject(bloco);
+		mv.addObject("vagas", vagaService.buscarTodosDesocupadas());
 		return mv;
 	}
 	
@@ -88,17 +94,24 @@ public class BlocoController {
 	@PostMapping("/novo")
 	public ModelAndView salvar(@Valid Bloco bloco, BindingResult result, RedirectAttributes attributes)
 	{
+		bloco.setNumVagas(bloco.getVagas().size());
+		
 		if(result.hasErrors())
 		{
 			return novo(bloco);
 		}
-		
 		
 			
 		if(bloco.getId() == null)
 		{
 			
 			service.salvar(bloco);
+			Bloco ultimo = service.buscarUltimo();
+			for (Vaga vaga : bloco.getVagas()) {
+				vaga.setOcupada(true);
+				vaga.setBloco(ultimo);
+				vagaService.salvar(vaga);
+			}
 			
 			attributes.addFlashAttribute("mensagem", "Bloco cadastrado com sucesso!");
 			
@@ -108,6 +121,12 @@ public class BlocoController {
 		{
 			
 			service.salvar(bloco);
+			
+			for (Vaga vaga : bloco.getVagas()) {
+				vaga.setOcupada(true);
+				vaga.setBloco(bloco);
+				vagaService.salvar(vaga);
+			}
 			
 			attributes.addFlashAttribute("mensagem", "Bloco atualizado com sucesso!");
 			

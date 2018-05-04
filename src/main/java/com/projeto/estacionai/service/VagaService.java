@@ -34,6 +34,11 @@ public class VagaService {
     {
         return this.repository.findAll();
     }
+    
+    public List<Vaga> buscarTodosDesocupadas()
+    {
+        return this.repository.findByOcupadaFalse();
+    }
 	
     public Vaga buscar(Long id)
     {

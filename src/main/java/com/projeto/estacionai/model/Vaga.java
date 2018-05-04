@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -23,12 +26,24 @@ public class Vaga {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	private boolean ocupada;
+	@NotNull
+        private boolean ocupada;
 	
-	private Bloco bloco;
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="bloco_id")
+        private Bloco bloco;
         
 	
-	public Vaga(Bloco bloco){
+	public Vaga(){}
+        
+        public Vaga(@NotNull Boolean ocupada, @NotNull Bloco bloco) {
+		super();
+		this.ocupada = ocupada;
+		this.bloco = bloco;
+	}
+        
+        public Vaga(Bloco bloco){
 		this.ocupada = false;
                 if(bloco.addVaga(this))
                     this.bloco = bloco;
@@ -48,6 +63,14 @@ public class Vaga {
 
 	public void setOcupada(boolean ocupada) {
 		this.ocupada = ocupada;
+	}
+        
+        public Bloco getBloco() {
+		return bloco;
+	}
+
+	public void setBloco(Bloco bloco) {
+		this.bloco = bloco;
 	}
         
         @Override
