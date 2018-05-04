@@ -34,7 +34,12 @@ public class BlocoService {
     {
         return this.repository.findAll();
     }
-	
+
+    public Bloco buscarUltimo()
+    {
+        return this.repository.findFirstByOrderByIdDesc();
+    }
+    
     public Bloco buscar(Long id)
     {
         return this.repository.getOne(id);
