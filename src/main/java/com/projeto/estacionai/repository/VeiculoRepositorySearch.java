@@ -44,6 +44,9 @@ public class VeiculoRepositorySearch {
 		if(!StringUtils.isEmpty(veiculo.getPlaca()))
 			predicates.add(builder.like(builder.lower(root.get("placa")), 
 					"%"+ veiculo.getPlaca().toLowerCase() + "%"));
+		if(!StringUtils.isEmpty(veiculo.getRenavam()))
+			predicates.add(builder.like(builder.lower(root.get("renavam")), 
+					"%"+ veiculo.getRenavam().toLowerCase() + "%"));
 		if(!StringUtils.isEmpty(veiculo.getModelo()))
 			predicates.add(builder.like(builder.lower(root.get("modelo")), 
 					"%"+ veiculo.getModelo().toLowerCase()+ "%"));

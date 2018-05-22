@@ -1,11 +1,13 @@
 package com.projeto.estacionai.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
 
 /**
  * 
@@ -42,6 +44,7 @@ public class Veiculo {
 	private Long id;
 	
 	@NotBlank
+	@Column(unique=true)
 	private String placa;
 	
 	@NotBlank
@@ -55,6 +58,10 @@ public class Veiculo {
 	
 	@NotBlank
 	private String tipo;
+	
+	@NotBlank
+	@Column(unique=true)
+	private String renavam;
 	
 
 	public Long getId() {
@@ -114,17 +121,24 @@ public class Veiculo {
 	}
 
 
-
-
 	public String getTipo() {
 		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+	public String getRenavam() {
+		return renavam;
 	}
 
 
 
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setRenavam(String renavam) {
+		this.renavam = renavam;
 	}
 
 

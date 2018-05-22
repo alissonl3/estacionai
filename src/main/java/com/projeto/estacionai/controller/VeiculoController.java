@@ -38,6 +38,7 @@ public class VeiculoController {
 		
 		ModelAndView mv = new ModelAndView("veiculos/v-lista-veiculo");
 		if((filtro.getPlaca() == null || filtro.getPlaca().trim().equals("")) && 
+			(filtro.getRenavam() == null || filtro.getRenavam().trim().equals("")) && 
 			(filtro.getModelo() == null || filtro.getModelo().trim().equals("")) && 
 			(filtro.getAno() == null || filtro.getAno() < 1500) && 
 			(filtro.getTipo() == null || filtro.getTipo().trim().equals("")))
