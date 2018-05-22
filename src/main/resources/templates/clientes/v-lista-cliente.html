@@ -51,24 +51,24 @@
 					<div class="form-group">
 						<label>Nome</label>
 
-						<input type="text" class="form-control" th:field="*{nome}" />
+						<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o Nome"/>
 					</div>
 					<div class="form-group">
 						<label >Telefone</label>
-					      <input type="tel" class="form-control" th:field="*{telefone}" placeholder="Digite o Telefone">		  
+					      <input type="tel" class="form-control js-tel" th:field="*{telefone}" placeholder="Digite o Telefone">		  
 					 </div>
 					 <div class="form-group">
 					 <label >Endereço</label>
-					      <input type="text" class="form-control" th:field="*{endereco}" placeholder="Digite a endereco">		  
+					      <input type="text" class="form-control" th:field="*{endereco}" placeholder="Digite o Endereço">		  
 					 </div>
 					 <div class="form-group">
 					 <label >CPF</label>
-					      <input type="text" class="form-control" th:field="*{cpf}" placeholder="Digite a cpf">		  
+					      <input type="text" class="form-control js-cpf" th:field="*{cpf}" placeholder="Digite o Cpf">		  
 					 </div>
 					 <div class="form-group">
 					 	<label>Tipo de pagamento:</label>
-						 <select id="tipo" th:field="*{tipoPagamento}">
-						 	<option value="0" selected="selected">Ambos</option>
+						 <select id="tipo" th:field="*{tipoPagamento}" class="form-control">
+						 	<option value="" selected="selected">Ambos</option>
 					    	<option value="1">Cartao de crédito</option>
 					    	<option value="2">Boleto</option>
 					    </select>
@@ -80,9 +80,9 @@
 					 </div>
 					
 					<div class="form-group">
-					      <button class="btn  btn-primary" type="submit">Pesquisar</button>
+					      <button class="btn  btn-primary" type="submit"><i class="fa fa-search"></i> Pesquisar</button>
 					      <a class="btn btn-primary" th:href="@{/clientes}">
-							<span class="hidden-xs hidden-sm">Buscar todos</span>
+							<span class="hidden-xs hidden-sm"><i class="fa fa-search"></i> Buscar todos</span>
 						</a>
 					</div>   
 				</form>

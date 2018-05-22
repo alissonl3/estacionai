@@ -34,8 +34,8 @@ public class BlocoController {
 	private BlocoService service;
 	@Autowired
 	private BlocoRepositorySearch search;
-        @Autowired
-        private VagaService vagaService;
+    @Autowired
+    private VagaService vagaService;
 	
 	@GetMapping
 	public ModelAndView listar(Bloco filtro)
@@ -94,6 +94,7 @@ public class BlocoController {
 	@PostMapping("/novo")
 	public ModelAndView salvar(@Valid Bloco bloco, BindingResult result, RedirectAttributes attributes)
 	{
+		System.out.println("Nummax: " + bloco.getMaxVagas());
 		bloco.setNumVagas(bloco.getVagas().size());
 		
 		if(result.hasErrors())

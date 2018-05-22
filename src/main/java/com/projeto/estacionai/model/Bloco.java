@@ -77,6 +77,10 @@ public class Bloco {
         public Integer getMaxVagas(){
             return maxVagas;
         }
+        
+        public void setMaxVagas(Integer maxVagas){
+            this.maxVagas = maxVagas;
+        }
 
 	public boolean addVaga(Vaga vaga){
             if(getNumVagas() < maxVagas){

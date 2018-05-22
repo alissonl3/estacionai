@@ -18,6 +18,9 @@
 							<h1>
 								Cadastro veiculo
 							</h1>
+							<p>
+							* Campos obrigatórios
+							</p>
 						</div>
 
 						<div class="col-xs-4">
@@ -61,7 +64,7 @@
 					<div class="form-group">
 						<label>*Placa</label>
 
-						<input id="placa" type="text" class="form-control" th:field="*{placa}" />
+						<input id="placa" type="text" class="form-control js-placa" th:field="*{placa}" placeholder="Digite a placa"/>
 					</div>
 					<div class="form-group">
 						<label >*Modelo</label>
@@ -73,7 +76,7 @@
 					 </div>
 					 <div class="form-group">
 					 	<label>*Tipo:</label>
-						 <select id="tipo" th:field="*{tipo}">
+						 <select id="tipo" th:field="*{tipo}" class="form-control">
 					    	<option value="CARRO" selected="selected">Carro</option>
 					    	<option value="MOTO">Moto</option>
 					    </select>
@@ -87,9 +90,9 @@
 				
 
 					<div class="form-group">
-						<button class="btn  btn-primary" th:if="${veiculo.id == null}" type="submit">Salvar</button>
-						<button class="btn  btn-primary" th:if="${veiculo.id != null}" type="submit">Atualizar</button>
-						<a class="btn  btn-primary" th:if="${veiculo.id != null}" th:href="@{/veiculos/novo}">Novo</a>
+						<button class="btn  btn-primary" th:if="${veiculo.id == null}" type="submit"><i class="fa fa-save"></i> Salvar</button>
+						<button class="btn  btn-primary" th:if="${veiculo.id != null}" type="submit"><i class="fa fa-save"></i> Atualizar</button>
+						<a class="btn  btn-primary" th:if="${veiculo.id != null}" th:href="@{/veiculos/novo}"><i class="fa fa-external-link"></i> Novo</a>
 					</div>
 				</form>
 			</div>

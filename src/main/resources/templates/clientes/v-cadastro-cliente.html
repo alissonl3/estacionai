@@ -18,6 +18,9 @@
 							<h1>
 								Cadastro cliente
 							</h1>
+							<p>
+							* Campos obrigatórios
+							</p>
 						</div>
 
 						<div class="col-xs-4">
@@ -61,23 +64,23 @@
 					<div class="form-group">
 						<label>*Nome</label>
 
-						<input type="text" class="form-control" th:field="*{nome}" />
+						<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o Nome" />
 					</div>
 					<div class="form-group">
 						<label >*Telefone</label>
-					      <input type="tel" class="form-control" th:field="*{telefone}" placeholder="Digite o Telefone">		  
+					      <input type="tel" class="form-control js-tel" th:field="*{telefone}" placeholder="Digite o Telefone">		  
 					 </div>
 					 <div class="form-group">
 					 <label >*Endereço</label>
-					      <input type="text" class="form-control" th:field="*{endereco}" placeholder="Digite a endereco">		  
+					      <input type="text" class="form-control" th:field="*{endereco}" placeholder="Digite o Endereço">		  
 					 </div>
 					 <div class="form-group">
 					 <label >*CPF</label>
-					      <input type="text" class="form-control" th:field="*{cpf}" placeholder="Digite a cpf">		  
+					      <input type="text" class="form-control js-cpf" th:field="*{cpf}" placeholder="Digite o Cpf">		  
 					 </div>
 					 <div class="form-group">
 					 	<label>*Tipo de pagamento:</label>
-						 <select id="tipo" th:field="*{tipoPagamento}">
+						 <select id="tipo" th:field="*{tipoPagamento}" class="form-control">
 					    	<option value="1" selected="selected">Cartao de crédito</option>
 					    	<option value="2">Boleto</option>
 					    </select>
@@ -91,9 +94,9 @@
 				
 
 					<div class="form-group">
-						<button class="btn  btn-primary" th:if="${cliente.id == null}" type="submit">Salvar</button>
-						<button class="btn  btn-primary" th:if="${cliente.id != null}" type="submit">Atualizar</button>
-						<a class="btn  btn-primary" th:if="${cliente.id != null}" th:href="@{/clientes/novo}">Novo</a>
+						<button class="btn  btn-primary" th:if="${cliente.id == null}" type="submit"> <i class="fa fa-save"></i> Salvar</button>
+						<button class="btn  btn-primary" th:if="${cliente.id != null}" type="submit"><i class="fa fa-save"></i> Atualizar</button>
+						<a class="btn  btn-primary" th:if="${cliente.id != null}" th:href="@{/clientes/novo}"><i class="fa fa-external-link"></i> Novo</a>
 					</div>
 				</form>
 			</div>
