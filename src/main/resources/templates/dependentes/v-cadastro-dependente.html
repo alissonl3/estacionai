@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+<head>
+</head>
+
+
+<body>
+
+		<section layout:fragment="content">
+			<div class="page-header">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-8">
+							<h1>
+								Cadastro dependente
+							</h1>
+							<p>
+							* Campos obrigatórios
+							</p>
+						</div>
+
+						<div class="col-xs-4">
+							<div class="aw-page-header-controls">
+								<a class="btn btn-primary" th:href="@{/dependentes}">
+									<i class="fa fa-table"></i>
+
+									<span class="hidden-xs hidden-sm">Lista dependentes</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container-fluid">
+				<form method="POST" class="form-vertical  js-form-loading"
+				th:object="${dependente}" th:action="@{/dependentes/novo}">
+				
+				<div class="alert  alert-danger  alert-dismissible" role="alert" 
+                th:if="${#fields.hasAnyErrors()}">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+
+					<div th:each="erro: ${#fields.detailedErrors()}">
+						<i class="fa fa-exclamation-circle"></i>
+						
+						<span th:text="${erro.message}">Mensagem erro.</span>
+					</div>
+				</div>
+				
+				
+				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+					<i class="fa fa-check-circle"></i>
+
+					<span th:text="${mensagem}">Mensagem sucesso!</span>
+				</div>
+				
+					<input id="id" type="hidden" th:field="*{id}" value="${dependente.id}" />
+					<div class="form-group">
+						<label>*Nome</label>
+
+						<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o Nome" />
+					</div>
+					<div class="form-group">
+						<label >*Telefone</label>
+					      <input type="tel" class="form-control js-tel" th:field="*{telefone}" placeholder="Digite o Telefone">		  
+					 </div>
+					 <div class="form-group">
+					 <label >*Email</label>
+					      <input type="email" class="form-control" th:field="*{email}" placeholder="Digite o Email">		  
+					 </div>
+					 <div class="form-group">
+					 <label >*CPF</label>
+					      <input type="text" class="form-control js-cpf" th:field="*{cpf}" placeholder="Digite o Cpf">		  
+					 </div>
+					 <div class="form-group">
+					 	<label>*Associado:</label>
+						 <select th:field="*{clienteAssociado}" class="form-control">
+					    	<option value="0" selected="selected">Selecione um cliente</option>
+					    	<option th:each="associado : ${associados}" th:value="${associado.id}" th:text="${associado.nome}">Nome</option>
+					    </select>
+				    </div>
+				    
+					
+				
+
+					<div class="form-group">
+						<button class="btn  btn-primary" th:if="${dependente.id == null}" type="submit"> <i class="fa fa-save"></i> Salvar</button>
+						<button class="btn  btn-primary" th:if="${dependente.id != null}" type="submit"><i class="fa fa-save"></i> Atualizar</button>
+						<a class="btn  btn-primary" th:if="${dependente.id != null}" th:href="@{/dependentes/novo}"><i class="fa fa-external-link"></i> Novo</a>
+					</div>
+				</form>
+			</div>
+		</section>
+
+</body>
+</html>

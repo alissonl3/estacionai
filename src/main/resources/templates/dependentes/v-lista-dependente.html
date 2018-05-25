@@ -17,16 +17,16 @@
 					<div class="row">
 						<div class="col-xs-8">
 							<h1>
-								Lista veiculos
+								Lista dependentes
 							</h1>
 						</div>
 
 						<div class="col-xs-4">
 							<div class="aw-page-header-controls">
-								<a class="btn btn-primary" th:href="@{/veiculos/novo}">
+								<a class="btn btn-primary" th:href="@{/dependentes/novo}">
 									<i class="fa fa-plus-square"></i>
 
-									<span class="hidden-xs hidden-sm">Cadastro veiculo</span>
+									<span class="hidden-xs hidden-sm">Cadastro dependente</span>
 								</a>
 							</div>
 						</div>
@@ -45,39 +45,37 @@
 					<span th:text="${mensagem}">Mensagem sucesso!</span>
 				</div>
 				
-				<form  th:object="${filtro}" th:action="@{/veiculos}" method="POST"
+				<form  th:object="${filtro}" th:action="@{/dependentes}" method="POST"
 							class="form-default form-horizontal" >
+					
 					<div class="form-group">
-						<label>Renavam</label>
-						<input type="text" class="form-control" th:field="*{renavam}" placeholder="Digite a numero do renavam"/>
+						<label>Nome</label>
+
+						<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o Nome"/>
 					</div>
 					<div class="form-group">
-							<label >Placa</label>
-					      <input type="text" class="form-control" th:field="*{placa}" placeholder="Digite a placa">		  
+						<label >Telefone</label>
+					      <input type="tel" class="form-control js-tel" th:field="*{telefone}" placeholder="Digite o Telefone">		  
+					 </div>		 
+					 <div class="form-group">
+					 <label >Email</label>
+					      <input type="email" class="form-control" th:field="*{email}" placeholder="Digite o Email">		  
 					 </div>
 					 <div class="form-group">
-					 <label >Modelo</label>
-					      <input type="text" class="form-control" th:field="*{modelo}" placeholder="Digite o modelo">		  
+					 <label >CPF</label>
+					      <input type="text" class="form-control js-cpf" th:field="*{cpf}" placeholder="Digite o Cpf">		  
 					 </div>
 					 <div class="form-group">
-					 <label >Marca</label>
-					      <input type="text" class="form-control" th:field="*{marca}" placeholder="Digite a marca">		  
-					 </div>
-					 <div class="form-group">
-					 	<label>Tipo:</label>
-						 <select id="tipo" th:field="*{tipo}" class="form-control">
-					    	<option value="" selected="selected">Carro e Moto</option>
-					    	<option value="CARRO" >Carro</option>
-					    	<option value="MOTO" >Moto</option>
+					 	<label>*Associado:</label>
+						 <select th:field="*{clienteAssociado}" class="form-control">
+					    	<option value="0" selected="selected">Selecione um cliente</option>
+					    	<option th:each="associado : ${associados}" th:value="${associado.id}" th:text="${associado.nome}">Nome</option>
 					    </select>
 				    </div>
-					 <div class="form-group">
-					 <label >Ano</label>
-					      <input type="number" class="form-control" th:field="*{ano}" placeholder="Informe o ano">		  
-					 </div>
+					
 					<div class="form-group">
 					      <button class="btn  btn-primary" type="submit"><i class="fa fa-search"></i> Pesquisar</button>
-					      <a class="btn btn-primary" th:href="@{/veiculos}">
+					      <a class="btn btn-primary" th:href="@{/dependentes}">
 							<span class="hidden-xs hidden-sm"><i class="fa fa-search"></i> Buscar todos</span>
 						</a>
 					</div>   
@@ -90,32 +88,30 @@
 						<thead class="aw-table-header-solid">
 							<tr>
 								<th class="av-table-vinhos-col-codigo">Código</th>
-								<th>Placa</th>
-								<th >Modelo</th>
-								<th >Tipo</th>
+								<th>Nome</th>
+								<th >Telefone</th>
+								<th >CPF</th>
 								<th class="av-table-vinhos-col-icons">Editar</th>
 								<th class="av-table-vinhos-col-icons">Excluir</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="veiculo : ${veiculos}">
-								<td class="text-center" th:text=${veiculo.id}>1</td>
+							<tr th:each="dependente : ${dependentes}">
+								<td class="text-center" th:text=${dependente.id}>1</td>
 
-								<td th:text=${veiculo.placa}>Placa
-								</td>
+								<td th:text=${dependente.nome}></td>
 
-								<td  th:text=${veiculo.modelo}>Ford</td>
+								<td  th:text=${dependente.telefone}>Telefone</td>
 
-								<td  th:text=${veiculo.tipo}>Moto</td>
+								<td  th:text=${dependente.cpf}>CPF</td>
 
-								
 								<td class="text-center">
-									<a class="btn btn-info btn-xs" th:href="@{/veiculos/editar/{id}(id=${veiculo.id})}" ><span class="fa fa-pencil"></span></a>
+									<a class="btn btn-info btn-xs" th:href="@{/dependentes/editar/{id}(id=${dependente.id})}" ><span class="fa fa-pencil"></span></a>
 								
 								</td>
 								<td class="text-center">
-									<form method="POST" th:onsubmit="'return confirm(\'Posso remover ' + ${veiculo.placa} + '?\');'"
-									th:action="@{/veiculos/{id}(id=${veiculo.id})}">
+									<form method="POST" th:onsubmit="'return confirm(\'Posso remover ' + ${dependente.nome} + '?\');'"
+									th:action="@{/dependentes/{id}(id=${dependente.id})}">
 										<input type="hidden" name="_method" value="DELETE" />
 									
 										<button type="submit" class="btn btn-danger btn-xs">
@@ -125,8 +121,8 @@
 								</td>
 							</tr>
 
-							<tr th:if="${veiculos.empty}">
-								<td colspan="5">Nenhum veiculo cadastrado</td>
+							<tr th:if="${dependentes.empty}">
+								<td colspan="6">Nenhum dependente cadastrado</td>
 							</tr>
 						</tbody>
 					</table>
