@@ -17,5 +17,7 @@ import com.projeto.estacionai.model.Veiculo;
 public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
 	
 	public List<Veiculo> findByPlacaLike(String placa);
+	
+	public List<Veiculo> findByCliente(Long id);
 
 }

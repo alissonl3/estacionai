@@ -41,6 +41,11 @@ public class VeiculoService {
 		return this.repository.getOne(id);
 	}
 	
+	public List<Veiculo> buscarPorCliente(Long id)
+	{
+		return this.repository.findByCliente(id);
+	}
+	
 	public List<Veiculo> buscarEspecifico(Veiculo veiculo)
 	{
 		

@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.projeto.estacionai.model.Cliente;
 import com.projeto.estacionai.model.Veiculo;
 import com.projeto.estacionai.repository.VeiculoRepositorySearch;
+import com.projeto.estacionai.service.ClienteService;
 import com.projeto.estacionai.service.VeiculoService;
 
 /**
@@ -31,6 +33,8 @@ public class VeiculoController {
 	private VeiculoService service;
 	@Autowired
 	private VeiculoRepositorySearch search;
+	@Autowired
+	private ClienteService clienteService;
 	
 	@GetMapping
 	public ModelAndView listar(Veiculo filtro)
@@ -55,13 +59,25 @@ public class VeiculoController {
 		return mv;
 	}
 	
+	
 	@PostMapping
 	public ModelAndView listarEspecifico(Veiculo filtro)
 	{
 		return listar(filtro);
 	}
 	
-	
+	@GetMapping("/visualizar/{id}")
+	public ModelAndView visualizar(@PathVariable Long id)
+	{
+		Veiculo filtro = new Veiculo();
+		Cliente cliente = clienteService.buscar(id);
+		filtro.setCliente(cliente);
+		
+		ModelAndView mv = new ModelAndView("veiculos/v-lista-veiculo");
+		mv.addObject("veiculos", search.filtrar(filtro));
+		mv.addObject("cliente", cliente);
+		return mv;
+	}
 	
 	@GetMapping("/novo")
 	public ModelAndView novo(Veiculo veiculo)
@@ -76,6 +92,7 @@ public class VeiculoController {
 	{
 		return novo(service.buscar(id));
 	}
+	
 	
 	@DeleteMapping("/{id}")
 	public String deletar(@PathVariable Long id, RedirectAttributes attributes)

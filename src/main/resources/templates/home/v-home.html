@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/layout}">
+<head>
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/lista-veiculos.css}" />
+</head>
+
+
+<body>
+
+		<section layout:fragment="content">
+		
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item active" aria-current="page">Inicio</li>
+			  </ol>
+			</nav>
+
+			<div class="container-fluid">
+			
+			<div class="row" style="padding-top: 10px;">
+			<div class="col-md-6">
+				<h1>Estacionái</h1>
+			</div>
+			<div class="col-md-6">
+				
+				<div class="card text-center" >
+					  <div class="card-body">
+<!-- 					    <h5 class="card-title">Quantidade de vagas livres</h5> -->
+<!-- 					    <hr /> -->
+					    <div class="row">
+					    	<div class="col-md-6">
+								<img th:src="@{/images/car.png}" class="img-fluid img-thumbnail" style="max-width: 100px; max-height: 100px;">
+								<a href="#" class="card-link">Disponíveis: <span class="badge badge-light">4</span></a>
+								
+							</div>
+							<div class="col-md-6">
+								<img th:src="@{/images/motorcycle.png}"  class="img-fluid img-thumbnail" style="max-width: 100px; max-height: 100px;">
+								<a href="#" class="card-link">Disponíveis: <span class="badge badge-light">4</span></a>
+							</div>
+					    </div>
+					    <hr />
+					    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalValidarTicket">
+						  Validar Ticket
+						</button>
+					    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalGerarTicket">
+						  Gerar Ticket
+						</button>
+					  </div>
+				</div>
+				
+				
+			</div>
+			</div>
+			
+			
+			<div class="row" style="padding-top: 10px;">
+				<div class="col-md-4">
+					<table class="table">
+					  <thead class="thead-dark">
+					    <tr>
+					      <th scope="col">Tempo</th>
+					      <th scope="col">Valor (R$)</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <td>1 hora</td>
+					      <td>7,00</td>
+					    </tr>
+					    <tr>
+					      <td>2 horas</td>
+					      <td>13,00</td>
+					    </tr>
+					    <tr>
+					      <td>A partir de 2h</td>
+					      <td>1,75 à cada 15 min</td>
+					    </tr>
+					    <tr>
+					      <td>Diária</td>
+					      <td>65,00</td>
+					    </tr>
+					    <tr>
+					      <td>Mensal</td>
+					      <td>À combinar</td>
+					    </tr>
+					  </tbody>
+					</table>
+				</div>
+				<div class="col-md-6">
+				<h1>Calendário aqui</h1>
+<!-- 					<div class="calendar" style="width: 100;"></div> -->
+				</div>
+			</div>	
+			
+			</div>
+			
+			
+			
+			<div class="modal fade" id="modalValidarTicket" tabindex="-1" role="dialog" aria-labelledby="modalValidarTicket" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title">Validar Ticket</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+					        <form method="POST" class="form-vertical">
+						
+						
+							<div class="form-group">
+								<label>Renavam</label>
+								<input type="text" class="form-control" placeholder="Digite a numero do renavam"/>
+							</div>
+							<div class="form-group">
+								<label>Placa</label>		
+								<input id="placa" type="text" class="form-control js-placa" placeholder="Digite a placa"/>
+							</div>
+						    
+						     
+						    <div class="form-group">
+								<label>Valor</label>		
+								<input id="valor" type="text" readonly="readonly" class="form-control"/>
+							</div>
+		
+							<div class="form-group">
+								<button class="btn  btn-primary"  type="submit"><i class="fa fa-save"></i> Validar</button>
+							</div>
+						</form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			
+			<div class="modal fade" id="modalGerarTicket" tabindex="-1" role="dialog" aria-labelledby="modalGerarTicket" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" >GerarTicket</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <form method="POST" class="form-vertical">
+						
+						
+							<div class="form-group">
+								<label>Renavam</label>
+								<input type="text" class="form-control" placeholder="Digite a numero do renavam"/>
+							</div>
+							<div class="form-group">
+								<label>Placa</label>		
+								<input id="placa" type="text" class="form-control js-placa" placeholder="Digite a placa"/>
+							</div>
+						   
+						   
+							<div class="form-group">
+								<button class="btn  btn-primary"  type="submit"><i class="fa fa-save"></i> Gerar</button>
+							</div>
+						</form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			
+			
+		</section>
+		
+
+</body>
+</html>

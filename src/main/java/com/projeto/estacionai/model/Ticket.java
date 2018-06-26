@@ -53,7 +53,21 @@ public class Ticket {
 	private Double total;
         
 	
-	public Ticket(){}      
+	public Ticket(){}    
+	
+	
+
+	public Ticket(@NotBlank String placa, @NotNull Vaga vaga, @NotNull LocalDateTime horarioChegada,
+			LocalDateTime horarioSaida, Double total) {
+		super();
+		this.placa = placa;
+		this.vaga = vaga;
+		this.horarioChegada = horarioChegada;
+		this.horarioSaida = horarioSaida;
+		this.total = total;
+	}
+
+
 
 	public Long getId() {
 		return id;
