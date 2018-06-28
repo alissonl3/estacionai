@@ -11,79 +11,62 @@
 <body>
 
 		<section layout:fragment="content">
-			<div class="page-header">
-				<div class="container-fluid">
+		
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+			    <li class="breadcrumb-item active" aria-current="page">Blocos</li>
+			  </ol>
+			</nav>
+		
+				<div class="container">
 					<div class="row">
-						<div class="col-xs-8">
+						<div class="col-md-12">
 							<h1>
 								Cadastro bloco
 							</h1>
-							<p>
-							* Campos obrigatórios
-							</p>
-						</div>
-
-						<div class="col-xs-4">
-							<div class="aw-page-header-controls">
-								<a class="btn btn-primary" th:href="@{/blocos}">
-									<i class="fa fa-table"></i>
-
-									<span class="hidden-xs hidden-sm">Lista blocos</span>
-								</a>
-							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="container-fluid">
-				<form method="POST" class="form-vertical  js-form-loading"
-				th:object="${bloco}" th:action="@{/blocos/novo}">
-				
-				<div class="alert  alert-danger  alert-dismissible" role="alert" 
-                th:if="${#fields.hasAnyErrors()}">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-
-					<div th:each="erro: ${#fields.detailedErrors()}">
-						<i class="fa fa-exclamation-circle"></i>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<form method="POST" class="form-vertical">
 						
-						<span th:text="${erro.message}">Mensagem erro.</span>
+							<div class="form-group">
+								<button class="btn btn-block  btn-primary" type="submit"><i class="fa fa-motorcycle"></i> Adicionar vaga de moto</button>
+							</div>
+							
+							<div class="form-group">
+								<button class="btn btn-block  btn-primary" type="submit"><i class="fa fa-car"></i> Adicionar vaga de carro</button>
+							</div>
+							
+							<div class="form-group">
+								<button class="btn btn-block  btn-primary" type="submit"><i class="fab fa-accessible-icon"></i> Adicionar vaga de deficiente</button>
+							</div>
+							
+							 <div class="form-group">
+							 <label >*Nome Bloco</label>
+							  <input type="text" class="form-control"  placeholder="Informe o nome do bloco">		  
+							 </div>
+							 
+							 <div class="form-group">
+							 <label >Vagas adicionadas</label>
+							  <input type="text" readonly="readonly" class="form-control"  placeholder="Numero de vagas adicionadas">		  
+							 </div>
+							
+						
+		
+							<div class="form-group">
+								<button class="btn  btn-success" type="submit"><i class="fa fa-save"></i> Cadastrar</button>
+							</div>
+						</form>
+					</div>
+					<div class="col-md-8">
+						<h2>Mapa aqui</h2>
 					</div>
 				</div>
-				
-				
-				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}">
-					<i class="fa fa-check-circle"></i>
-
-					<span th:text="${mensagem}">Mensagem sucesso!</span>
-				</div>
-				
-					<input id="id" type="hidden" th:field="*{id}" value="${bloco.id}" />
-					<input id="numVagas" type="hidden" th:field="*{numVagas}" value="1" />
-					 <div class="form-group">
-					 <label >*Numero maximo de vagas</label>
-					      <input type="number" class="form-control" th:field="*{maxVagas}" placeholder="Informe o numero maximo de vagas">		  
-					 </div>
-					
-					 <div class="form-group">
-					 	<label>*Selecione as vagas:</label>
-					    <select th:field="*{vagas}" class="form-control"  multiple >
-				            <option th:each="vaga : ${vagas}" 
-				                    th:value="${vaga.id}"
-				                    th:text="${vaga.id}">Vaga id</option>
-				        </select>
-				    </div>
-					
-				
-
-					<div class="form-group">
-						<button class="btn  btn-primary" th:if="${bloco.id == null}" type="submit"><i class="fa fa-save"></i> Salvar</button>
-						<button class="btn  btn-primary" th:if="${bloco.id != null}" type="submit"><i class="fa fa-save"></i> Atualizar</button>
-						<a class="btn  btn-primary" th:if="${bloco.id != null}" th:href="@{/blocos/novo}"><i class="fa fa-external-link"></i> Novo</a>
-					</div>
-				</form>
 			</div>
 		</section>
 

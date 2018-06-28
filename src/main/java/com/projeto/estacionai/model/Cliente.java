@@ -1,9 +1,12 @@
 package com.projeto.estacionai.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -41,8 +44,19 @@ public class Cliente {
 	@NotNull
 	private Integer numeroVagas;
 	
+	@OneToMany(mappedBy="cliente")
+	private List<Veiculo> veiculos;
+	
 	// Funções
 	
+	public List<Veiculo> getVeiculos() {
+		return veiculos;
+	}
+
+	public void setVeiculos(List<Veiculo> veiculos) {
+		this.veiculos = veiculos;
+	}
+
 	public Cliente() {}
 	
 	public Cliente(String nome, String telefone, String endereco, String cpf, Integer tipoP, Integer numeroV){
@@ -54,6 +68,19 @@ public class Cliente {
 		this.numeroVagas = numeroV;
 	}
 	
+	
+	public Cliente(@NotBlank String nome, @NotBlank String telefone, @NotBlank String endereco, @NotBlank String cpf,
+			@NotNull Integer tipoPagamento, @NotNull Integer numeroVagas, List<Veiculo> veiculos) {
+		super();
+		this.nome = nome;
+		this.telefone = telefone;
+		this.endereco = endereco;
+		this.cpf = cpf;
+		this.tipoPagamento = tipoPagamento;
+		this.numeroVagas = numeroVagas;
+		this.veiculos = veiculos;
+	}
+
 	// Gets e Sets Cliente	
 
 	public String getNome() {

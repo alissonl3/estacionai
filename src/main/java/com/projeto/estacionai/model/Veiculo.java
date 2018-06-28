@@ -1,11 +1,17 @@
 package com.projeto.estacionai.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
 
 /**
  * 
@@ -14,6 +20,9 @@ import javax.validation.constraints.NotNull;
  */
 
 @Entity
+@Table(uniqueConstraints=
+@UniqueConstraint(columnNames={"placa", "renavam"})
+)
 public class Veiculo {
 	
 	public Veiculo()
@@ -33,6 +42,21 @@ public class Veiculo {
 		this.ano = ano;
 		this.tipo = tipo;
 	}
+	
+
+	public Veiculo(@NotBlank String placa, @NotBlank String modelo, @NotBlank String marca, @NotNull Integer ano,
+			@NotBlank String tipo, @NotBlank String renavam, @NotNull Cliente cliente) {
+		super();
+		this.placa = placa;
+		this.modelo = modelo;
+		this.marca = marca;
+		this.ano = ano;
+		this.tipo = tipo;
+		this.renavam = renavam;
+		this.cliente = cliente;
+	}
+
+
 
 
 
@@ -56,6 +80,25 @@ public class Veiculo {
 	@NotBlank
 	private String tipo;
 	
+	@NotBlank
+	private String renavam;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name="cliente_id", nullable=false)
+	private Cliente cliente;
+	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+
 
 	public Long getId() {
 		return id;
@@ -114,17 +157,24 @@ public class Veiculo {
 	}
 
 
-
-
 	public String getTipo() {
 		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+	public String getRenavam() {
+		return renavam;
 	}
 
 
 
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setRenavam(String renavam) {
+		this.renavam = renavam;
 	}
 
 

@@ -62,7 +62,7 @@ public class ClienteController {
 		public ModelAndView novo(Cliente cliente)
 		{
 			ModelAndView mv = new ModelAndView("clientes/v-cadastro-cliente");
-			mv.addObject(cliente);
+			mv.addObject(cliente);			
 			return mv;
 		}
 		
