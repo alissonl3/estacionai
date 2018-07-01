@@ -1,21 +1,39 @@
 <!DOCTYPE html>
-<html lang="pt"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/layout}">
-<head>
+<html lang="pt">
 
-<title>Login</title>
+<head>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/login.css}" />
+	<title>Login</title>
 
 </head>
 
-<body>
-<div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-secondary">Left</button>
-  <button type="button" class="btn btn-secondary">Middle</button>
-  <button type="button" class="btn btn-secondary">Right</button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pr-wrap">
+                <div class="pass-reset">
+                    <label>
+                        Enter the email you signed up with</label>
+                    <input type="email" placeholder="Email" />
+                    <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
+                </div>
+            </div>
+            <div class="wrap">
+                <p class="form-title">
+                    <img th:src="@{/images/logo.png}" class="img-fluid img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                </p>
+                <form class="login">
+                <input type="text" placeholder="Usuário" />
+                <input type="password" placeholder="Senha" />
+                <input type="submit" value="Entrar" class="btn btn-success btn-sm" />
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-</body>
+
 
 </html>
