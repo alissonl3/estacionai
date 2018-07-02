@@ -30,7 +30,6 @@
 								Veiculos registrados
 							</h1>
 						
-						<hr />
 						</div>
 					</div>
 				</div>
@@ -40,6 +39,14 @@
 			<div class="row">
 			<div class="col-md-12">
 			
+				<div class="alert  alert-info" th:if="${veiculos.empty}">
+					<i class="fa fa-info"></i>
+
+					<span>Não existem veiculos cadastrado para este cliente!</span>
+					<a href="#" >Clique aqui para adicionar um novo veiculo</a>
+					
+				</div>
+				
 				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}">
 					<i class="fa fa-check-circle"></i>
 
@@ -86,14 +93,22 @@
 				
 <!-- 				<hr /> -->
 	
-				<div class="input-group">
-				  <input type="text" class="form-control" placeholder="Digite a placa" >
-				  <div class="input-group-append">
-				    <button class="btn btn-outline-secondary" type="button"><span class="fa fa-search"></span> Pesquisar</button>
-				    <button class="btn btn-primary"><i class="fa fa-car"></i> Adicionar novo veiculo</button>
-				  </div>
+<!-- 				<div class="input-group"> -->
+<!-- 				  <input type="text" class="form-control" placeholder="Digite a placa" > -->
+<!-- 				  <div class="input-group-append"> -->
+<!-- 				    <button class="btn btn-outline-secondary" type="button"><span class="fa fa-search"></span> Pesquisar</button> -->
+<!-- 				    <button class="btn btn-primary"><i class="fa fa-car"></i> Adicionar novo veiculo</button> -->
+<!-- 				  </div> -->
+<!-- 				</div> -->
+
+				<div class="input-group mb-3">
+							  <input type="text" class="form-control" placeholder="Digite o nome do bloco" >
+							  <div class="input-group-append">
+							    <button class="btn btn-outline-secondary" type="button"><span class="fa fa-search"></span> Pesquisar</button>
+							   	<button class="btn btn-outline-secondary" type="button"><span class="fa fa-angle-double-down"></span> Avançada</button>
+							  </div>
 				</div>
-				<br />
+
 				<div class="table-responsive">
 					<table id="tabela-produtos" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
 						<thead class="aw-table-header-solid">
@@ -119,7 +134,7 @@
 
 								
 								<td class="text-center">
-									<a class="btn btn-info" th:href="@{/veiculos/editar/{id}/{idCliente}(id=${veiculo.id},idCliente=${cliente.id})}" ><span class="fa fa-pencil-alt"></span></a>
+									<a class="btn btn-info" th:href="@{/clientes/editar/veiculo/{id}(id=${veiculo.id})}" ><span class="fa fa-pencil-alt"></span></a>
 								
 								</td>
 								<td class="text-center">
@@ -135,7 +150,7 @@
 							</tr>
 
 							<tr th:if="${veiculos.empty}">
-								<td colspan="5">Nenhum veiculo cadastrado</td>
+								<td colspan="6">Nenhum veiculo cadastrado</td>
 							</tr>
 						</tbody>
 					</table>

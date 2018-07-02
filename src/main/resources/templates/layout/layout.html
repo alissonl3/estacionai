@@ -20,6 +20,7 @@
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<img th:src="@{/images/logo1.jpeg}" class="img-fluid" style="max-width: 50px; max-height: 50px;">								
   <a class="navbar-brand" href="#">Estacion<b>aí</b></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -35,10 +36,7 @@
           <i class="fa fa-parking"></i> Blocos
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarBlocos">
-          <a class="dropdown-item" href="">Bloco A</a>
-          <a class="dropdown-item" href="">Bloco B</a>
-          <a class="dropdown-item" href="">Bloco C</a>
-          <a class="dropdown-item" href="">Bloco D</a>
+        <a class="dropdown-item" th:href="@{/blocos}">Buscar Bloco</a>
           <a class="dropdown-item" th:href="@{/blocos/novo}">Adicionar Bloco</a>
         </div>
       </li>
@@ -65,25 +63,24 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" th:href="@{/}" id="navbarRelatorio" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-chart-bar"></i> Relatórios
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarRelatorio">
-          <a class="dropdown-item" th:href="@{/relatorios}" >Relatório de Contas à pagar</a>
-          <a class="dropdown-item" th:href="@{/relatorios}" >Relatório de Contas à receber</a>
-          <a class="dropdown-item" th:href="@{/relatorios}" >Relatório de Movimentos de clientes</a>
-          <a class="dropdown-item" th:href="@{/relatorios}" >Relatório de Equipamentos</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" th:href="@{/}" id="navbarContas" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-dollar-sign"></i> Contas
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarContas">
-          <a class="dropdown-item" >Contas à pagar</a>
-          <a class="dropdown-item" >Contas à receber</a>
-          <a class="dropdown-item" >Documentação de Equipamentos</a>
-          <a class="dropdown-item" >Equipamentos</a>
+          <a class="dropdown-item" th:href="@{/contas/pagar}" >Contas à pagar</a>
+          <a class="dropdown-item" th:href="@{/contas/receber}" >Contas à receber</a>
+          <a class="dropdown-item" th:href="@{/contas/equipamento}" >Documentação de Equipamentos</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" th:href="@{/}" id="navbarRelatorio" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-chart-bar"></i> Relatórios
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarRelatorio">
+          <a class="dropdown-item" th:href="@{/relatorios/pagar}" >Relatório de Contas à pagar</a>
+          <a class="dropdown-item" th:href="@{/relatorios/receber}" >Relatório de Contas à receber</a>
+          <a class="dropdown-item" th:href="@{/relatorios/movimento}" >Relatório de Movimentos de clientes</a>
+          <a class="dropdown-item" th:href="@{/relatorios/equipamento}" >Relatório de Equipamentos</a>
         </div>
       </li>
     </ul>
@@ -97,7 +94,7 @@
 		<div class="push"></div>
 		<!-- FOOTER -->
 		<footer >
-			<div class="container-fluid">
+			<div class="container-fluid" style="margin-top: 10px;">
 				<span >&copy; 2017 ESTACIONAÍ.</span>
 			</div>
 		</footer>
@@ -117,6 +114,7 @@
 			$('.js-tel').mask("(99) 9999-9999");
 			$('.js-cpf').mask("999.999.999-99");
 			$('.js-placa').mask("aaa-aaaa");
+			$('.js-data').mask("99/99/9999");
 // 			$('.calendar').calendar({
 // 				showHeaders: true,
 // 				colsMd: 6,

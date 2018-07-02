@@ -12,12 +12,12 @@
 
 		<section layout:fragment="content">
 		
-		<nav aria-label="breadcrumb" th:if="${cliente.id != null}">
+		<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
 			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
 			    <li class="breadcrumb-item"><a th:href="@{/clientes}">Clientes</a></li>
-			    <li class="breadcrumb-item" ><a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" th:text="${cliente.nome}">Nome</a></li>
-			    <li class="breadcrumb-item" ><a th:href="@{/veiculos/visualizar/{id}(id=${cliente.id})}">Veiculos</a></li>
+			    <li class="breadcrumb-item" ><a th:href="@{/clientes/editar/{id}(id=${veiculo.cliente.id})}" th:text="${veiculo.cliente.nome}">Nome</a></li>
+			    <li class="breadcrumb-item" ><a th:href="@{/clientes/veiculos/{id}(id=${veiculo.cliente.id})}">Veiculos</a></li>
 			    <li class="breadcrumb-item active" aria-current="page" th:text="${veiculo.placa}">Veiculo</li>
 			  </ol>
 		</nav>
@@ -46,7 +46,7 @@
 
 			<div class="container">
 				<form method="POST" class="form-vertical"
-				th:object="${veiculo}" th:action="@{/veiculos/novo}">
+				th:object="${veiculo}" th:action="@{/clientes/editar/veiculo/novo}">
 				
 				<div class="alert  alert-danger  alert-dismissible" role="alert" 
                 th:if="${#fields.hasAnyErrors()}">
@@ -69,6 +69,7 @@
 				</div>
 				
 					<input id="id" type="hidden" th:field="*{id}" value="${veiculo.id}" />
+					<input id="cliente" type="hidden" th:field="*{cliente}" value="${veiculo.cliente}" />
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label>*Renavam</label>
@@ -109,7 +110,7 @@
 					<div class="form-group">
 						<button class="btn  btn-primary" th:if="${veiculo.id == null}" type="submit"><i class="fa fa-save"></i> Salvar</button>
 						<button class="btn  btn-primary" th:if="${veiculo.id != null}" type="submit"><i class="fa fa-save"></i> Atualizar</button>
-						<a class="btn  btn-danger"  href="#"><i class="fa fa-times"></i> Cancelar</a>
+						<a class="btn  btn-danger"  th:href="@{/clientes/veiculos/{id}(id=${veiculo.cliente.id})}"><i class="fa fa-times"></i> Cancelar</a>
 					</div>
 				</form>
 			</div>

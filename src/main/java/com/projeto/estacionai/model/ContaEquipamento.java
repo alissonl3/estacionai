@@ -10,21 +10,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Alisson
  */
 @Entity
-public class Relatorio {
+public class ContaEquipamento {
+	
+	public ContaEquipamento()
+	{
+		
+	}
 
-	public Relatorio(@NotBlank String nome, @NotBlank String dataRealizacao, @NotNull Integer tipo, @NotBlank String url) {
+	public ContaEquipamento(@NotBlank String nome, @NotBlank String estado, @NotBlank String lugarReparo) {
 		super();
 		this.nome = nome;
-		this.dataRealizacao = dataRealizacao;
-		this.tipo = tipo;
-		this.url = url;
+		this.estado = estado;
+		this.lugarReparo = lugarReparo;
 	}
 
 	@Id
@@ -32,16 +35,13 @@ public class Relatorio {
 	private Long id;
 	
 	@NotBlank
-    private String nome;
-    
+	private String nome;
+	
 	@NotBlank
-    private String dataRealizacao;
-    
-	@NotNull
-    private Integer tipo;
-    
+	private String estado;
+	
 	@NotBlank
-    private String url;
+	private String lugarReparo;
 
 	public Long getId() {
 		return id;
@@ -59,29 +59,25 @@ public class Relatorio {
 		this.nome = nome;
 	}
 
-	public String getDataRealizacao() {
-		return dataRealizacao;
+	public String getEstado() {
+		return estado;
 	}
 
-	public void setDataRealizacao(String dataRealizacao) {
-		this.dataRealizacao = dataRealizacao;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
-	public Integer getTipo() {
-		return tipo;
+	public String getLugarReparo() {
+		return lugarReparo;
 	}
 
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
+	public void setLugarReparo(String lugarReparo) {
+		this.lugarReparo = lugarReparo;
 	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
+	
+	
+	
+	
 	
 	
     

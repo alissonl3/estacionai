@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -20,6 +21,31 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Vaga {
 	
+	public Vaga(){}
+    
+    public Vaga(@NotNull Boolean ocupada, @NotNull Bloco bloco) {
+	super();
+	this.ocupada = ocupada;
+	this.bloco = bloco;
+	}
+	    
+	 public Vaga(Bloco bloco){
+		this.ocupada = false;
+	            if(bloco.addVaga(this))
+	                this.bloco = bloco;
+	}
+	 
+	 
+	
+	public Vaga(@NotNull boolean ocupada, @NotNull Bloco bloco, @NotNull Integer tipo) {
+		super();
+		this.ocupada = ocupada;
+		this.bloco = bloco;
+		this.tipo = tipo;
+	}
+
+
+
 	// Atributos
 	
 	@Id
@@ -27,27 +53,16 @@ public class Vaga {
 	private Long id;
 	
 	@NotNull
-        private boolean ocupada;
+    private boolean ocupada;
 	
 	@NotNull
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="bloco_id")
-        private Bloco bloco;
-        
+    private Bloco bloco;
 	
-	public Vaga(){}
+	@NotNull
+	private Integer tipo;
         
-        public Vaga(@NotNull Boolean ocupada, @NotNull Bloco bloco) {
-		super();
-		this.ocupada = ocupada;
-		this.bloco = bloco;
-	}
-        
-        public Vaga(Bloco bloco){
-		this.ocupada = false;
-                if(bloco.addVaga(this))
-                    this.bloco = bloco;
-	}
 
 	public Long getId() {
 		return id;
@@ -72,8 +87,16 @@ public class Vaga {
 	public void setBloco(Bloco bloco) {
 		this.bloco = bloco;
 	}
-        
-        @Override
+	
+        public Integer getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
+	}
+
+		@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
