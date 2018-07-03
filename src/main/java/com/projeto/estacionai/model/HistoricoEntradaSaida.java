@@ -5,7 +5,6 @@
  */
 package com.projeto.estacionai.model;
 
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
 import javax.persistence.Convert;
@@ -13,8 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -27,35 +24,23 @@ import com.projeto.estacionai.util.LocalDateTimeAttributeConverter;
  * @author ALISSON
  */
 @Entity
-public class Ticket {
+public class HistoricoEntradaSaida {
 
-    public Ticket(@NotBlank String codigo, @NotBlank String placa, @NotNull Vaga vaga,
-			@NotNull LocalDateTime horarioChegada, LocalDateTime horarioSaida, Double total) {
+	public HistoricoEntradaSaida(@NotBlank String codigo, @NotNull LocalDateTime horarioChegada,
+			LocalDateTime horarioSaida) {
 		super();
 		this.codigo = codigo;
-		this.placa = placa;
-		this.vaga = vaga;
 		this.horarioChegada = horarioChegada;
 		this.horarioSaida = horarioSaida;
-		this.total = total;
 	}
 
-	@Transient
-	private static DecimalFormat df2 = new DecimalFormat(".##");
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotBlank
 	private String codigo;
-	
-	@NotBlank
-	private String placa;
-	
-	@NotNull
-	@OneToOne
-	private Vaga vaga;
+
 	
 	@NotNull
 	@DateTimeFormat(pattern="dd/MM/yyyy")
@@ -66,23 +51,9 @@ public class Ticket {
 	@Convert(converter = LocalDateTimeAttributeConverter.class)
 	private LocalDateTime horarioSaida;
 	
-	private Double total;
-        
-	
-	public Ticket(){}    
-	
-	
 
-	public Ticket(@NotBlank String placa, @NotNull Vaga vaga, @NotNull LocalDateTime horarioChegada,
-			LocalDateTime horarioSaida, Double total) {
-		super();
-		this.placa = placa;
-		this.vaga = vaga;
-		this.horarioChegada = horarioChegada;
-		this.horarioSaida = horarioSaida;
-		this.total = total;
-	}
-
+	
+	public HistoricoEntradaSaida(){}    
 
 
 	public Long getId() {
@@ -92,24 +63,6 @@ public class Ticket {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getPlaca() {
-		return placa;
-	}
-
-	public void setPlaca(String placa) {
-		this.placa = placa;
-	}
-
-	public Vaga getVaga() {
-		return vaga;
-	}
-
-
-	public void setVaga(Vaga vaga) {
-		this.vaga = vaga;
-	}
-
 
 	public LocalDateTime getHorarioChegada() {
 		return horarioChegada;
@@ -130,18 +83,6 @@ public class Ticket {
 		this.horarioSaida = horarioSaida;
 	}
 
-
-	public Double getTotal() {
-		return total;
-	}
-
-
-	public void setTotal(Double total) {	
-		this.total = Double.parseDouble(df2.format(total));
-	}
-
-	
-
 	public String getCodigo() {
 		return codigo;
 	}
@@ -153,6 +94,7 @@ public class Ticket {
 	}
 
 
+	
 
 		@Override
 	public int hashCode() {
@@ -170,7 +112,7 @@ public class Ticket {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Ticket other = (Ticket) obj;
+		HistoricoEntradaSaida other = (HistoricoEntradaSaida) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

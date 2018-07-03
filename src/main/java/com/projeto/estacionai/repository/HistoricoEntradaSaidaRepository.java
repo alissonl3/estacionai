@@ -5,6 +5,7 @@
  */
 package com.projeto.estacionai.repository;
 
+import com.projeto.estacionai.model.HistoricoEntradaSaida;
 import com.projeto.estacionai.model.Ticket;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,10 +16,7 @@ import org.springframework.stereotype.Repository;
  * @author ALISSON
  */
 @Repository
-public interface TicketRepository extends JpaRepository<Ticket, Long> {
-    
-	//buscar o ultimo registro com a placa informada 
-    public Ticket findLastByPlacaLike(String placa);
+public interface HistoricoEntradaSaidaRepository extends JpaRepository<HistoricoEntradaSaida, Long> {
     
     public Ticket findLastByCodigoLike(String codigo);
 
