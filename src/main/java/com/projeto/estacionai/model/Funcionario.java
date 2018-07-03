@@ -29,6 +29,21 @@ public class Funcionario {
 		this.nivelPermissao = nivelPermissao;
 	}
 
+
+	public Funcionario(@NotBlank String nome, @NotBlank String telefone, @NotBlank String funcao, @NotBlank String cpf,
+			@NotBlank String pis, @NotNull Integer nivelPermissao, String senha) {
+		super();
+		this.nome = nome;
+		this.telefone = telefone;
+		this.funcao = funcao;
+		this.cpf = cpf;
+		this.pis = pis;
+		this.nivelPermissao = nivelPermissao;
+		this.senha = senha;
+	}
+
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -50,6 +65,9 @@ public class Funcionario {
 	
 	@NotNull
 	private Integer nivelPermissao;
+	
+	
+	private String senha;
 	
 	// Funções
 
@@ -111,6 +129,15 @@ public class Funcionario {
 		this.nivelPermissao = nivelPermissao;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	
 	
 	
 	

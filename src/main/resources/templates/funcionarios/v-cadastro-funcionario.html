@@ -97,7 +97,21 @@
 					    
 						 <div class="form-group col-md-6">
 						 <label >*Nível de Permissão</label>
-						      <input type="number" class="form-control" th:field="*{nivelPermissao}" placeholder="Informe o nível de permissão">		  
+						 <select id="nivelPermissao" th:field="*{nivelPermissao}" th:onchange="${'showSenha()'}" class="form-control">
+						    	<option value="1" selected="selected">Normal</option>
+						    	<option value="2" >Gerente</option>
+						    </select>
+<!-- 						      <input type="number" class="form-control" th:field="*{nivelPermissao}" placeholder="Informe o nível de permissão">		   -->
+						 </div>
+					 </div>
+					 
+					 
+					 <div class="collapse" id="collapseSenha">
+						 <div class="form-row">
+							 <div class="form-group col-md-12">
+							 	<label>Senha:</label>
+							 	<input id="senha" type="password" class="form-control" th:field="*{senha}" placeholder="Informe a senha">		  		 
+						    </div>
 						 </div>
 					 </div>
 							
@@ -110,6 +124,43 @@
 					</div>
 				</form>
 			</div>
+			
+			<script type="text/javascript">
+			
+			function alerta()
+			{
+				
+				var valor = document.getElementById("nivelPermissao").value;
+				
+				if(valor == 2)
+				{
+				alert("Apenas um teste 2");
+				}
+				
+			}
+			
+			function showSenha()
+			{
+				
+				var valor = document.getElementById("nivelPermissao").value;
+				
+				if(valor == 1)
+				{
+					document.getElementById("senha").value = "";
+					
+					$('#collapseSenha').collapse('hide');
+					
+				}
+				else if(valor == 2)
+				{
+					$('#collapseSenha').collapse('show');
+				}
+				
+				
+			}
+			
+			</script>
+			
 		</section>
 
 </body>
