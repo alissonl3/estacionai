@@ -47,6 +47,8 @@
 					
 				</div>
 				
+				
+				
 				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}">
 					<i class="fa fa-check-circle"></i>
 
@@ -100,6 +102,12 @@
 <!-- 				    <button class="btn btn-primary"><i class="fa fa-car"></i> Adicionar novo veiculo</button> -->
 <!-- 				  </div> -->
 <!-- 				</div> -->
+
+				<div th:if="${!veiculos.empty}" style="margin-bottom: 10px;" >
+						<a class="btn btn-outline-success" th:href="@{/clientes/veiculos/}" > 
+	 							 <span class="fa fa-plus"></span> Adicionar veiculo 
+						</a>
+				</div>
 
 				<div class="input-group mb-3">
 							  <input type="text" class="form-control" placeholder="Digite o nome do bloco" >

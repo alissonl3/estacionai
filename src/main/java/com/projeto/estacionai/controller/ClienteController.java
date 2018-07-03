@@ -92,6 +92,12 @@ public class ClienteController {
 			return mv;
 		}
 		
+		@GetMapping("/veiculos/{id}/novo")
+		public ModelAndView salvarVeiculo(@PathVariable Long id)
+		{
+			return novoVeiculo(serviceVeiculo.buscar(id));
+		}
+		
 		@GetMapping("/editar/veiculo/{id}")
 		public ModelAndView editarVeiculo(@PathVariable Long id)
 		{

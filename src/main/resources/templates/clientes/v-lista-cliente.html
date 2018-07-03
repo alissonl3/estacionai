@@ -40,8 +40,14 @@
 							<i class="fa fa-info"></i>
 		
 							<span>Não existem veiculos cadastrado para este cliente!</span>
-							<a href="#" >Clique aqui para adicionar um novo veiculo</a>
+							<a th:href="@{/clientes/novo}" >Clique aqui para adicionar um novo veiculo</a>
 							
+						</div>
+						
+						<div th:if="${!clientes.empty}" style="margin-bottom: 10px;" >
+						<a class="btn btn-outline-success" th:href="@{/clientes/novo}" > 
+	 							 <span class="fa fa-plus"></span> Adicionar cliente 
+						</a>
 						</div>
 						
 							<div class="input-group mb-3">

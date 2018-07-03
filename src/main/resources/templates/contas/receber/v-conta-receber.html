@@ -34,6 +34,12 @@
 					
 				</div>
 				
+				<div th:if="${!contas.empty}" style="margin-bottom: 10px; >
+						<a class="btn btn-outline-success" th:href="@{/contas/receber/novo}" > 
+	 							 <span class="fa fa-plus"></span> Adicionar conta 
+						</a>
+				</div>
+				
 				<div class="input-group mb-3">
 							  <input type="text" class="form-control" placeholder="Digite o nome da conta" >
 							  <div class="input-group-append">

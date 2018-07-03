@@ -40,7 +40,13 @@
 					<span>Não existem blocos cadastrados!</span>
 					<a href="#" >Clique aqui para adicionar um novo bloco</a>
 					
-				</div>
+			</div>
+			
+			<div th:if="${!blocos.empty}" style="margin-bottom: 10px;" >
+						<a class="btn btn-outline-success" th:href="@{/blocos/novo}" > 
+	 							 <span class="fa fa-plus"></span> Adicionar bloco 
+						</a>
+			</div>
 			
 <!-- 				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}"> -->
 <!-- 					<i class="fa fa-check-circle"></i> -->
