@@ -14,8 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.projeto.estacionai.model.Cliente;
+import com.projeto.estacionai.model.Veiculo;
 import com.projeto.estacionai.repository.ClienteRepositorySearch;
+import com.projeto.estacionai.repository.VeiculoRepositorySearch;
 import com.projeto.estacionai.service.ClienteService;
+import com.projeto.estacionai.service.VeiculoService;
 
 @Controller
 @RequestMapping("/clientes")
@@ -25,6 +28,10 @@ public class ClienteController {
 		private ClienteService service;
 		@Autowired
 		private ClienteRepositorySearch search;
+		@Autowired
+		private VeiculoService serviceVeiculo;
+		@Autowired
+		private VeiculoRepositorySearch searchVeiculo;
 		
 		@GetMapping
 		public ModelAndView listar(Cliente filtro)
@@ -70,6 +77,52 @@ public class ClienteController {
 		public ModelAndView editar(@PathVariable Long id)
 		{
 			return novo(service.buscar(id));
+		}
+		
+		@GetMapping("/veiculos/{id}")
+		public ModelAndView veiculos(@PathVariable Long id)
+		{
+			Veiculo filtro = new Veiculo();
+			Cliente cliente = service.buscar(id);
+			filtro.setCliente(cliente);
+			
+			ModelAndView mv = new ModelAndView("clientes/v-lista-veiculo");
+			mv.addObject("veiculos", searchVeiculo.filtrar(filtro));
+			mv.addObject("cliente", cliente);
+			return mv;
+		}
+		
+		@GetMapping("/editar/veiculo/{id}")
+		public ModelAndView editarVeiculo(@PathVariable Long id)
+		{
+			return novoVeiculo(serviceVeiculo.buscar(id));
+		}
+		
+		@GetMapping("/editar/veiculo/novo")
+		public ModelAndView novoVeiculo(Veiculo veiculo)
+		{
+			ModelAndView mv = new ModelAndView("clientes/v-cadastro-veiculo");
+			mv.addObject(veiculo);			
+			return mv;
+		}
+		
+		@PostMapping("/editar/veiculo/novo")
+		public ModelAndView salvarVeiculo(@Valid Veiculo veiculo, BindingResult result, RedirectAttributes attributes)
+		{
+			if(result.hasErrors())
+			{
+				return novoVeiculo(veiculo);
+			}
+			
+
+			serviceVeiculo.salvar(veiculo);
+			
+			
+				
+			attributes.addFlashAttribute("mensagem", "Veiculo atualizado com sucesso!");
+				
+			return new ModelAndView("redirect:/clientes/editar/veiculo/" + veiculo.getId());
+			
 		}
 		
 		@DeleteMapping("/{id}")

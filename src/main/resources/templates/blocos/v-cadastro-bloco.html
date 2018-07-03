@@ -10,7 +10,7 @@
 
 <body>
 
-		<section layout:fragment="content">
+		<section layout:fragment="content" >
 		
 			<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
@@ -18,56 +18,71 @@
 			    <li class="breadcrumb-item active" aria-current="page">Blocos</li>
 			  </ol>
 			</nav>
-		
-				<div class="container">
-					<div class="row">
+			
+		<div class="container">
+			<div class="row">
 						<div class="col-md-12">
 							<h1>
 								Cadastro bloco
 							</h1>
 						</div>
 					</div>
-				</div>
+		</div>
+			
+		<div class="container border rounded p-3" style="border-color: graytext;">
+				
+					<div class="row">
+						<div class="col-md-12">
+<!-- 							<h1> -->
+<!-- 								Cadastro bloco -->
+<!-- 							</h1> -->
+							<p>
+							* Campos obrigatórios
+							</p>
+						</div>
+					</div>
+				
 
-			<div class="container">
+			
 				<div class="row">
-					<div class="col-md-4">
-						<form method="POST" class="form-vertical">
+					<div class="col-md-12" >
+						<form method="POST" class="form-vertical"
+						th:object="${bloco}" th:action="@{/blocos/salvar}">
 						
-							<div class="form-group">
-								<button class="btn btn-block  btn-primary" type="submit"><i class="fa fa-motorcycle"></i> Adicionar vaga de moto</button>
+						<div class="alert  alert-danger  alert-dismissible" role="alert" 
+		                th:if="${#fields.hasAnyErrors()}">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+		
+							<div th:each="erro: ${#fields.detailedErrors()}">
+								<i class="fa fa-exclamation-circle"></i>
+								
+								<span th:text="${erro.message}">Mensagem erro.</span>
 							</div>
-							
-							<div class="form-group">
-								<button class="btn btn-block  btn-primary" type="submit"><i class="fa fa-car"></i> Adicionar vaga de carro</button>
-							</div>
-							
-							<div class="form-group">
-								<button class="btn btn-block  btn-primary" type="submit"><i class="fab fa-accessible-icon"></i> Adicionar vaga de deficiente</button>
-							</div>
-							
+						</div>
+						
 							 <div class="form-group">
 							 <label >*Nome Bloco</label>
-							  <input type="text" class="form-control"  placeholder="Informe o nome do bloco">		  
+							  <input type="text" class="form-control" th:field="*{nome}"  placeholder="Informe o nome do bloco">		  
 							 </div>
 							 
 							 <div class="form-group">
-							 <label >Vagas adicionadas</label>
-							  <input type="text" readonly="readonly" class="form-control"  placeholder="Numero de vagas adicionadas">		  
+							 <label >*Numero máximo de vagas</label>
+							  <input type="number" class="form-control" th:field="*{maxVagas}"  placeholder="Numero máximo de vagas">		  
 							 </div>
-							
+							 
+							 <hr />
 						
-		
-							<div class="form-group">
-								<button class="btn  btn-success" type="submit"><i class="fa fa-save"></i> Cadastrar</button>
+							<div class="btn-group">
+							<button class="btn  btn-success" type="submit"><i class="fa fa-save"></i> Cadastrar</button>			
+							<a class="btn  btn-danger " role="group" th:href="@{/blocos}"><i class="fa fa-times"></i> Cancelar</a>
 							</div>
 						</form>
 					</div>
-					<div class="col-md-8">
-						<h2>Mapa aqui</h2>
-					</div>
 				</div>
-			</div>
+			
+		</div>
 		</section>
 
 </body>

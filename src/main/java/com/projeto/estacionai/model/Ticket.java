@@ -18,6 +18,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.projeto.estacionai.util.LocalDateTimeAttributeConverter;
 
@@ -27,14 +28,27 @@ import com.projeto.estacionai.util.LocalDateTimeAttributeConverter;
  */
 @Entity
 public class Ticket {
-	
-    @Transient
+
+    public Ticket(@NotBlank String codigo, @NotBlank String placa, @NotNull Vaga vaga,
+			@NotNull LocalDateTime horarioChegada, LocalDateTime horarioSaida, Double total) {
+		super();
+		this.codigo = codigo;
+		this.placa = placa;
+		this.vaga = vaga;
+		this.horarioChegada = horarioChegada;
+		this.horarioSaida = horarioSaida;
+		this.total = total;
+	}
+
+	@Transient
 	private static DecimalFormat df2 = new DecimalFormat(".##");
-	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotBlank
+	private String codigo;
 	
 	@NotBlank
 	private String placa;
@@ -44,9 +58,11 @@ public class Ticket {
 	private Vaga vaga;
 	
 	@NotNull
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Convert(converter = LocalDateTimeAttributeConverter.class)
 	private LocalDateTime horarioChegada;
 	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Convert(converter = LocalDateTimeAttributeConverter.class)
 	private LocalDateTime horarioSaida;
 	
@@ -123,6 +139,19 @@ public class Ticket {
 	public void setTotal(Double total) {	
 		this.total = Double.parseDouble(df2.format(total));
 	}
+
+	
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
 
 
 		@Override

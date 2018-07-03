@@ -19,5 +19,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     
 	//buscar o ultimo registro com a placa informada 
     public Ticket findLastByPlacaLike(String placa);
+    
+    public Ticket findLastByCodigoLike(String codigo);
 
 }

@@ -93,6 +93,14 @@ public class VeiculoController {
 		return novo(service.buscar(id));
 	}
 	
+	@GetMapping("/editar/{id}/{idCliente}")
+	public ModelAndView editarComCliente(@PathVariable Long id, @PathVariable Long idCliente)
+	{
+		ModelAndView mv = new ModelAndView("veiculos/v-cadastro-veiculo");
+		mv.addObject("veiculo", service.buscar(id));
+		mv.addObject("cliente", clienteService.buscar(idCliente));
+		return mv;
+	}
 	
 	@DeleteMapping("/{id}")
 	public String deletar(@PathVariable Long id, RedirectAttributes attributes)

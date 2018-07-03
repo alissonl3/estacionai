@@ -43,6 +43,11 @@ public class VagaService {
     public Vaga buscar(Long id)
     {
         return this.repository.getOne(id);
-    }	
+    }
+    
+    public List<Vaga> buscarVagasBloco()
+    {
+    	return null;
+    }
 }
 

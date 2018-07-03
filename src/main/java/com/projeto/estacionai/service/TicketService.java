@@ -8,6 +8,7 @@ package com.projeto.estacionai.service;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +25,14 @@ public class TicketService {
 	@Autowired
 	private TicketRepository repository;
 	
+	
 	public void validarTicket(String placa)
 	{
 		Ticket ticket = repository.findLastByPlacaLike(placa);
 		LocalDateTime horarioSaida = LocalDateTime.now();
 		ticket.setHorarioSaida(horarioSaida);
 		ticket.setTotal(calcularTotal(ticket));
+		ticket.setCodigo(MD5Encoder.encode(placa.getBytes()));
 		
 		//atualiza com o horario de saida e total a pagar
 		repository.save(ticket);

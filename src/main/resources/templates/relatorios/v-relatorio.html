@@ -5,7 +5,7 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/layout}">
 <head>
-	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/lista-veiculos.css}" />
+<!-- 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/lista-veiculos.css}" /> -->
 </head>
 
 
@@ -20,9 +20,10 @@
 			  </ol>
 			</nav>
 
-			<div class="container-fluid">
+			<div class="container">
 			
 			<div class="row" style="padding-top: 10px;">
+			
 				<div class="col-md-6">
 					
 					<button type="button" class="btn btn-success" >
@@ -46,7 +47,7 @@
 							<tr>
 								<th>Código</th>
 								<th>Nome</th>
-								<th >Data de realização</th>
+								<th>Data de realização</th>
 								<th>Excluir</th>
 							</tr>
 						</thead>
@@ -71,7 +72,7 @@
 								</td>
 							</tr>
 
-							<tr th:if="${relatorios.empty}">
+							<tr th:if="${relatorios == null}">
 								<td colspan="5">Nenhum relatorio cadastrado</td>
 							</tr>
 						</tbody>
