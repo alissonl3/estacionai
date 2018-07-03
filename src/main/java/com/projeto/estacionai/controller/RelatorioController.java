@@ -5,13 +5,10 @@
  */
 package com.projeto.estacionai.controller;
 
-import com.projeto.estacionai.model.Relatorio;
 import com.projeto.estacionai.service.ContaEquipamentoService;
 import com.projeto.estacionai.service.ContaPagarService;
 import com.projeto.estacionai.service.ContaReceberService;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
