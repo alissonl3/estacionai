@@ -95,13 +95,22 @@ public class ClienteController {
 		@GetMapping("/veiculos/{id}/novo")
 		public ModelAndView salvarVeiculo(@PathVariable Long id)
 		{
-			return novoVeiculo(serviceVeiculo.buscar(id));
+			//return novoVeiculo(serviceVeiculo.buscar(id));
+			return novoVeiculo(service.buscar(id));
 		}
 		
 		@GetMapping("/editar/veiculo/{id}")
 		public ModelAndView editarVeiculo(@PathVariable Long id)
 		{
 			return novoVeiculo(serviceVeiculo.buscar(id));
+		}
+		
+		public ModelAndView novoVeiculo(Cliente cliente)
+		{
+			ModelAndView mv = new ModelAndView("clientes/v-cadastro-veiculo");
+			mv.addObject("cliente", cliente);
+			mv.addObject("veiculo", new Veiculo());			
+			return mv;
 		}
 		
 		@GetMapping("/editar/veiculo/novo")

@@ -56,6 +56,8 @@ public class Parcela {
 	@NotNull
 	@JoinColumn(name="contareceber_id", nullable=false)
 	private ContaReceber contaReceber;
+	
+	private Boolean ativo;
 
 	public Long getId() {
 		return id;
@@ -95,6 +97,14 @@ public class Parcela {
 
 	public void setContaReceber(ContaReceber contaReceber) {
 		this.contaReceber = contaReceber;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 	
 	

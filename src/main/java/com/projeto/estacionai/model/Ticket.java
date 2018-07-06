@@ -67,6 +67,8 @@ public class Ticket {
 	private LocalDateTime horarioSaida;
 	
 	private Double total;
+	
+	private Boolean ativo;
         
 	
 	public Ticket(){}    
@@ -150,6 +152,20 @@ public class Ticket {
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+	
+	
+
+
+
+		public Boolean getAtivo() {
+		return ativo;
+	}
+
+
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 

@@ -46,6 +46,8 @@ public class Bloco {
     
     @NotBlank
     private String nome;
+    
+    private Boolean ativo;
         
 	public Bloco(){
         }
@@ -110,6 +112,16 @@ public class Bloco {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	
+
+		public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 		@Override

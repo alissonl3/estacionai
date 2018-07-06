@@ -75,6 +75,8 @@ public class ContaReceber {
 	
 	private String numeroCartao;
 	
+	private Boolean ativo;
+	
 	@NotNull
 	private Double valor;
 	
@@ -139,6 +141,16 @@ public class ContaReceber {
 
 	public void setNumeroCartao(String numeroCartao) {
 		this.numeroCartao = numeroCartao;
+	}
+
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 

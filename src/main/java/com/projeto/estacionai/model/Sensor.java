@@ -43,6 +43,8 @@ public class Sensor {
 	@JoinColumn(name="vaga_id")
     private Vaga vaga;
 	
+	private Boolean ativo;
+	
 
 	public Long getId() {
 		return id;
@@ -67,6 +69,16 @@ public class Sensor {
 
 	public void setVaga(Vaga vaga) {
 		this.vaga = vaga;
+	}
+	
+	
+
+		public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 		@Override

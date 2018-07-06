@@ -83,6 +83,8 @@ public class Veiculo {
 	@NotBlank
 	private String renavam;
 	
+	private Boolean ativo;
+	
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name="cliente_id", nullable=false)
@@ -175,6 +177,21 @@ public class Veiculo {
 
 	public void setRenavam(String renavam) {
 		this.renavam = renavam;
+	}
+
+
+	
+
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+
+
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 

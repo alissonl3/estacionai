@@ -42,6 +42,8 @@ public class ContaEquipamento {
 	
 	@NotBlank
 	private String lugarReparo;
+	
+	private Boolean ativo;
 
 	public Long getId() {
 		return id;
@@ -73,6 +75,14 @@ public class ContaEquipamento {
 
 	public void setLugarReparo(String lugarReparo) {
 		this.lugarReparo = lugarReparo;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 	
 	

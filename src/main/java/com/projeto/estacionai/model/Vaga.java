@@ -63,6 +63,7 @@ public class Vaga {
 	@NotNull
 	private Integer tipo;
         
+	private Boolean ativo;
 
 	public Long getId() {
 		return id;
@@ -94,6 +95,14 @@ public class Vaga {
 
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
+	}
+
+		public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 		@Override

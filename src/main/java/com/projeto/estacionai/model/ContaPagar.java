@@ -59,6 +59,8 @@ public class ContaPagar {
 	@NotNull
 	private Double valor;
 	
+	private Boolean ativo;
+	
 
 	public Integer getTipoConta() {
 		return tipoConta;
@@ -98,6 +100,14 @@ public class ContaPagar {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 	
 	

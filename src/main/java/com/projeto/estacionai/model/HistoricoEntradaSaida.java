@@ -52,6 +52,7 @@ public class HistoricoEntradaSaida {
 	private LocalDateTime horarioSaida;
 	
 
+	private Boolean ativo;
 	
 	public HistoricoEntradaSaida(){}    
 
@@ -93,8 +94,17 @@ public class HistoricoEntradaSaida {
 		this.codigo = codigo;
 	}
 
-
 	
+
+		public Boolean getAtivo() {
+		return ativo;
+	}
+
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
 
 		@Override
 	public int hashCode() {

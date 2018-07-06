@@ -16,8 +16,8 @@
 			  <ol class="breadcrumb">
 			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
 			    <li class="breadcrumb-item"><a th:href="@{/clientes}">Clientes</a></li>
-			    <li class="breadcrumb-item" ><a th:href="@{/clientes/editar/{id}(id=${veiculo.cliente.id})}" th:text="${veiculo.cliente.nome}">Nome</a></li>
-			    <li class="breadcrumb-item" ><a th:href="@{/clientes/veiculos/{id}(id=${veiculo.cliente.id})}">Veiculos</a></li>
+<!-- 			    <li class="breadcrumb-item" ><a th:href="@{/clientes/editar/{id}(id=${veiculo.cliente.id})}" th:text="${veiculo.cliente.nome}">Nome</a></li> -->
+<!-- 			    <li class="breadcrumb-item" ><a th:href="@{/clientes/veiculos/{id}(id=${veiculo.cliente.id})}">Veiculos</a></li> -->
 			    <li class="breadcrumb-item active" aria-current="page" th:text="${veiculo.placa}">Veiculo</li>
 			  </ol>
 		</nav>
@@ -110,7 +110,7 @@
 					<div class="form-group">
 						<button class="btn  btn-primary" th:if="${veiculo.id == null}" type="submit"><i class="fa fa-save"></i> Salvar</button>
 						<button class="btn  btn-primary" th:if="${veiculo.id != null}" type="submit"><i class="fa fa-save"></i> Atualizar</button>
-						<a class="btn  btn-danger"  th:href="@{/clientes/veiculos/{id}(id=${veiculo.cliente.id})}"><i class="fa fa-times"></i> Cancelar</a>
+<!-- 						<a class="btn  btn-danger"  th:href="@{/clientes/veiculos/{id}(id=${veiculo.cliente.id})}"><i class="fa fa-times"></i> Cancelar</a> -->
 					</div>
 				</form>
 			</div>

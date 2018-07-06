@@ -69,6 +69,8 @@ public class Funcionario {
 	
 	private String senha;
 	
+	private Boolean ativo;
+	
 	// Funções
 
 	public Funcionario() {}
@@ -135,6 +137,16 @@ public class Funcionario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	
