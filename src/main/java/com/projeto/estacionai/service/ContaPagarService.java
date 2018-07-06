@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.projeto.estacionai.model.ContaEquipamento;
 import com.projeto.estacionai.model.ContaPagar;
 import com.projeto.estacionai.repository.ContaPagarRepository;
 
@@ -24,6 +25,12 @@ public class ContaPagarService {
 	private ContaPagarRepository repository;
 	
 	public void salvar (ContaPagar conta) {
+		conta.setAtivo(true);
+		this.repository.save(conta);
+	}
+	
+	public void deletar (ContaPagar conta) {
+		conta.setAtivo(false);
 		this.repository.save(conta);
 	}
 	
@@ -34,7 +41,7 @@ public class ContaPagarService {
 	
 	public List<ContaPagar> buscarTodos()
 	{
-		return this.repository.findAll();
+		return this.repository.findByAtivoTrue();
 	}
 	
 	public ContaPagar buscar(Long id)

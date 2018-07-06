@@ -25,6 +25,13 @@ public class HistoricoEntradaSaidaService {
 	
 	 public void salvar(HistoricoEntradaSaida historico)
 	    {
+		 	historico.setAtivo(true);
+	        this.repository.save(historico);
+	    }
+	 
+	 public void deletar(HistoricoEntradaSaida historico)
+	    {
+		 	historico.setAtivo(false);
 	        this.repository.save(historico);
 	    }
 		
@@ -35,7 +42,7 @@ public class HistoricoEntradaSaidaService {
 		
 	    public List<HistoricoEntradaSaida> buscarTodos()
 	    {
-	        return this.repository.findAll();
+	        return this.repository.findByAtivoTrue();
 	    }
 	    
 	    public HistoricoEntradaSaida buscar(Long id)

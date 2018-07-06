@@ -105,7 +105,7 @@ public class VeiculoController {
 	@DeleteMapping("/{id}")
 	public String deletar(@PathVariable Long id, RedirectAttributes attributes)
 	{
-		service.deletar(id);
+		this.service.deletar(this.service.buscar(id));
 		
 		attributes.addFlashAttribute("mensagem", "Veiculo removido com sucesso!");
 		

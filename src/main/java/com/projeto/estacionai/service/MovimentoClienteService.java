@@ -20,6 +20,12 @@ public class MovimentoClienteService {
 	private MovimentoClienteRepository repository;
 	
 	public void salvar (MovimentoCliente movimento) {
+		movimento.setAtivo(true);
+		this.repository.save(movimento);
+	}
+	
+	public void deletar (MovimentoCliente movimento) {
+		movimento.setAtivo(false);
 		this.repository.save(movimento);
 	}
 	
@@ -30,7 +36,7 @@ public class MovimentoClienteService {
 	
 	public List<MovimentoCliente> buscarTodos()
 	{
-		return this.repository.findAll();
+		return this.repository.findByAtivoTrue();
 	}
 	
 	public MovimentoCliente buscar(Long id)

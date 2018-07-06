@@ -6,6 +6,9 @@
 package com.projeto.estacionai.repository;
 
 import com.projeto.estacionai.model.Sensor;
+
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -19,5 +22,7 @@ public interface SensorRepository extends JpaRepository<Sensor, Long> {
     
 	@Query(value = "SELECT SUM(id) FROM sensor WHERE ligado = true", nativeQuery = true)
     public Integer countSensoresLigados();
+	
+	public List<Sensor> findByAtivoTrue();
 	
 }

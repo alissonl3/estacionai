@@ -23,6 +23,13 @@ public class SensorService {
 	
     public void salvar(Sensor sensor)
     {
+    	sensor.setAtivo(true);
+        this.repository.save(sensor);
+    }
+    
+    public void deletar(Sensor sensor)
+    {
+    	sensor.setAtivo(false);
         this.repository.save(sensor);
     }
 	
@@ -33,7 +40,7 @@ public class SensorService {
 	
     public List<Sensor> buscarTodos()
     {
-        return this.repository.findAll();
+        return this.repository.findByAtivoTrue();
     }
     
     public List<Sensor> buscarTodosDesligados()

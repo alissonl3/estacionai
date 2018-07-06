@@ -26,6 +26,12 @@ public class ContaEquipamentoService {
 	private ContaEquipamentoRepository repository;
 	
 	public void salvar (ContaEquipamento contaEquipamento) {
+		contaEquipamento.setAtivo(true);
+		this.repository.save(contaEquipamento);
+	}
+	
+	public void deletar (ContaEquipamento contaEquipamento) {
+		contaEquipamento.setAtivo(false);
 		this.repository.save(contaEquipamento);
 	}
 	
@@ -36,7 +42,7 @@ public class ContaEquipamentoService {
 	
 	public List<ContaEquipamento> buscarTodos()
 	{
-		return this.repository.findAll();
+		return this.repository.findByAtivoTrue();
 	}
 	
 	public ContaEquipamento buscar(Long id)

@@ -24,6 +24,12 @@ public class ContaReceberService {
 	private ContaReceberRepository repository;
 	
 	public void salvar (ContaReceber conta) {
+		conta.setAtivo(true);
+		this.repository.save(conta);
+	}
+	
+	public void deletar(ContaReceber conta) {
+		conta.setAtivo(false);
 		this.repository.save(conta);
 	}
 	
@@ -34,7 +40,7 @@ public class ContaReceberService {
 	
 	public List<ContaReceber> buscarTodos()
 	{
-		return this.repository.findAll();
+		return this.repository.findByAtivoTrue();
 	}
 	
 	public ContaReceber buscar(Long id)

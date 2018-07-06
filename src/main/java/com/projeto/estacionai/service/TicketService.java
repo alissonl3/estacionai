@@ -29,6 +29,7 @@ public class TicketService {
 	public void validarTicket(String placa)
 	{
 		Ticket ticket = repository.findLastByPlacaLike(placa);
+		ticket.setAtivo(true);
 		LocalDateTime horarioSaida = LocalDateTime.now();
 		ticket.setHorarioSaida(horarioSaida);
 		ticket.setTotal(calcularTotal(ticket));

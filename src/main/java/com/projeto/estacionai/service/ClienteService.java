@@ -20,6 +20,12 @@ public class ClienteService {
 	private ClienteRepository repository;
 	
 	public void salvar (Cliente cliente) {
+		cliente.setAtivo(true);
+		this.repository.save(cliente);
+	}
+	
+	public void deletar(Cliente cliente) {
+		cliente.setAtivo(false);
 		this.repository.save(cliente);
 	}
 	
@@ -30,7 +36,7 @@ public class ClienteService {
 	
 	public List<Cliente> buscarTodos()
 	{
-		return this.repository.findAll();
+		return this.repository.findByAtivoTrue();
 	}
 	
 	public Cliente buscar(Long id)

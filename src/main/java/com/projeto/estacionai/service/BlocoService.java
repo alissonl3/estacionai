@@ -22,6 +22,13 @@ public class BlocoService {
 	
     public void salvar(Bloco bloco)
     {
+    	bloco.setAtivo(true);
+        this.repository.save(bloco);
+    }
+    
+    public void deletar(Bloco bloco)
+    {
+    	bloco.setAtivo(false);
         this.repository.save(bloco);
     }
 	
@@ -32,7 +39,7 @@ public class BlocoService {
 	
     public List<Bloco> buscarTodos()
     {
-        return this.repository.findAll();
+        return this.repository.findByAtivoTrue();
     }
 
     public Bloco buscarUltimo()

@@ -64,7 +64,7 @@ public class ContaEquipamentoController {
 	@DeleteMapping("/{id}")
 	public ModelAndView deletar(@PathVariable Long id, RedirectAttributes attributes)
 	{
-		this.service.deletar(id);
+		this.service.deletar(this.service.buscar(id));
 		attributes.addFlashAttribute("mensagem", "Conta removida com sucesso!");
 		return index();
 	}

@@ -22,6 +22,13 @@ public class VagaService {
 	
     public void salvar(Vaga vaga)
     {
+    	vaga.setAtivo(true);
+        this.repository.save(vaga);
+    }
+    
+    public void deletar(Vaga vaga)
+    {
+    	vaga.setAtivo(false);
         this.repository.save(vaga);
     }
 	
@@ -32,7 +39,7 @@ public class VagaService {
 	
     public List<Vaga> buscarTodos()
     {
-        return this.repository.findAll();
+        return this.repository.findByAtivoTrue();
     }
     
     public List<Vaga> buscarTodosDesocupadas()
