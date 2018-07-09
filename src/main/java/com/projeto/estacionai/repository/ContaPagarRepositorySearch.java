@@ -5,7 +5,7 @@
  */
 package com.projeto.estacionai.repository;
 
-import com.projeto.estacionai.model.Bloco;
+import com.projeto.estacionai.model.ContaPagar;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -19,45 +19,42 @@ import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author Eduardo
+ * @author Alisson
  */
 @Repository
-public class BlocoRepositorySearch {
+public class ContaPagarRepositorySearch {
 
 	@PersistenceContext
 	private EntityManager manager;
 	
 	
-	public List<Bloco> filtrar(Bloco bloco) {
+	public List<ContaPagar> filtrar(ContaPagar conta) {
 		CriteriaBuilder builder =  manager.getCriteriaBuilder();
-		CriteriaQuery<Bloco> criteria = builder.createQuery(Bloco.class);
+		CriteriaQuery<ContaPagar> criteria = builder.createQuery(ContaPagar.class);
 		
-		Root<Bloco> root = criteria.from(Bloco.class);
+		Root<ContaPagar> root = criteria.from(ContaPagar.class);
 		
-		Predicate[] predicates = restricoes(bloco, builder, root);
+		Predicate[] predicates = restricoes(conta, builder, root);
 		criteria.where(predicates);
 		
-		TypedQuery<Bloco> query = manager.createQuery(criteria);
+		TypedQuery<ContaPagar> query = manager.createQuery(criteria);
 		
 		return query.getResultList(); 
 	}
 	
-	private Predicate[] restricoes(Bloco bloco, CriteriaBuilder builder, Root<Bloco> root) {
+	private Predicate[] restricoes(ContaPagar conta, CriteriaBuilder builder, Root<ContaPagar> root) {
 		List<Predicate> predicates	= new ArrayList<>();
 		
 		
-		if(bloco.getId() != null)
+		if(conta.getId() != null)
 			predicates.add(builder.equal(root.get("id"), 
-					bloco.getId()));
-        if(bloco.getNumVagas() != null)
-			predicates.add(builder.equal(root.get("numVagas"), 
-					bloco.getMaxVagas()));
-		if(bloco.getMaxVagas() != null)
-			predicates.add(builder.equal(root.get("maxVagas"), 
-					bloco.getMaxVagas()));
-		if(bloco.getNome() != null && !bloco.getNome().isEmpty())
+					conta.getId()));
+		if(conta.getNome() != null && !conta.getNome().isEmpty())
 			predicates.add(builder.like(builder.lower(root.get("nome")), 
-					"%"+  bloco.getNome().toLowerCase()+ "%"));
+					"%"+  conta.getNome().toLowerCase()+ "%"));
+		if(conta.getTipoConta() != null)
+			predicates.add(builder.equal(root.get("tipoConta"), 
+					conta.getTipoConta()));
 		
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

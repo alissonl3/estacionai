@@ -39,13 +39,16 @@
 					</a>
 				</div>
 				
+				<form  th:object="${filtro}" th:action="@{/contas/pagar}" method="POST" 
+						class="form-default form-horizontal" >
 				<div class="input-group mb-3">
-							  <input type="text" class="form-control" placeholder="Digite o nome da conta" >
+							  <input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome da conta" >
 							  <div class="input-group-append">
-							    <button class="btn btn-outline-secondary" type="button"><span class="fa fa-search"></span> Pesquisar</button>
+							    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"></span> Pesquisar</button>
 							   	<button class="btn btn-outline-secondary" type="button"><span class="fa fa-angle-double-down"></span> Avançada</button>
 							  </div>
 				</div>
+				</form>
 				
 			</div>
 			
@@ -108,7 +111,7 @@
 							</tr>
 
 							<tr th:if="${contas.empty}">
-								<td colspan="5">Nenhum conta cadastrado</td>
+								<td colspan="6">Nenhuma conta cadastrado</td>
 							</tr>
 						</tbody>
 					</table>

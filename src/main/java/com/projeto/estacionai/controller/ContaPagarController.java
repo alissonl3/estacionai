@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.projeto.estacionai.model.ContaPagar;
+import com.projeto.estacionai.repository.ContaPagarRepositorySearch;
 import com.projeto.estacionai.service.ContaPagarService;
 
 /**
@@ -35,12 +36,22 @@ public class ContaPagarController {
 	@Autowired
 	private ContaPagarService service;
 	
+	@Autowired
+	private ContaPagarRepositorySearch search;
+	
 	@GetMapping
-	public ModelAndView index()
+	public ModelAndView index(ContaPagar filtro)
 	{		
 		ModelAndView mv = new ModelAndView("contas/pagar/v-conta-pagar");
-		mv.addObject("contas", this.service.buscarTodos());
+		mv.addObject("contas", this.search.filtrar(filtro));
+		mv.addObject("filtro", filtro);
 		return mv;
+	}
+	
+	@PostMapping
+	public ModelAndView listarEspecifico(ContaPagar filtro)
+	{		
+		return index(filtro);
 	}
 	
 	
@@ -60,11 +71,13 @@ public class ContaPagarController {
 	
 	
 	@DeleteMapping("/{id}")
-	public ModelAndView deletar(@PathVariable Long id, RedirectAttributes attributes)
+	public String deletar(@PathVariable Long id, RedirectAttributes attributes)
 	{
 		this.service.deletar(this.service.buscar(id));
 		attributes.addFlashAttribute("mensagem", "Conta removida com sucesso!");
-		return index();
+		
+
+		return "redirect:/contas/pagar";
 	}
 	
 	
