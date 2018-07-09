@@ -123,22 +123,23 @@ public class ClienteController {
 			return mv;
 		}
 		
-		@PostMapping("/editar/veiculo/novo")
-		public ModelAndView salvarVeiculo(@Valid Veiculo veiculo, BindingResult result, RedirectAttributes attributes)
+		@PostMapping("/veiculos/{idCliente}/novo")
+		public ModelAndView salvarVeiculo(@Valid Veiculo veiculo, BindingResult result, RedirectAttributes attributes, @PathVariable Long idCliente)
 		{
+			System.out.println("1");
 			if(result.hasErrors())
 			{
-				return novoVeiculo(veiculo);
+				return salvarVeiculo(idCliente);
 			}
 			
-
+			System.out.println("2");
 			serviceVeiculo.salvar(veiculo);
 			
 			
+			System.out.println("3");
+			attributes.addFlashAttribute("mensagem", "Veiculo cadastrado com sucesso!");
 				
-			attributes.addFlashAttribute("mensagem", "Veiculo atualizado com sucesso!");
-				
-			return new ModelAndView("redirect:/clientes/editar/veiculo/" + veiculo.getId());
+			return new ModelAndView("redirect:/clientes/velicuos/" + idCliente + "/novo" );
 			
 		}
 		

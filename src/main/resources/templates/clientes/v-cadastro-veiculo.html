@@ -16,9 +16,9 @@
 			  <ol class="breadcrumb">
 			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
 			    <li class="breadcrumb-item"><a th:href="@{/clientes}">Clientes</a></li>
-<!-- 			    <li class="breadcrumb-item" ><a th:href="@{/clientes/editar/{id}(id=${veiculo.cliente.id})}" th:text="${veiculo.cliente.nome}">Nome</a></li> -->
+			    <li class="breadcrumb-item" ><a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" th:text="${cliente.nome}">Nome</a></li>
 <!-- 			    <li class="breadcrumb-item" ><a th:href="@{/clientes/veiculos/{id}(id=${veiculo.cliente.id})}">Veiculos</a></li> -->
-			    <li class="breadcrumb-item active" aria-current="page" th:text="${veiculo.placa}">Veiculo</li>
+			    <li class="breadcrumb-item active" aria-current="page">Cadastrar veiculo</li>
 			  </ol>
 		</nav>
 		
@@ -46,7 +46,7 @@
 
 			<div class="container">
 				<form method="POST" class="form-vertical"
-				th:object="${veiculo}" th:action="@{/clientes/editar/veiculo/novo}">
+				th:object="${veiculo}" th:action="@{/clientes/veiculos/{idCliente}/novo(idCliente=${cliente.id})}">
 				
 				<div class="alert  alert-danger  alert-dismissible" role="alert" 
                 th:if="${#fields.hasAnyErrors()}">
@@ -69,7 +69,7 @@
 				</div>
 				
 					<input id="id" type="hidden" th:field="*{id}" value="${veiculo.id}" />
-					<input id="cliente" type="hidden" th:field="*{cliente}" value="${veiculo.cliente}" />
+					<input id="cliente" type="hidden" th:field="*{cliente}" value="${cliente}" />
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label>*Renavam</label>
