@@ -38,22 +38,24 @@ public class ClienteController {
 		{
 			
 			ModelAndView mv = new ModelAndView("clientes/v-lista-cliente");
-			if((filtro.getCpf() == null || filtro.getCpf().trim().equals("")) && 
-				(filtro.getEndereco() == null || filtro.getEndereco().trim().equals("")) && 
-				(filtro.getNome() == null || filtro.getNome().trim().equals("")) && 
-				(filtro.getTelefone() == null || filtro.getTelefone().trim().equals("")) &&
-				(filtro.getNumeroVagas() == null || filtro.getNumeroVagas() < 0) && 
-				(filtro.getTipoPagamento() == null || filtro.getTipoPagamento() < 0))
-			{
-				mv.addObject("clientes", service.buscarTodos());
-				mv.addObject("filtro", new Cliente());
-			}
-			else
-			{
-				
-				mv.addObject("clientes", search.filtrar(filtro));
-				mv.addObject("filtro", filtro);
-			}
+//			if((filtro.getCpf() == null || filtro.getCpf().trim().equals("")) && 
+//				(filtro.getEndereco() == null || filtro.getEndereco().trim().equals("")) && 
+//				(filtro.getNome() == null || filtro.getNome().trim().equals("")) && 
+//				(filtro.getTelefone() == null || filtro.getTelefone().trim().equals("")) &&
+//				(filtro.getNumeroVagas() == null || filtro.getNumeroVagas() < 0) && 
+//				(filtro.getTipoPagamento() == null || filtro.getTipoPagamento() < 0))
+//			{
+//				mv.addObject("clientes", service.buscarTodos());
+//				mv.addObject("filtro", new Cliente());
+//			}
+//			else
+//			{
+//				
+//				mv.addObject("clientes", search.filtrar(filtro));
+//				mv.addObject("filtro", filtro);
+//			}
+			mv.addObject("clientes", search.filtrar(filtro));
+			mv.addObject("filtro", filtro);
 			return mv;
 		}
 		

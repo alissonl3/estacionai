@@ -49,12 +49,15 @@ public class BlocoRepositorySearch {
 		if(bloco.getId() != null)
 			predicates.add(builder.equal(root.get("id"), 
 					bloco.getId()));
-                if(bloco.getNumVagas() != null)
+        if(bloco.getNumVagas() != null)
 			predicates.add(builder.equal(root.get("numVagas"), 
 					bloco.getMaxVagas()));
 		if(bloco.getMaxVagas() != null)
 			predicates.add(builder.equal(root.get("maxVagas"), 
 					bloco.getMaxVagas()));
+		if(bloco.getNome() != null && !bloco.getNome().isEmpty())
+			predicates.add(builder.equal(root.get("nome"), 
+					bloco.getNome()));
 		
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

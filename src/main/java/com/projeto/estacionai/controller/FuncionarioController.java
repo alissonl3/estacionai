@@ -31,22 +31,24 @@ public class FuncionarioController {
 		{
 			
 			ModelAndView mv = new ModelAndView("funcionarios/v-lista-funcionario");
-			if((filtro.getCpf() == null || filtro.getCpf().trim().equals("")) && 
-				(filtro.getPis() == null || filtro.getPis().trim().equals("")) && 
-				(filtro.getNome() == null || filtro.getNome().trim().equals("")) && 
-				(filtro.getFuncao() == null || filtro.getFuncao().trim().equals("")) && 
-				(filtro.getTelefone() == null || filtro.getTelefone().trim().equals("")) &&
-				(filtro.getNivelPermissao() == null || filtro.getNivelPermissao() < 0))
-			{
-				mv.addObject("funcionarios", service.buscarTodos());
-				mv.addObject("filtro", new Funcionario());
-			}
-			else
-			{
-				
-				mv.addObject("funcionario", search.filtrar(filtro));
-				mv.addObject("filtro", filtro);
-			}
+//			if((filtro.getCpf() == null || filtro.getCpf().trim().equals("")) && 
+//				(filtro.getPis() == null || filtro.getPis().trim().equals("")) && 
+//				(filtro.getNome() == null || filtro.getNome().trim().equals("")) && 
+//				(filtro.getFuncao() == null || filtro.getFuncao().trim().equals("")) && 
+//				(filtro.getTelefone() == null || filtro.getTelefone().trim().equals("")) &&
+//				(filtro.getNivelPermissao() == null || filtro.getNivelPermissao() < 0))
+//			{
+//				mv.addObject("funcionarios", service.buscarTodos());
+//				mv.addObject("filtro", new Funcionario());
+//			}
+//			else
+//			{
+//				
+//				mv.addObject("funcionario", search.filtrar(filtro));
+//				mv.addObject("filtro", filtro);
+//			}
+			mv.addObject("funcionarios", search.filtrar(filtro));
+			mv.addObject("filtro", filtro);
 			return mv;
 		}
 		

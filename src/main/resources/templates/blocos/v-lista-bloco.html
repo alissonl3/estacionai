@@ -48,11 +48,11 @@
 						</a>
 			</div>
 			
-<!-- 				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}"> -->
-<!-- 					<i class="fa fa-check-circle"></i> -->
+				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+					<i class="fa fa-check-circle"></i>
 
-<!-- 					<span th:text="${mensagem}">Mensagem sucesso!</span> -->
-<!-- 				</div> -->
+					<span th:text="${mensagem}">Mensagem sucesso!</span>
+				</div>
 				
 <!-- 				<form  th:object="${filtro}" th:action="@{/blocos}" method="POST" -->
 <!-- 							class="form-default form-horizontal" > -->
@@ -74,13 +74,16 @@
 				
 <!-- 				<hr /> -->
 
-
-				<div class="input-group mb-3">
-				  <input type="text" class="form-control" placeholder="Digite o nome do bloco" >
-				  <div class="input-group-append">
-				    <button class="btn btn-outline-secondary" type="button"><span class="fa fa-search"></span> Pesquisar</button>
-				  </div>
-				</div>
+				<form  th:object="${filtro}" th:action="@{/blocos}" method="POST" 
+						class="form-default form-horizontal" >
+					<div class="input-group mb-3">
+					  <input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome do bloco" >
+					  <div class="input-group-append">
+					    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"></span> Pesquisar</button>
+					  </div>
+					</div>
+				</form>
+				
 				<div class="table-responsive">
 					<table id="tabela-produtos" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
 						<thead class="aw-table-header-solid">
