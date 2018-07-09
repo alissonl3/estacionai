@@ -49,5 +49,10 @@ public class ContaEquipamentoService {
 	{
 		return this.repository.getOne(id);
 	}
+	
+	public Double total()
+	{
+		return this.repository.getTotal();
+	}
    
 }

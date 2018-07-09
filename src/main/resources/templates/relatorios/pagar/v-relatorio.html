@@ -37,27 +37,31 @@
 <!-- 			</div> -->
 			
 			<div class="container">
+			<form  th:object="${filtro}" th:action="@{/relatorios/pagar}" method="POST" 
+						class="form-default" >
 				<div class="form-row">
 					<div class="col"><h5>Pesquisar por periodo:</h5></div>
 					<div class="w-100"></div>
 				    <div class="col">
-				      <input type="text" class="form-control js-data" placeholder="Informe a data de inicio">
+				      <input type="text" class="form-control js-data" th:field="*{dataInicio}" placeholder="Informe a data de inicio">
 				      <small class="form-text text-muted">
 						      	Exemplo: 10/10/2010
 						</small>
 				    </div>
 				    <div class="col">
-				      <input type="text" class="form-control js-data" placeholder="Informe a data de fim">
+				      <input type="text" class="form-control js-data" th:field="*{dataFim}" placeholder="Informe a data de fim">
 				      <small class="form-text text-muted">
 						      	Exemplo: 10/11/2010
 						</small>
 				    </div>
 				    <div class="col">
-				      <button type="button" class="btn btn-block btn-outline-secondary" >
+				      <button type="submit" class="btn btn-block btn-outline-secondary" >
 				      <span class="fa fa-search"></span> Pesquisar
 					</button>
 				    </div>
+				    
 				  </div>
+				  </form>
 			</div>
 			
 			<div class="container">
@@ -93,6 +97,7 @@
 						<thead>
 							<tr>
 								<th>Nome</th>
+								<th>Data</th>
 								<th>Valor</th>
 							</tr>
 						</thead>
@@ -101,6 +106,8 @@
 
 								<td th:text=${conta.nome}>Nome</td>
 								
+								<td th:text=${conta.dataVencimento}>Data</td>
+								
 								<td th:text=${conta.valor}>Valor</td>
 								
 								
@@ -108,6 +115,7 @@
 							
 							<tr th:if="${!contas.empty}">
 								<td><b>Total à pagar:</b></td>
+								<td></td>
 								<td th:text="${total}" ></td>
 							</tr>
 
