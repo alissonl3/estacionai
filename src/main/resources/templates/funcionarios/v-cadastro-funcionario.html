@@ -109,7 +109,7 @@
 					    
 						 <div class="form-group col-md-6">
 						 <label >*Nível de Permissão</label>
-						 <select id="nivelPermissao" th:field="*{nivelPermissao}" th:onchange="${'showSenha()'}" class="form-control">
+						 <select id="nivelPermissao" th:field="*{nivelPermissao}" class="form-control">
 						    	<option value="1" selected="selected">Normal</option>
 						    	<option value="2" >Gerente</option>
 						    </select>
@@ -117,14 +117,11 @@
 						 </div>
 					 </div>
 					 
-					 
-					 <div class="collapse" id="collapseSenha">
-						 <div class="form-row">
+					 <div class="form-row">
 							 <div class="form-group col-md-12">
 							 	<label>Senha:</label>
 							 	<input id="senha" type="password" class="form-control" th:field="*{senha}" placeholder="Informe a senha">		  		 
 						    </div>
-						 </div>
 					 </div>
 							
 					<hr />
