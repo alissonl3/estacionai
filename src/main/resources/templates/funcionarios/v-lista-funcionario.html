@@ -18,15 +18,6 @@
 			    <li class="breadcrumb-item active" aria-current="page">Funcionários</li>
 			  </ol>
 			</nav>
-<!-- 				<div class="container"> -->
-<!-- 					<div class="row"> -->
-<!-- 						<div class="col-md-12"> -->
-<!-- 							<h1> -->
-<!-- 								Lista de funcionários -->
-<!-- 							</h1> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
 				
 				<div class="container">
 					<div class="row">
@@ -50,14 +41,90 @@
 						
 						<form  th:object="${filtro}" th:action="@{/funcionarios}" method="POST" 
 						class="form-default form-horizontal" >
+						<div class="collapse" id="collapseNormalFuncionario" >
 							<div class="input-group mb-3">
 							  <input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome do funcionario" >
 							  <div class="input-group-append">
 							    <button class="btn btn-outline-secondary" type="submit"><span class="fa fa-search"></span> Pesquisar</button>
-							   	<button class="btn btn-outline-secondary" type="button"><span class="fa fa-angle-double-down"></span> Avançada</button>
+							   	<button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseAvancadaFuncionario" th:onclick="${'expandirFuncionario()'}"><span class="fa fa-angle-double-down"></span> Avançada</button>
 							  </div>
 							</div>
+						</div>
 						</form>
+						
+						
+						<form  th:object="${filtro}" th:action="@{/funcionarios}" method="POST" 
+						class="form-default form-horizontal" >
+							<div class="collapse" id="collapseAvancadaFuncionario">
+							 
+						<h5>Busca avançada</h5>
+						<hr />
+						<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>*Nome</label>
+	
+							<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o Nome" />
+						</div>
+						<div class="form-group col-md-6">
+							<label >*Telefone</label>
+						      <input type="tel" class="form-control js-tel" th:field="*{telefone}" placeholder="Digite o Telefone">		  
+						 <small class="form-text text-muted">
+						      	Exemplo: (99) 9999-9999
+							  </small>	
+						 </div>
+					 </div>
+					 <div class="form-row">
+						 <div class="form-group col-md-6">
+						 <label >*Função</label>
+						      <input type="text" class="form-control" th:field="*{funcao}" placeholder="Digite a Função">		  
+						 	<small class="form-text text-muted">
+						      	Exemplo: Caixa, Cobrador...
+							  </small>	
+						 </div>
+						 <div class="form-group col-md-6">
+						 <label >*CPF</label>
+						      <input type="text" class="form-control js-cpf" th:field="*{cpf}" placeholder="Digite o Cpf">		  
+						 	<small class="form-text text-muted">
+						      	Exemplo: 999.999.999-99
+							  </small>	
+						 </div>
+					 </div>
+					 <div class="form-row">
+						 <div class="form-group col-md-6">
+						 	<label>*PIS:</label>
+							 <input type="text" class="form-control js-cpf" th:field="*{pis}" placeholder="Digite o PIS">
+					    	<small class="form-text text-muted">
+						      	Exemplo: 999.999.999-99
+							  </small>	
+					    </div>
+					    
+						 <div class="form-group col-md-6">
+						 <label >*Nível de Permissão</label>
+						 <select id="nivelPermissao" th:field="*{nivelPermissao}" th:onchange="${'showSenha()'}" class="form-control">
+						    	<option value="1" selected="selected">Normal</option>
+						    	<option value="2" >Gerente</option>
+						    </select>
+<!-- 						      <input type="number" class="form-control" th:field="*{nivelPermissao}" placeholder="Informe o nível de permissão">		   -->
+						 </div>
+					 </div>
+					 
+					 <div class="form-row">
+						 <div class="form-group col-md-6">
+						 	<button class="btn btn-outline-secondary" type="submit" th:onclick="${'expandirFuncionario()'}"><span class="fa fa-search"></span> Pesquisar</button>
+							  
+					    </div>
+					    
+						 <div class="form-group col-md-6">
+						  	<button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseAvancadaFuncionario" th:onclick="${'despandirFuncionario()'}"  ><span class="fa fa-angle-double-up"></span> Normal</button>
+							  
+						 </div>
+					 </div>
+					 
+					 </div>
+					</form>
+						
+						
+						
 						</div>
 					
 					
@@ -187,6 +254,26 @@
 				</div>
 			</div>
 			</div>
+			
+			
+			<script type="text/javascript">
+			
+				function expandirFuncionario()
+				{
+					
+					$('#collapseNormalFuncionario').collapse('hide');
+									
+				}
+				
+				function despandirFuncionario()
+				{
+					
+					$('#collapseNormalFuncionario').collapse('show');
+									
+				}
+			
+			</script>
+			
 		</section>
 
 </body>
