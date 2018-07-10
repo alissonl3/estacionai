@@ -3,8 +3,10 @@ package com.projeto.estacionai.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -94,11 +96,21 @@ public class ClienteController {
 			return mv;
 		}
 		
-		@GetMapping("/veiculos/{id}/novo")
-		public ModelAndView salvarVeiculo(@PathVariable Long id)
+//		@GetMapping("/veiculos/{id}/novo")
+//		public ModelAndView salvarVeiculo(@PathVariable Long id)
+//		{
+//			//return novoVeiculo(serviceVeiculo.buscar(id));
+//			return novoVeiculo(service.buscar(id));
+//		}
+		
+		@GetMapping("/veiculos/{idCliente}/novo")
+		public ModelAndView salvarVeiculo(Veiculo veiculo, @PathVariable Long idCliente)
 		{
 			//return novoVeiculo(serviceVeiculo.buscar(id));
-			return novoVeiculo(service.buscar(id));
+			ModelAndView mv = new ModelAndView("clientes/v-cadastro-veiculo");
+			mv.addObject("clienteAtual", service.buscar(idCliente));
+			mv.addObject("veiculo", veiculo);	
+			return mv;
 		}
 		
 		@GetMapping("/editar/veiculo/{id}")
@@ -110,7 +122,7 @@ public class ClienteController {
 		public ModelAndView novoVeiculo(Cliente cliente)
 		{
 			ModelAndView mv = new ModelAndView("clientes/v-cadastro-veiculo");
-			mv.addObject("cliente", cliente);
+//			mv.addObject("clienteAtual", cliente);
 			mv.addObject("veiculo", new Veiculo());			
 			return mv;
 		}
@@ -123,25 +135,64 @@ public class ClienteController {
 			return mv;
 		}
 		
+		
 		@PostMapping("/veiculos/{idCliente}/novo")
 		public ModelAndView salvarVeiculo(@Valid Veiculo veiculo, BindingResult result, RedirectAttributes attributes, @PathVariable Long idCliente)
 		{
 			System.out.println("1");
+			veiculo.setCliente(service.buscar(idCliente));
+			System.out.println("Cliente: " + veiculo.getCliente().getNome());
 			if(result.hasErrors())
 			{
-				return salvarVeiculo(idCliente);
+				System.out.println("error");
+				
+				for(ObjectError erro : result.getAllErrors())
+				{
+					System.out.println("Erro: " + erro.getDefaultMessage());
+				}
+				
+				
+				return salvarVeiculo(veiculo, idCliente);
 			}
 			
-			System.out.println("2");
+			
 			serviceVeiculo.salvar(veiculo);
 			
 			
 			System.out.println("3");
 			attributes.addFlashAttribute("mensagem", "Veiculo cadastrado com sucesso!");
 				
-			return new ModelAndView("redirect:/clientes/velicuos/" + idCliente + "/novo" );
+			return new ModelAndView("redirect:/clientes/veiculos/" + idCliente + "/novo" );
 			
 		}
+		
+//		@PostMapping("/veiculos/{idCliente}/novo")
+//		public ModelAndView salvarVeiculo(@Valid Veiculo veiculo, BindingResult result, RedirectAttributes attributes, @PathVariable Long idCliente)
+//		{
+//			System.out.println("1");
+//			if(result.hasErrors())
+//			{
+//				System.out.println("error");
+//				
+//				for(ObjectError erro : result.getAllErrors())
+//				{
+//					System.out.println("Erro: " + erro.getDefaultMessage());
+//				}
+//				
+//				
+//				return salvarVeiculo(idCliente);
+//			}
+//			
+//			System.out.println("2");
+//			serviceVeiculo.salvar(veiculo);
+//			
+//			
+//			System.out.println("3");
+//			attributes.addFlashAttribute("mensagem", "Veiculo cadastrado com sucesso!");
+//				
+//			return new ModelAndView("redirect:/clientes/velicuos/" + idCliente + "/novo" );
+//			
+//		}
 		
 		@DeleteMapping("/{id}")
 		public String deletar(@PathVariable Long id, RedirectAttributes attributes)
