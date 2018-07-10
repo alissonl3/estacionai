@@ -125,11 +125,29 @@
 	jQuery(function($){
 			$('[data-toggle="popover"]').popover();
 		 	$('[data-toggle="tooltip"]').tooltip();
+		 	
 			$('.js-moeda').mask("#.##9,99", { reverse: true });
 			$('.js-tel').mask("(99) 9999-9999");
 			$('.js-cpf').mask("999.999.999-99");
 			$('.js-placa').mask("aaa-9999");
 			$('.js-data').mask("99/99/9999");
+			
+			$('#collapseNormalCliente').collapse('show');
+			
+			
+			
+			$(document).ready(function() {
+				
+				url = new URL(window.location.href);
+
+				if (url.searchParams.get('avancada')) {
+					$('#collapseNormalCliente').collapse('hide');
+					$('#collapseAvancadaCliente').collapse('show');
+				}
+
+			});
+			
+			
 			
 // 			$('.calendar').calendar({
 // 				showHeaders: true,
