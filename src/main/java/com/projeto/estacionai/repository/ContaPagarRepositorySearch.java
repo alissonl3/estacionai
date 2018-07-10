@@ -55,6 +55,9 @@ public class ContaPagarRepositorySearch {
 		if(conta.getTipoConta() != null)
 			predicates.add(builder.equal(root.get("tipoConta"), 
 					conta.getTipoConta()));
+		if(conta.getAtivo() != null)	
+			predicates.add(builder.equal(root.get("ativo"), 
+					conta.getAtivo()));
 		
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

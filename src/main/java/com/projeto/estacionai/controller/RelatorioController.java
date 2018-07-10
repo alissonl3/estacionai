@@ -53,6 +53,7 @@ public class RelatorioController {
 //		mv.addObject("contas", servicePagar.buscarTodos());
 //		mv.addObject("total", servicePagar.total());
 
+		filtro.setAtivo(true);
 		mv.addObject("filtro", filtro);
 		mv.addObject("contas", searchPagar.filtrar(filtro));
 		mv.addObject("total", servicePagar.total());
@@ -72,6 +73,7 @@ public class RelatorioController {
 		ModelAndView mv = new ModelAndView("relatorios/receber/v-relatorio");
 //		mv.addObject("contas", serviceReceber.buscarTodos());
 //		mv.addObject("total", serviceReceber.total());
+		filtro.setAtivo(true);
 		mv.addObject("filtro", filtro);
 		mv.addObject("contas", searchReceber.filtrar(filtro));
 		mv.addObject("total", serviceReceber.total());
@@ -101,6 +103,7 @@ public class RelatorioController {
 		
 		ModelAndView mv = new ModelAndView("relatorios/equipamento/v-relatorio");
 //		mv.addObject("contas", serviceEquipamento.buscarTodos());
+		filtro.setAtivo(true);
 		mv.addObject("filtro", filtro);
 		mv.addObject("contas", searchEquipamento.filtrar(filtro));
 		mv.addObject("total", serviceEquipamento.total());

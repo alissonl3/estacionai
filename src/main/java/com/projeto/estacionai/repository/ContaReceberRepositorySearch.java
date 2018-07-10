@@ -52,6 +52,9 @@ public class ContaReceberRepositorySearch {
 		if(conta.getNome() != null && !conta.getNome().isEmpty())
 			predicates.add(builder.like(builder.lower(root.get("nome")), 
 					"%"+  conta.getNome().toLowerCase()+ "%"));
+		if(conta.getAtivo() != null)	
+			predicates.add(builder.equal(root.get("ativo"), 
+					conta.getAtivo()));
 		
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

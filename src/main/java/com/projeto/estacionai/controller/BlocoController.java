@@ -63,6 +63,7 @@ public class BlocoController {
 //		if(filtro != null)
 //		{
 //			
+			filtro.setAtivo(true);
 			mv.addObject("blocos", search.filtrar(filtro));
 			mv.addObject("filtro", filtro);
 			return mv;

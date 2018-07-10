@@ -59,6 +59,9 @@ public class ClienteRepositorySearch {
 		if(cliente.getTipoPagamento() != null)
 			predicates.add(builder.equal(root.get("tipoPagamento"), 
 					cliente.getTipoPagamento()));
+		if(cliente.getAtivo() != null)	
+			predicates.add(builder.equal(root.get("ativo"), 
+					cliente.getAtivo()));
 		
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

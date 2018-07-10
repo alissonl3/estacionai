@@ -58,6 +58,10 @@ public class BlocoRepositorySearch {
 		if(bloco.getNome() != null && !bloco.getNome().isEmpty())
 			predicates.add(builder.like(builder.lower(root.get("nome")), 
 					"%"+  bloco.getNome().toLowerCase()+ "%"));
+		if(bloco.getAtivo() != null)	
+			predicates.add(builder.equal(root.get("ativo"), 
+					bloco.getAtivo()));
+		
 		
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

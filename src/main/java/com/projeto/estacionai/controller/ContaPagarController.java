@@ -43,6 +43,7 @@ public class ContaPagarController {
 	public ModelAndView index(ContaPagar filtro)
 	{		
 		ModelAndView mv = new ModelAndView("contas/pagar/v-conta-pagar");
+		filtro.setAtivo(true);
 		mv.addObject("contas", this.search.filtrar(filtro));
 		mv.addObject("filtro", filtro);
 		return mv;

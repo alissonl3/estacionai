@@ -44,6 +44,7 @@ public class ContaEquipamentoController {
 	public ModelAndView index(ContaEquipamento filtro)
 	{		
 		ModelAndView mv = new ModelAndView("contas/equipamento/v-conta-equipamento");
+		filtro.setAtivo(true);
 		mv.addObject("contas", this.search.filtrar(filtro));
 		mv.addObject("filtro", filtro);
 		return mv;

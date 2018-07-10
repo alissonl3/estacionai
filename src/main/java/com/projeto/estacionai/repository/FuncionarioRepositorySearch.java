@@ -62,6 +62,9 @@ public class FuncionarioRepositorySearch {
 		if(!StringUtils.isEmpty(funcionario.getSenha()))
 			predicates.add(builder.equal(root.get("senha"), 
 					funcionario.getSenha()));
+		if(funcionario.getAtivo() != null)	
+			predicates.add(builder.equal(root.get("ativo"), 
+					funcionario.getAtivo()));
 		
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

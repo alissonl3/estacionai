@@ -47,6 +47,7 @@ public class FuncionarioController {
 //				mv.addObject("funcionario", search.filtrar(filtro));
 //				mv.addObject("filtro", filtro);
 //			}
+			filtro.setAtivo(true);
 			mv.addObject("funcionarios", search.filtrar(filtro));
 			mv.addObject("filtro", filtro);
 			return mv;

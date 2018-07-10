@@ -44,6 +44,7 @@ public class ContaReceberController {
 	public ModelAndView index(ContaReceber filtro)
 	{		
 		ModelAndView mv = new ModelAndView("contas/receber/v-conta-receber");
+		filtro.setAtivo(true);
 		mv.addObject("contas", this.search.filtrar(filtro));
 		mv.addObject("filtro", filtro);
 		return mv;

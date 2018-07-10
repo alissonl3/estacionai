@@ -50,6 +50,9 @@ public class RelatorioContaEquipamentoRepositorySearch {
 			predicates.add(builder.lessThanOrEqualTo(root.get("dataVencimento"), conta.getDataFim()));
 			predicates.add(builder.greaterThanOrEqualTo(root.get("dataVencimento"), conta.getDataInicio()));
 		}
+		if(conta.getAtivo() != null)	
+			predicates.add(builder.equal(root.get("ativo"), 
+					conta.getAtivo()));
 		
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

@@ -40,6 +40,7 @@ public class ClienteController {
 		{
 			
 			ModelAndView mv = new ModelAndView("clientes/v-lista-cliente");
+			filtro.setAtivo(true);
 			mv.addObject("clientes", search.filtrar(filtro));
 			mv.addObject("filtro", filtro);
 			return mv;
