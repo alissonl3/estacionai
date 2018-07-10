@@ -110,7 +110,7 @@
 				</div>
 
 				<div class="input-group mb-3">
-							  <input type="text" class="form-control" placeholder="Digite o nome do bloco" >
+							  <input type="text" class="form-control" placeholder="Digite o nome do veiculo" >
 							  <div class="input-group-append">
 							    <button class="btn btn-outline-secondary" type="button"><span class="fa fa-search"></span> Pesquisar</button>
 <!-- 							   	<button class="btn btn-outline-secondary" type="button"><span class="fa fa-angle-double-down"></span> Avançada</button> -->
@@ -142,12 +142,12 @@
 
 								
 								<td class="text-center">
-									<a class="btn btn-info" th:href="@{/clientes/editar/veiculo/{id}(id=${veiculo.id})}" ><span class="fa fa-pencil-alt"></span></a>
+									<a class="btn btn-info" th:href="@{/clientes/veiculos/{idCliente}/editar/{id}(idCliente=${cliente.id},id=${veiculo.id})}" ><span class="fa fa-pencil-alt"></span></a>
 								
 								</td>
 								<td class="text-center">
 									<form method="POST" th:onsubmit="'return confirm(\'Posso remover ' + ${veiculo.placa} + '?\');'"
-									th:action="@{/veiculos/{id}(id=${veiculo.id})}">
+									th:action="@{/clientes/veiculos/{id}(id=${veiculo.id})}">
 										<input type="hidden" name="_method" value="DELETE" />
 									
 										<button type="submit" class="btn btn-danger">

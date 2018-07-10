@@ -40,22 +40,6 @@ public class ClienteController {
 		{
 			
 			ModelAndView mv = new ModelAndView("clientes/v-lista-cliente");
-//			if((filtro.getCpf() == null || filtro.getCpf().trim().equals("")) && 
-//				(filtro.getEndereco() == null || filtro.getEndereco().trim().equals("")) && 
-//				(filtro.getNome() == null || filtro.getNome().trim().equals("")) && 
-//				(filtro.getTelefone() == null || filtro.getTelefone().trim().equals("")) &&
-//				(filtro.getNumeroVagas() == null || filtro.getNumeroVagas() < 0) && 
-//				(filtro.getTipoPagamento() == null || filtro.getTipoPagamento() < 0))
-//			{
-//				mv.addObject("clientes", service.buscarTodos());
-//				mv.addObject("filtro", new Cliente());
-//			}
-//			else
-//			{
-//				
-//				mv.addObject("clientes", search.filtrar(filtro));
-//				mv.addObject("filtro", filtro);
-//			}
 			mv.addObject("clientes", search.filtrar(filtro));
 			mv.addObject("filtro", filtro);
 			return mv;
@@ -89,19 +73,14 @@ public class ClienteController {
 			Veiculo filtro = new Veiculo();
 			Cliente cliente = service.buscar(id);
 			filtro.setCliente(cliente);
+			filtro.setAtivo(true);
 			
 			ModelAndView mv = new ModelAndView("clientes/v-lista-veiculo");
 			mv.addObject("veiculos", searchVeiculo.filtrar(filtro));
 			mv.addObject("cliente", cliente);
 			return mv;
 		}
-		
-//		@GetMapping("/veiculos/{id}/novo")
-//		public ModelAndView salvarVeiculo(@PathVariable Long id)
-//		{
-//			//return novoVeiculo(serviceVeiculo.buscar(id));
-//			return novoVeiculo(service.buscar(id));
-//		}
+
 		
 		@GetMapping("/veiculos/{idCliente}/novo")
 		public ModelAndView salvarVeiculo(Veiculo veiculo, @PathVariable Long idCliente)
@@ -113,10 +92,13 @@ public class ClienteController {
 			return mv;
 		}
 		
-		@GetMapping("/editar/veiculo/{id}")
-		public ModelAndView editarVeiculo(@PathVariable Long id)
+		@GetMapping("/veiculos/{idCliente}/editar/{id}")
+		public ModelAndView editarVeiculo(@PathVariable Long idCliente, @PathVariable Long id)
 		{
-			return novoVeiculo(serviceVeiculo.buscar(id));
+			ModelAndView mv = new ModelAndView("clientes/v-cadastro-veiculo");
+			mv.addObject("clienteAtual", service.buscar(idCliente));
+			mv.addObject("veiculo", serviceVeiculo.buscar(id));			
+			return mv;
 		}
 		
 		public ModelAndView novoVeiculo(Cliente cliente)
@@ -139,60 +121,32 @@ public class ClienteController {
 		@PostMapping("/veiculos/{idCliente}/novo")
 		public ModelAndView salvarVeiculo(@Valid Veiculo veiculo, BindingResult result, RedirectAttributes attributes, @PathVariable Long idCliente)
 		{
-			System.out.println("1");
 			veiculo.setCliente(service.buscar(idCliente));
-			System.out.println("Cliente: " + veiculo.getCliente().getNome());
 			if(result.hasErrors())
 			{
-				System.out.println("error");
-				
-				for(ObjectError erro : result.getAllErrors())
-				{
-					System.out.println("Erro: " + erro.getDefaultMessage());
-				}
-				
 				
 				return salvarVeiculo(veiculo, idCliente);
 			}
 			
 			
-			serviceVeiculo.salvar(veiculo);
-			
-			
-			System.out.println("3");
-			attributes.addFlashAttribute("mensagem", "Veiculo cadastrado com sucesso!");
-				
-			return new ModelAndView("redirect:/clientes/veiculos/" + idCliente + "/novo" );
+			if(veiculo.getId() == null)
+			{
+				serviceVeiculo.salvar(veiculo);
+	
+				attributes.addFlashAttribute("mensagem", "Veiculo cadastrado com sucesso!");
+					
+				return new ModelAndView("redirect:/clientes/veiculos/" + idCliente + "/novo" );
+			}
+			else
+			{
+				serviceVeiculo.salvar(veiculo);
+
+				attributes.addFlashAttribute("mensagem", "Veiculo atualizado com sucesso!");
+					
+				return new ModelAndView("redirect:/clientes/veiculos/" + idCliente + "/editar/" + veiculo.getId() );
+			}
 			
 		}
-		
-//		@PostMapping("/veiculos/{idCliente}/novo")
-//		public ModelAndView salvarVeiculo(@Valid Veiculo veiculo, BindingResult result, RedirectAttributes attributes, @PathVariable Long idCliente)
-//		{
-//			System.out.println("1");
-//			if(result.hasErrors())
-//			{
-//				System.out.println("error");
-//				
-//				for(ObjectError erro : result.getAllErrors())
-//				{
-//					System.out.println("Erro: " + erro.getDefaultMessage());
-//				}
-//				
-//				
-//				return salvarVeiculo(idCliente);
-//			}
-//			
-//			System.out.println("2");
-//			serviceVeiculo.salvar(veiculo);
-//			
-//			
-//			System.out.println("3");
-//			attributes.addFlashAttribute("mensagem", "Veiculo cadastrado com sucesso!");
-//				
-//			return new ModelAndView("redirect:/clientes/velicuos/" + idCliente + "/novo" );
-//			
-//		}
 		
 		@DeleteMapping("/{id}")
 		public String deletar(@PathVariable Long id, RedirectAttributes attributes)
@@ -203,6 +157,18 @@ public class ClienteController {
 			attributes.addFlashAttribute("mensagem", "Cliente removido com sucesso!");
 			
 			return "redirect:/clientes";
+		}
+		
+		@DeleteMapping("/veiculos/{id}")
+		public String deletarVeiculo(@PathVariable Long id, RedirectAttributes attributes)
+		{
+			Veiculo veiculo = this.serviceVeiculo.buscar(id);
+			Long idCliente = veiculo.getCliente().getId();
+			this.serviceVeiculo.deletar(veiculo);
+			
+			attributes.addFlashAttribute("mensagem", "Veiculo removido com sucesso!");
+			
+			return "redirect:/clientes/veiculos/" + idCliente;
 		}
 		
 		@PostMapping("/novo")
