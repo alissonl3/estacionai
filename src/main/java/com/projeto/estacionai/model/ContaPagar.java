@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -59,6 +60,18 @@ public class ContaPagar {
 	@NotNull
 	private Double valor;
 	
+	private Boolean ativo;
+	
+	@Transient
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@Convert(converter = AdapterLocalDate.class)
+	private LocalDate dataInicio;
+	
+	@Transient
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@Convert(converter = AdapterLocalDate.class)
+	private LocalDate dataFim;
+	
 
 	public Integer getTipoConta() {
 		return tipoConta;
@@ -98,6 +111,30 @@ public class ContaPagar {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public LocalDate getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(LocalDate dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	public LocalDate getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(LocalDate dataFim) {
+		this.dataFim = dataFim;
 	}
 	
 	

@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.projeto.estacionai.model.ContaPagar;
 import com.projeto.estacionai.model.ContaReceber;
+import com.projeto.estacionai.repository.ContaReceberRepositorySearch;
 import com.projeto.estacionai.service.ContaReceberService;
 
 /**
@@ -35,12 +37,23 @@ public class ContaReceberController {
 	@Autowired
 	private ContaReceberService service;
 	
+	@Autowired
+	private ContaReceberRepositorySearch search;
+	
 	@GetMapping
-	public ModelAndView index()
+	public ModelAndView index(ContaReceber filtro)
 	{		
 		ModelAndView mv = new ModelAndView("contas/receber/v-conta-receber");
-		mv.addObject("contas", this.service.buscarTodos());
+		filtro.setAtivo(true);
+		mv.addObject("contas", this.search.filtrar(filtro));
+		mv.addObject("filtro", filtro);
 		return mv;
+	}
+	
+	@PostMapping
+	public ModelAndView listarEspecifico(ContaReceber filtro)
+	{		
+		return index(filtro);
 	}
 	
 	
@@ -60,11 +73,11 @@ public class ContaReceberController {
 	
 	
 	@DeleteMapping("/{id}")
-	public ModelAndView deletar(@PathVariable Long id, RedirectAttributes attributes)
+	public String deletar(@PathVariable Long id, RedirectAttributes attributes)
 	{
-		this.service.deletar(id);
+		this.service.deletar(this.service.buscar(id));
 		attributes.addFlashAttribute("mensagem", "Conta removida com sucesso!");
-		return index();
+		return "redirect:/contas/receber";
 	}
 	
 	

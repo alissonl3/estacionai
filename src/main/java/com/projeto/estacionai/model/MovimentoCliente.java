@@ -44,6 +44,8 @@ public class MovimentoCliente {
 	@NotNull
 	private Integer tipoVeiculo;
 	
+	private Boolean ativo;
+	
 	@NotNull
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Convert(converter = AdapterLocalDate.class)
@@ -82,6 +84,14 @@ public class MovimentoCliente {
 
 	public void setDataMovimento(LocalDate dataMovimento) {
 		this.dataMovimento = dataMovimento;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 

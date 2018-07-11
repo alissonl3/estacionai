@@ -42,16 +42,16 @@ public class FuncionarioRepositorySearch {
 		
 		
 		if(!StringUtils.isEmpty(funcionario.getCpf()))
-			predicates.add(builder.equal(builder.lower(root.get("cpf")), 
+			predicates.add(builder.like(builder.lower(root.get("cpf")), 
 				funcionario.getCpf().toLowerCase() ));
 		if(!StringUtils.isEmpty(funcionario.getPis()))
 			predicates.add(builder.like(builder.lower(root.get("pis")), 
 					"%"+ funcionario.getPis().toLowerCase()+ "%"));
 		if(!StringUtils.isEmpty(funcionario.getNome()))
-			predicates.add(builder.equal(builder.lower(root.get("nome")), 
+			predicates.add(builder.like(builder.lower(root.get("nome")), 
 					"%" + funcionario.getNome().toLowerCase() + "%"));
 		if(!StringUtils.isEmpty(funcionario.getTelefone()))
-			predicates.add(builder.equal(builder.lower(root.get("telefone")), 
+			predicates.add(builder.like(builder.lower(root.get("telefone")), 
 					"%" + funcionario.getTelefone().toLowerCase() + "%"));
 		if(!StringUtils.isEmpty(funcionario.getFuncao()))
 			predicates.add(builder.like(builder.lower(root.get("funcao")), 
@@ -62,6 +62,9 @@ public class FuncionarioRepositorySearch {
 		if(!StringUtils.isEmpty(funcionario.getSenha()))
 			predicates.add(builder.equal(root.get("senha"), 
 					funcionario.getSenha()));
+		if(funcionario.getAtivo() != null)	
+			predicates.add(builder.equal(root.get("ativo"), 
+					funcionario.getAtivo()));
 		
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

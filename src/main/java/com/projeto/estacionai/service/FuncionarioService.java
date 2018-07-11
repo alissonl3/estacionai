@@ -20,6 +20,12 @@ public class FuncionarioService {
 	private FuncionarioRepository repository;
 	
 	public void salvar (Funcionario funcionario) {
+		funcionario.setAtivo(true);
+		this.repository.save(funcionario);
+	}
+	
+	public void deletar (Funcionario funcionario) {
+		funcionario.setAtivo(false);
 		this.repository.save(funcionario);
 	}
 	
@@ -30,7 +36,7 @@ public class FuncionarioService {
 	
 	public List<Funcionario> buscarTodos()
 	{
-		return this.repository.findAll();
+		return this.repository.findByAtivoTrue();
 	}
 	
 	public Funcionario buscar(Long id)

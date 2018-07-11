@@ -43,9 +43,11 @@
 					<i class="fa fa-info"></i>
 
 					<span>Não existem veiculos cadastrado para este cliente!</span>
-					<a href="#" >Clique aqui para adicionar um novo veiculo</a>
+					<a th:href="@{/clientes/veiculos/{idCliente}/novo(idCliente=${cliente.id})}" >Clique aqui para adicionar um novo veiculo</a>
 					
 				</div>
+				
+				
 				
 				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}">
 					<i class="fa fa-check-circle"></i>
@@ -101,11 +103,17 @@
 <!-- 				  </div> -->
 <!-- 				</div> -->
 
+				<div th:if="${!veiculos.empty}" style="margin-bottom: 10px;" >
+						<a class="btn btn-outline-success" th:href="@{/clientes/veiculos/{idCliente}/novo(idCliente=${cliente.id})}" > 
+	 							 <span class="fa fa-plus"></span> Adicionar veiculo 
+						</a>
+				</div>
+
 				<div class="input-group mb-3">
-							  <input type="text" class="form-control" placeholder="Digite o nome do bloco" >
+							  <input type="text" class="form-control" placeholder="Digite o nome do veiculo" >
 							  <div class="input-group-append">
 							    <button class="btn btn-outline-secondary" type="button"><span class="fa fa-search"></span> Pesquisar</button>
-							   	<button class="btn btn-outline-secondary" type="button"><span class="fa fa-angle-double-down"></span> Avançada</button>
+<!-- 							   	<button class="btn btn-outline-secondary" type="button"><span class="fa fa-angle-double-down"></span> Avançada</button> -->
 							  </div>
 				</div>
 
@@ -134,12 +142,12 @@
 
 								
 								<td class="text-center">
-									<a class="btn btn-info" th:href="@{/clientes/editar/veiculo/{id}(id=${veiculo.id})}" ><span class="fa fa-pencil-alt"></span></a>
+									<a class="btn btn-info" th:href="@{/clientes/veiculos/{idCliente}/editar/{id}(idCliente=${cliente.id},id=${veiculo.id})}" ><span class="fa fa-pencil-alt"></span></a>
 								
 								</td>
 								<td class="text-center">
 									<form method="POST" th:onsubmit="'return confirm(\'Posso remover ' + ${veiculo.placa} + '?\');'"
-									th:action="@{/veiculos/{id}(id=${veiculo.id})}">
+									th:action="@{/clientes/veiculos/{id}(id=${veiculo.id})}">
 										<input type="hidden" name="_method" value="DELETE" />
 									
 										<button type="submit" class="btn btn-danger">

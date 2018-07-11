@@ -42,16 +42,16 @@ public class ClienteRepositorySearch {
 		
 		
 		if(!StringUtils.isEmpty(cliente.getCpf()))
-			predicates.add(builder.equal(builder.lower(root.get("cpf")), 
+			predicates.add(builder.like(builder.lower(root.get("cpf")), 
 				cliente.getCpf().toLowerCase() ));
 		if(!StringUtils.isEmpty(cliente.getEndereco()))
 			predicates.add(builder.like(builder.lower(root.get("endereco")), 
 					"%"+ cliente.getEndereco().toLowerCase()+ "%"));
 		if(!StringUtils.isEmpty(cliente.getNome()))
-			predicates.add(builder.equal(builder.lower(root.get("nome")), 
+			predicates.add(builder.like(builder.lower(root.get("nome")), 
 					"%" + cliente.getNome().toLowerCase() + "%"));
 		if(!StringUtils.isEmpty(cliente.getTelefone()))
-			predicates.add(builder.equal(builder.lower(root.get("telefone")), 
+			predicates.add(builder.like(builder.lower(root.get("telefone")), 
 					"%" + cliente.getTelefone().toLowerCase() + "%"));
 		if(cliente.getNumeroVagas() != null)
 			predicates.add(builder.equal(root.get("numeroVagas"), 
@@ -59,6 +59,9 @@ public class ClienteRepositorySearch {
 		if(cliente.getTipoPagamento() != null)
 			predicates.add(builder.equal(root.get("tipoPagamento"), 
 					cliente.getTipoPagamento()));
+		if(cliente.getAtivo() != null)	
+			predicates.add(builder.equal(root.get("ativo"), 
+					cliente.getAtivo()));
 		
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

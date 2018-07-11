@@ -22,9 +22,15 @@ public class VeiculoService {
 	
 	public void salvar(Veiculo veiculo)
 	{
+		veiculo.setAtivo(true);
 		this.repository.save(veiculo);
 	}
 	
+	public void deletar(Veiculo veiculo)
+	{
+		veiculo.setAtivo(false);
+		this.repository.save(veiculo);
+	}
 	
 	public void deletar(Long id)
 	{
@@ -33,7 +39,7 @@ public class VeiculoService {
 	
 	public List<Veiculo> buscarTodos()
 	{
-		return this.repository.findAll();
+		return this.repository.findByAtivoTrue();
 	}
 	
 	public Veiculo buscar(Long id)

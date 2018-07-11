@@ -6,6 +6,7 @@
 package com.projeto.estacionai.repository;
 
 import com.projeto.estacionai.model.Bloco;
+
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -18,5 +19,7 @@ import org.springframework.stereotype.Repository;
 public interface BlocoRepository extends JpaRepository<Bloco, Long> {
 
     public Bloco findFirstByOrderByIdDesc();
+    
+    public List<Bloco> findByAtivoTrue();
 
 }

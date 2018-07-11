@@ -24,6 +24,13 @@ public class RelatorioService {
 	
     public void salvar(Relatorio relatorio)
     {
+    	relatorio.setAtivo(true);
+        this.repository.save(relatorio);
+    }
+    
+    public void deletar(Relatorio relatorio)
+    {
+    	relatorio.setAtivo(false);
         this.repository.save(relatorio);
     }
 	
@@ -34,7 +41,7 @@ public class RelatorioService {
 	
     public List<Relatorio> buscarTodos()
     {
-        return this.repository.findAll();
+        return this.repository.findByAtivoTrue();
     }
     
     public Relatorio buscar(Long id)

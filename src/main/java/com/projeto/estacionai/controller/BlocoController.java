@@ -43,20 +43,36 @@ public class BlocoController {
 	{
 		
 		ModelAndView mv = new ModelAndView("blocos/v-lista-bloco");
-		System.out.println("valores: " + filtro.getNumVagas() + "," + filtro.getMaxVagas() + "," + filtro.getId());
-		if((filtro.getNumVagas() == null || filtro.getNumVagas() > 1000) && 
-			(filtro.getMaxVagas() == null || filtro.getMaxVagas() > 1000) &&
-			(filtro.getId() == null || filtro.getId() < 1))
-		{
-			mv.addObject("blocos", service.buscarTodos());
-			mv.addObject("filtro", new Bloco());
-		}
-		else
-		{
+		System.out.println("valores: "  + filtro.getNome() + "," + filtro.getNumVagas() + "," + filtro.getMaxVagas() + "," + filtro.getId());
+//		if((filtro.getNumVagas() == null || filtro.getNumVagas() > 1000) && 
+//			(filtro.getMaxVagas() == null || filtro.getMaxVagas() > 1000) &&
+//			(filtro.getId() == null || filtro.getId() < 1))
+//		if((filtro.getNumVagas() == null || filtro.getNumVagas() > 1000) && 
+//				(filtro.getMaxVagas() == null || filtro.getMaxVagas() > 1000) &&
+//				(filtro.getId() == null || filtro.getId() < 1))
+//		{
+//			mv.addObject("blocos", service.buscarTodos());
+//			mv.addObject("filtro", new Bloco());
+//		}
+//		else
+//		{
+//			mv.addObject("blocos", search.filtrar(filtro));
+//			mv.addObject("filtro", filtro);
+//		}
+		
+//		if(filtro != null)
+//		{
+//			
+			filtro.setAtivo(true);
 			mv.addObject("blocos", search.filtrar(filtro));
 			mv.addObject("filtro", filtro);
-		}
-		return mv;
+			return mv;
+//		}
+//		
+//		mv.addObject("blocos", service.buscarTodos());
+//		mv.addObject("filtro", new Bloco());
+//		return mv;
+		
 	}
 	
 	@PostMapping

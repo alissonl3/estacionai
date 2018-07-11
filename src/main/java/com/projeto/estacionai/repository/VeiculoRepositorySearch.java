@@ -56,9 +56,13 @@ public class VeiculoRepositorySearch {
 		if(veiculo.getAno() != null)
 			predicates.add(builder.equal(root.get("ano"), 
 					veiculo.getAno()));
+		if(veiculo.getAtivo() != null)	
+			predicates.add(builder.equal(root.get("ativo"), 
+					veiculo.getAtivo()));
 		if(veiculo.getCliente() != null && veiculo.getCliente().getId() != 0)
 			predicates.add(builder.equal(root.get("cliente"), 
 					veiculo.getCliente().getId()));
+		
 		
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

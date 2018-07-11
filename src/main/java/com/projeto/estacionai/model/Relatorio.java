@@ -42,6 +42,8 @@ public class Relatorio {
     
 	@NotBlank
     private String url;
+	
+	private Boolean ativo;
 
 	public Long getId() {
 		return id;
@@ -81,6 +83,14 @@ public class Relatorio {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 	
 	

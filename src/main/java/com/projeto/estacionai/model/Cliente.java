@@ -47,6 +47,8 @@ public class Cliente {
 	@OneToMany(mappedBy="cliente")
 	private List<Veiculo> veiculos;
 	
+	private Boolean ativo;
+	
 	// Funções
 	
 	public List<Veiculo> getVeiculos() {
@@ -138,6 +140,16 @@ public class Cliente {
 	public void setNumeroVagas(Integer numeroVagas) {
 		this.numeroVagas = numeroVagas;
 	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+	
+	
 	
 	
 }
