@@ -2,7 +2,8 @@
 <html lang="pt"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:th="http://www.thymeleaf.org"
-     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -28,7 +29,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" th:href="@{/}"><i class="fa fa-home"></i> Inicio<span class="sr-only">(current)</span></a>
+        <a class="nav-link" th:href="@{/home}"><i class="fa fa-home"></i> Inicio<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" th:href="@{/blocos}" id="navbarBlocos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -48,7 +49,7 @@
           <a class="dropdown-item" th:href="@{/clientes/novo}"><span class="fa fa-plus"></span> Cadastrar</a>
         </div>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_GERENTE')">
         <a class="nav-link dropdown-toggle" href="#" id="navbarAdmin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-user-tie"></i> Funcionários
         </a>
@@ -57,7 +58,7 @@
           <a class="dropdown-item" th:href="@{/funcionarios/novo}"><span class="fa fa-plus"></span> Cadastrar</a>
         </div>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_GERENTE')">
         <a class="nav-link dropdown-toggle" th:href="@{/}" id="navbarContas" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-dollar-sign"></i> Contas
         </a>
@@ -67,7 +68,7 @@
           <a class="dropdown-item" th:href="@{/contas/equipamento}" ><span class="fa fa-search"></span> Documentação de Equipamentos</a>
         </div>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_GERENTE')">
         <a class="nav-link dropdown-toggle" th:href="@{/}" id="navbarRelatorio" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-chart-bar"></i> Relatórios
         </a>
