@@ -18,7 +18,7 @@ import com.projeto.estacionai.observer.TicketSujeito;
  * @author Alisson
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/home")
 public class HomeController {
 	
 	
