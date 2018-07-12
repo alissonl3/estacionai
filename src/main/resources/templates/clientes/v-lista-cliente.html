@@ -18,16 +18,7 @@
 			    <li class="breadcrumb-item active" aria-current="page">Clientes</li>
 			  </ol>
 			</nav>
-<!-- 				<div class="container"> -->
-<!-- 					<div class="row"> -->
-<!-- 						<div class="col-md-12"> -->
-<!-- 							<h1> -->
-<!-- 								Lista clientes -->
-<!-- 							</h1> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-				
+			
 				<div class="container">
 					<div class="row">
 					
@@ -39,8 +30,8 @@
 						<div class="alert  alert-info" th:if="${clientes.empty}">
 							<i class="fa fa-info"></i>
 		
-							<span>Não existem veiculos cadastrado para este cliente!</span>
-							<a th:href="@{/clientes/novo}" >Clique aqui para adicionar um novo veiculo</a>
+							<span>Não existem clientes cadastrados com esse nome!</span>
+							<a th:href="@{/clientes/novo}" >Clique aqui para cadastrar um novo cliente</a>
 							
 						</div>
 						
