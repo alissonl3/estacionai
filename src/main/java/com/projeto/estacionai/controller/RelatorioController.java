@@ -5,30 +5,23 @@
  */
 package com.projeto.estacionai.controller;
 
-import com.projeto.estacionai.model.Bloco;
-import com.projeto.estacionai.model.Relatorio;
-import com.projeto.estacionai.model.Vaga;
-import com.projeto.estacionai.repository.BlocoRepositorySearch;
-import com.projeto.estacionai.service.BlocoService;
-import com.projeto.estacionai.service.VagaService;
+import com.projeto.estacionai.model.ContaEquipamento;
+import com.projeto.estacionai.model.ContaPagar;
+import com.projeto.estacionai.model.ContaReceber;
+import com.projeto.estacionai.repository.RelatorioContaEquipamentoRepositorySearch;
+import com.projeto.estacionai.repository.RelatorioContaPagarRepositorySearch;
+import com.projeto.estacionai.repository.RelatorioContaReceberRepositorySearch;
+import com.projeto.estacionai.service.ContaEquipamentoService;
+import com.projeto.estacionai.service.ContaPagarService;
+import com.projeto.estacionai.service.ContaReceberService;
 
-import java.util.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -38,35 +31,91 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/relatorios")
 public class RelatorioController {
 	
+	@Autowired
+	private ContaPagarService servicePagar;
+	@Autowired
+	private ContaReceberService serviceReceber;
+	@Autowired
+	private ContaEquipamentoService serviceEquipamento;
+	@Autowired
+	private RelatorioContaPagarRepositorySearch searchPagar;
+	@Autowired
+	private RelatorioContaReceberRepositorySearch searchReceber;
+	@Autowired
+	private RelatorioContaEquipamentoRepositorySearch searchEquipamento;
 	
-	@GetMapping
-	public ModelAndView index()
+	
+	@GetMapping("/pagar")
+	public ModelAndView index(ContaPagar filtro)
 	{		
-		ModelAndView mv = new ModelAndView("relatorios/v-relatorio");
+		
+		ModelAndView mv = new ModelAndView("relatorios/pagar/v-relatorio");
+//		mv.addObject("contas", servicePagar.buscarTodos());
+//		mv.addObject("total", servicePagar.total());
+
+		filtro.setAtivo(true);
+		mv.addObject("filtro", filtro);
+		mv.addObject("contas", searchPagar.filtrar(filtro));
+		mv.addObject("total", servicePagar.total());
+		return mv;
+	}
+	
+	@PostMapping("/pagar")
+	public ModelAndView listarEspecifico(ContaPagar filtro)
+	{		
+		return index(filtro);
+	}
+	
+	@GetMapping("/receber")
+	public ModelAndView indexReceber(ContaReceber filtro)
+	{		
+		
+		ModelAndView mv = new ModelAndView("relatorios/receber/v-relatorio");
+//		mv.addObject("contas", serviceReceber.buscarTodos());
+//		mv.addObject("total", serviceReceber.total());
+		filtro.setAtivo(true);
+		mv.addObject("filtro", filtro);
+		mv.addObject("contas", searchReceber.filtrar(filtro));
+		mv.addObject("total", serviceReceber.total());
+		return mv;
+	}
+	
+	@PostMapping("/receber")
+	public ModelAndView listarEspecificoReceber(ContaReceber filtro)
+	{		
+		return indexReceber(filtro);
+	}
+	
+	@GetMapping("/movimento")
+	public ModelAndView indexMovimento()
+	{		
+		
+		ModelAndView mv = new ModelAndView("relatorios/movimento/v-relatorio");
+		mv.addObject("contas", serviceReceber.buscarTodos());
+		mv.addObject("total", serviceReceber.total());
 		return mv;
 	}
 	
 	
-	private List<Relatorio> popularLista(int tipo)
-	{
-	
-		List<Relatorio> retorno  = new ArrayList<>();
+	@GetMapping("/equipamento")
+	public ModelAndView indexEquipamento(ContaEquipamento filtro)
+	{		
 		
-		if(tipo == 1)
-		{ 
-			retorno.add(new Relatorio("Relatorio 1", "10/05/2018", 1, "url"));
-		}else if(tipo == 2)
-		{
-			
-		}else if(tipo == 3)
-		{
-			
-		}else
-		{
-			
-		}
-		
-		return null;
+		ModelAndView mv = new ModelAndView("relatorios/equipamento/v-relatorio");
+//		mv.addObject("contas", serviceEquipamento.buscarTodos());
+		filtro.setAtivo(true);
+		mv.addObject("filtro", filtro);
+		mv.addObject("contas", searchEquipamento.filtrar(filtro));
+		mv.addObject("total", serviceEquipamento.total());
+		return mv;
 	}
+	
+	@PostMapping("/equipamento")
+	public ModelAndView listarEspecificoEquipamento(ContaEquipamento filtro)
+	{		
+		return indexEquipamento(filtro);
+	}
+	
+	
 
 }

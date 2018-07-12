@@ -119,7 +119,7 @@
 
 								
 								<td class="text-center">
-									<a class="btn btn-info" th:href="@{/veiculos/editar/{id}(id=${veiculo.id})}" ><span class="fa fa-pencil-alt"></span></a>
+									<a class="btn btn-info" th:href="@{/veiculos/editar/{id}/{idCliente}(id=${veiculo.id},idCliente=${cliente.id})}" ><span class="fa fa-pencil-alt"></span></a>
 								
 								</td>
 								<td class="text-center">
@@ -127,7 +127,7 @@
 									th:action="@{/veiculos/{id}(id=${veiculo.id})}">
 										<input type="hidden" name="_method" value="DELETE" />
 									
-										<button type="submit" class="btn btn-danger btn-xs">
+										<button type="submit" class="btn btn-danger">
 											<span class="fa fa-trash"></span>
 										</button>
 									</form>

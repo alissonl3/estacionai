@@ -45,7 +45,7 @@ public class Veiculo {
 	
 
 	public Veiculo(@NotBlank String placa, @NotBlank String modelo, @NotBlank String marca, @NotNull Integer ano,
-			@NotBlank String tipo, @NotBlank String renavam, @NotNull Cliente cliente) {
+			@NotBlank String tipo, @NotBlank String renavam, Cliente cliente) {
 		super();
 		this.placa = placa;
 		this.modelo = modelo;
@@ -83,7 +83,9 @@ public class Veiculo {
 	@NotBlank
 	private String renavam;
 	
-	@NotNull
+	private Boolean ativo;
+	
+	
 	@ManyToOne
 	@JoinColumn(name="cliente_id", nullable=false)
 	private Cliente cliente;
@@ -175,6 +177,21 @@ public class Veiculo {
 
 	public void setRenavam(String renavam) {
 		this.renavam = renavam;
+	}
+
+
+	
+
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+
+
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 

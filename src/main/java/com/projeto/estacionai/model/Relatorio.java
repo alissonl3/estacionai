@@ -5,14 +5,10 @@
  */
 package com.projeto.estacionai.model;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -46,6 +42,8 @@ public class Relatorio {
     
 	@NotBlank
     private String url;
+	
+	private Boolean ativo;
 
 	public Long getId() {
 		return id;
@@ -85,6 +83,14 @@ public class Relatorio {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 	
 	

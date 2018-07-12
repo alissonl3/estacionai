@@ -36,26 +36,43 @@ public class BlocoController {
 	private BlocoRepositorySearch search;
     @Autowired
     private VagaService vagaService;
+    
 	
 	@GetMapping
 	public ModelAndView listar(Bloco filtro)
 	{
 		
 		ModelAndView mv = new ModelAndView("blocos/v-lista-bloco");
-		System.out.println("valores: " + filtro.getNumVagas() + "," + filtro.getMaxVagas() + "," + filtro.getId());
-		if((filtro.getNumVagas() == null || filtro.getNumVagas() > 1000) && 
-			(filtro.getMaxVagas() == null || filtro.getMaxVagas() > 1000) &&
-			(filtro.getId() == null || filtro.getId() < 1))
-		{
-			mv.addObject("blocos", service.buscarTodos());
-			mv.addObject("filtro", new Bloco());
-		}
-		else
-		{
+		System.out.println("valores: "  + filtro.getNome() + "," + filtro.getNumVagas() + "," + filtro.getMaxVagas() + "," + filtro.getId());
+//		if((filtro.getNumVagas() == null || filtro.getNumVagas() > 1000) && 
+//			(filtro.getMaxVagas() == null || filtro.getMaxVagas() > 1000) &&
+//			(filtro.getId() == null || filtro.getId() < 1))
+//		if((filtro.getNumVagas() == null || filtro.getNumVagas() > 1000) && 
+//				(filtro.getMaxVagas() == null || filtro.getMaxVagas() > 1000) &&
+//				(filtro.getId() == null || filtro.getId() < 1))
+//		{
+//			mv.addObject("blocos", service.buscarTodos());
+//			mv.addObject("filtro", new Bloco());
+//		}
+//		else
+//		{
+//			mv.addObject("blocos", search.filtrar(filtro));
+//			mv.addObject("filtro", filtro);
+//		}
+		
+//		if(filtro != null)
+//		{
+//			
+			filtro.setAtivo(true);
 			mv.addObject("blocos", search.filtrar(filtro));
 			mv.addObject("filtro", filtro);
-		}
-		return mv;
+			return mv;
+//		}
+//		
+//		mv.addObject("blocos", service.buscarTodos());
+//		mv.addObject("filtro", new Bloco());
+//		return mv;
+		
 	}
 	
 	@PostMapping
@@ -71,14 +88,18 @@ public class BlocoController {
 	{
 		ModelAndView mv = new ModelAndView("blocos/v-cadastro-bloco");
 		mv.addObject(bloco);
-		mv.addObject("vagas", vagaService.buscarTodosDesocupadas());
+//		mv.addObject("vagas", vagaService.buscarTodosDesocupadas());
 		return mv;
 	}
 	
 	@GetMapping("/editar/{id}")
 	public ModelAndView editar(@PathVariable Long id)
 	{
-		return novo(service.buscar(id));
+		ModelAndView mv = new ModelAndView("blocos/v-editar-bloco");
+		mv.addObject("bloco", service.buscar(id));
+		mv.addObject("vagas", vagaService.buscarTodosDesocupadas());
+		return mv;
+//		return novo(service.buscar(id));
 	}
 	
 	@DeleteMapping("/{id}")
@@ -91,11 +112,56 @@ public class BlocoController {
 		return "redirect:/blocos";
 	}
 	
+	@DeleteMapping("/vaga/{id}")
+	public String deletarVaga(@PathVariable Long id, RedirectAttributes attributes)
+	{
+		
+		Long idBloco = vagaService.buscar(id).getBloco().getId();
+		
+		vagaService.deletar(id);
+		
+		attributes.addFlashAttribute("mensagem", "Vaga removida com sucesso!");
+		
+		return "redirect:/blocos/editar/" + idBloco;
+	}
+	
+	@GetMapping("/vaga/novo/{bloco}/{tipo}")
+	public ModelAndView salvarVaga(@PathVariable Integer tipo, @PathVariable Long bloco)
+	{
+		
+		//acionando nova vaga
+		Vaga vaga = new Vaga();
+		vaga.setTipo(tipo);
+		vaga.setOcupada(false);
+		vaga.setBloco(service.buscar(bloco));
+		
+		vagaService.salvar(vaga);	
+			
+		return new ModelAndView("redirect:/blocos/editar/" + bloco);
+		
+	}
+	
+	@PostMapping("/salvar")
+	public ModelAndView salvarBloco(@Valid Bloco bloco, BindingResult result, RedirectAttributes attributes)
+	{
+		if(result.hasErrors())
+		{
+			return novo(bloco);
+		}
+		
+		service.salvar(bloco);
+		Bloco ultimo = service.buscarUltimo();
+		attributes.addFlashAttribute("mensagem", "Bloco cadastrado com sucesso!");
+		
+		return new ModelAndView("redirect:/blocos/editar/" + ultimo.getId());
+		
+	}
+	
+	
 	@PostMapping("/novo")
 	public ModelAndView salvar(@Valid Bloco bloco, BindingResult result, RedirectAttributes attributes)
 	{
-		System.out.println("Nummax: " + bloco.getMaxVagas());
-		bloco.setNumVagas(bloco.getVagas().size());
+		//bloco.setNumVagas(bloco.getVagas().size());
 		
 		if(result.hasErrors())
 		{
@@ -107,12 +173,12 @@ public class BlocoController {
 		{
 			
 			service.salvar(bloco);
-			Bloco ultimo = service.buscarUltimo();
-			for (Vaga vaga : bloco.getVagas()) {
-				vaga.setOcupada(true);
-				vaga.setBloco(ultimo);
-				vagaService.salvar(vaga);
-			}
+//			Bloco ultimo = service.buscarUltimo();
+//			for (Vaga vaga : bloco.getVagas()) {
+//				vaga.setOcupada(true);
+//				vaga.setBloco(ultimo);
+//				vagaService.salvar(vaga);
+//			}
 			
 			attributes.addFlashAttribute("mensagem", "Bloco cadastrado com sucesso!");
 			
@@ -123,11 +189,11 @@ public class BlocoController {
 			
 			service.salvar(bloco);
 			
-			for (Vaga vaga : bloco.getVagas()) {
-				vaga.setOcupada(true);
-				vaga.setBloco(bloco);
-				vagaService.salvar(vaga);
-			}
+//			for (Vaga vaga : bloco.getVagas()) {
+//				vaga.setOcupada(true);
+//				vaga.setBloco(bloco);
+//				vagaService.salvar(vaga);
+//			}
 			
 			attributes.addFlashAttribute("mensagem", "Bloco atualizado com sucesso!");
 			

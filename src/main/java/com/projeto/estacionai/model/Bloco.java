@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -22,18 +23,31 @@ import javax.validation.constraints.NotNull;
 public class Bloco {
 	
 	// Atributos
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	public Bloco(List<Vaga> vagas, @NotNull Integer maxVagas, Integer numVagas, @NotBlank String nome) {
+		super();
+		this.vagas = vagas;
+		this.maxVagas = maxVagas;
+		this.numVagas = numVagas;
+		this.nome = nome;
+	}
+
 	@OneToMany(mappedBy = "bloco")
-        private List<Vaga> vagas;
+    private List<Vaga> vagas;
 	
-        @NotNull
-        private Integer maxVagas;
+    @NotNull
+    private Integer maxVagas;
         
-        private Integer numVagas;
+    private Integer numVagas;
+    
+    @NotBlank
+    private String nome;
+    
+    private Boolean ativo;
         
 	public Bloco(){
         }
@@ -90,7 +104,27 @@ public class Bloco {
             return false;
         }
 	
-        @Override
+	
+	
+        public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	
+
+		public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+		@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

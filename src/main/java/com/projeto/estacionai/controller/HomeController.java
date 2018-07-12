@@ -5,29 +5,20 @@
  */
 package com.projeto.estacionai.controller;
 
-import com.projeto.estacionai.model.Bloco;
-import com.projeto.estacionai.model.Vaga;
-import com.projeto.estacionai.repository.BlocoRepositorySearch;
-import com.projeto.estacionai.service.BlocoService;
-import com.projeto.estacionai.service.VagaService;
-import javax.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.projeto.estacionai.observer.EntradaSaidaObserver;
+import com.projeto.estacionai.observer.TicketSujeito;
 
 /**
  *
- * @author Eduardo
+ * @author Alisson
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/home")
 public class HomeController {
 	
 	
@@ -35,6 +26,18 @@ public class HomeController {
 	public ModelAndView index()
 	{		
 		ModelAndView mv = new ModelAndView("home/v-home");
+		return mv;
+	}
+	
+	
+	@GetMapping("/observer")
+	public ModelAndView iniciarObservadores()
+	{
+		
+		TicketSujeito sujeito = new TicketSujeito();
+		sujeito.anexar(new EntradaSaidaObserver(sujeito));	
+		
+		ModelAndView mv = new ModelAndView("redirect:/");
 		return mv;
 	}
 	

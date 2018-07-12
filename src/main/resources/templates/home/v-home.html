@@ -5,7 +5,7 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/layout}">
 <head>
-	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/lista-veiculos.css}" />
+<!-- 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/lista-veiculos.css}" /> -->
 </head>
 
 
@@ -19,46 +19,94 @@
 			  </ol>
 			</nav>
 
-			<div class="container-fluid">
+			<div class="container">
 			
-			<div class="row" style="padding-top: 10px;">
+			<div class="row" style="padding-top: 5px;">
 			<div class="col-md-6">
-				<h1>Estacionái</h1>
-			</div>
-			<div class="col-md-6">
-				
-				<div class="card text-center" >
+				<div class="card text-center" style="min-height: 250px;" >
 					  <div class="card-body">
-<!-- 					    <h5 class="card-title">Quantidade de vagas livres</h5> -->
-<!-- 					    <hr /> -->
+					  <div class="row">
+						  <div class="col-md-10" >
+						  	<h5 class="card-title">Tickets </h5> 
+						  </div>
+						  <div class="col-md-2">
+						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="Neste módulo é gerado e valido os tickets do estacionamento." ><i class="fa fa-life-ring"></i> </button>
+						  </div>
+					  </div>
+					    <hr />
 					    <div class="row">
 					    	<div class="col-md-6">
-								<img th:src="@{/images/car.png}" class="img-fluid img-thumbnail" style="max-width: 100px; max-height: 100px;">
-								<a href="#" class="card-link">Disponíveis: <span class="badge badge-light">4</span></a>
-								
+					    		<img th:src="@{/images/ticket.png}" class="img-fluid" style="height: 150px;" />								
 							</div>
 							<div class="col-md-6">
-								<img th:src="@{/images/motorcycle.png}"  class="img-fluid img-thumbnail" style="max-width: 100px; max-height: 100px;">
-								<a href="#" class="card-link">Disponíveis: <span class="badge badge-light">4</span></a>
+							<p>Opções</p>
+							<hr />
+								<div class="btn-group-vertical btn-block">
+									 <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalValidarTicket">
+									  <i class="fa fa-check" ></i> Validar Ticket
+									</button>
+									<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalGerarTicket">
+								  		<i class="fa fa-cog" ></i> Gerar Ticket
+									</button>
+								</div>
 							</div>
 					    </div>
-					    <hr />
-					    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalValidarTicket">
-						  Validar Ticket
-						</button>
-					    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalGerarTicket">
-						  Gerar Ticket
-						</button>
+					    
 					  </div>
 				</div>
-				
-				
 			</div>
+			<div class="col-md-6">
+				<div class="card text-center" >
+					  <div class="card-body" style="min-height: 250px;">
+					  <div class="row">
+					  <div class="col-md-10">
+					    <h5 class="card-title">Quantidade de vagas livres</h5>
+					  </div>
+					  <div class="col-md-2">
+						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="É atualizado em tempo real a quantidade de vagas disponíveis para cada tipo de veiculo." ><i class="fa fa-life-ring"></i> </button>
+					  </div>
+					  </div>
+					    <hr />
+					    <div class="row">
+					    	<div class="col-md-12">
+					    		<ul class="list-group">
+								  <li class="list-group-item d-flex justify-content-between align-items-center " >
+								    <i class="fa fa-motorcycle" ></i> Moto
+								    <span class="badge badge-primary badge-pill">14</span>
+								  </li>
+								  <li class="list-group-item d-flex justify-content-between align-items-center " >
+								    <i class="fa fa-car"></i> Carro
+								    <span class="badge badge-success badge-pill">2</span>
+								  </li>
+								  <li class="list-group-item d-flex justify-content-between align-items-center" >
+								     <i class="fab fa-accessible-icon" ></i> Deficiente
+								    <span class="badge badge-warning badge-pill">1</span>
+								  </li>
+								</ul>
+							</div>
+					    </div>
+					  </div>
+				</div>
+			</div>
+				
+				
+				
 			</div>
 			
 			
 			<div class="row" style="padding-top: 10px;">
-				<div class="col-md-4">
+				<div class="col-md-6">
+				<div class="card text-center" >
+					<div class="card-body" style="min-height: 250px;">
+					<div class="row">
+					  <div class="col-md-10">
+					    <h5 class="card-title">Tabela de preços</h5>
+					  </div>
+					  <div class="col-md-2">
+						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="A tabela abaixo mostra os valores dos preços do estacionamento." ><i class="fa fa-life-ring"></i> </button>
+					  </div>
+					  </div>
+					    <hr />
 					<table class="table">
 					  <thead class="thead-dark">
 					    <tr>
@@ -89,10 +137,90 @@
 					    </tr>
 					  </tbody>
 					</table>
+					</div>
+					</div>
 				</div>
 				<div class="col-md-6">
-				<h1>Calendário aqui</h1>
-<!-- 					<div class="calendar" style="width: 100;"></div> -->
+				<div class="card text-center" >
+					<div class="card-body" style="min-height: 250px;">
+					    <div class="row">
+					  <div class="col-md-10">
+					    <h5 class="card-title">Histórico de entrada e saída</h5>
+					  </div>
+					  <div class="col-md-2">
+						  	<button type="button" class="btn  btn-outline-danger" style="color: red;" data-toggle="popover" title="Ajuda" data-content="É atualizado em tempo real a entrada e saida de veiculos no estacionamento." ><i class="fa fa-life-ring"></i> </button>
+					  </div>
+					  </div>
+					    <hr />
+					    <div class="row">
+					    	<div class="col-md-12">
+					    		<div class="table-responsive">
+					<table id="tabela-produtos" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
+						<thead class="aw-table-header-solid">
+							<tr>
+								<th>Ticket</th>
+								<th >Entrada</th>
+								<th >Saída</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="text-center">293847529384392</td>
+
+								<td class="text-center">10/10/2018 17:30
+								</td>
+
+								<td class="text-center">10/10/2018 19:30</td>
+
+
+								
+							</tr>
+							<tr>
+								<td class="text-center">29384928349</td>
+
+								<td class="text-center">10/10/2018 10:40
+								</td>
+
+								<td class="text-center">---</td>
+
+
+								
+							</tr>
+							<tr>
+								<td class="text-center">29384529389289</td>
+
+								<td class="text-center">10/10/2018 11:30
+								</td>
+
+								<td class="text-center">10/10/2018 12:30</td>
+		
+							</tr>
+							<tr>
+								<td class="text-center">29384529389289</td>
+
+								<td class="text-center">10/10/2018 11:30
+								</td>
+
+								<td class="text-center">10/10/2018 12:30</td>
+		
+							</tr>
+							<tr>
+								<td class="text-center">29384529389289</td>
+
+								<td class="text-center">10/10/2018 11:30
+								</td>
+
+								<td class="text-center">10/10/2018 12:30</td>
+		
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+							</div>
+					    </div>
+					  </div>
+					  </div>
 				</div>
 			</div>	
 			
@@ -120,6 +248,9 @@
 							<div class="form-group">
 								<label>Placa</label>		
 								<input id="placa" type="text" class="form-control js-placa" placeholder="Digite a placa"/>
+								<small class="form-text text-muted">
+						      	Exemplo: AAA-9999
+								</small>
 							</div>
 						    
 						     
@@ -160,6 +291,9 @@
 							<div class="form-group">
 								<label>Placa</label>		
 								<input id="placa" type="text" class="form-control js-placa" placeholder="Digite a placa"/>
+								<small class="form-text text-muted">
+						      	Exemplo: AAA-9999
+								</small>
 							</div>
 						   
 						   
@@ -175,6 +309,23 @@
 			  </div>
 			</div>
 			
+			<script type="text/javascript">
+			
+			
+			
+// 			jQuery(function($){
+// 				  console.log('Ready disparado');
+				  
+// 				  const reference = document.querySelector('.js-tooltip');
+// 					new Tooltip(reference, {
+// 					    placement: 'top', // or bottom, left, right, and variations
+// 					    title: "Top"
+// 					});
+// 			});
+			
+			
+			
+			</script>
 			
 		</section>
 		

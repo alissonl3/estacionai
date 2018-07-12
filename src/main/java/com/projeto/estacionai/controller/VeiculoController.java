@@ -41,21 +41,21 @@ public class VeiculoController {
 	{
 		
 		ModelAndView mv = new ModelAndView("veiculos/v-lista-veiculo");
-		if((filtro.getPlaca() == null || filtro.getPlaca().trim().equals("")) && 
-			(filtro.getRenavam() == null || filtro.getRenavam().trim().equals("")) && 
-			(filtro.getModelo() == null || filtro.getModelo().trim().equals("")) && 
-			(filtro.getAno() == null || filtro.getAno() < 1500) && 
-			(filtro.getTipo() == null || filtro.getTipo().trim().equals("")))
-		{
-			mv.addObject("veiculos", service.buscarTodos());
-			mv.addObject("filtro", new Veiculo());
-		}
-		else
-		{
-			
+//		if((filtro.getPlaca() == null || filtro.getPlaca().trim().equals("")) && 
+//			(filtro.getRenavam() == null || filtro.getRenavam().trim().equals("")) && 
+//			(filtro.getModelo() == null || filtro.getModelo().trim().equals("")) && 
+//			(filtro.getAno() == null || filtro.getAno() < 1500) && 
+//			(filtro.getTipo() == null || filtro.getTipo().trim().equals("")))
+//		{
+//			mv.addObject("veiculos", service.buscarTodos());
+//			mv.addObject("filtro", new Veiculo());
+//		}
+//		else
+//		{
+			filtro.setAtivo(true);
 			mv.addObject("veiculos", search.filtrar(filtro));
 			mv.addObject("filtro", filtro);
-		}
+//		}
 		return mv;
 	}
 	
@@ -93,11 +93,19 @@ public class VeiculoController {
 		return novo(service.buscar(id));
 	}
 	
+	@GetMapping("/editar/{id}/{idCliente}")
+	public ModelAndView editarComCliente(@PathVariable Long id, @PathVariable Long idCliente)
+	{
+		ModelAndView mv = new ModelAndView("veiculos/v-cadastro-veiculo");
+		mv.addObject("veiculo", service.buscar(id));
+		mv.addObject("cliente", clienteService.buscar(idCliente));
+		return mv;
+	}
 	
 	@DeleteMapping("/{id}")
 	public String deletar(@PathVariable Long id, RedirectAttributes attributes)
 	{
-		service.deletar(id);
+		this.service.deletar(this.service.buscar(id));
 		
 		attributes.addFlashAttribute("mensagem", "Veiculo removido com sucesso!");
 		
