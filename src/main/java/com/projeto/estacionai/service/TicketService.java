@@ -26,6 +26,11 @@ public class TicketService {
 	private TicketRepository repository;
 	
 	
+	public Ticket buscarTicket(String placa)
+	{
+		return this.repository.findLastByPlacaLike(placa);
+	}
+	
 	public void validarTicket(String placa)
 	{
 		Ticket ticket = repository.findLastByPlacaLike(placa);

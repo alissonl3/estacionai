@@ -151,6 +151,7 @@ public class BlocoController {
 		
 		service.salvar(bloco);
 		Bloco ultimo = service.buscarUltimo();
+		System.out.println("Id :" + ultimo.getId());
 		attributes.addFlashAttribute("mensagem", "Bloco cadastrado com sucesso!");
 		
 		return new ModelAndView("redirect:/blocos/editar/" + ultimo.getId());
