@@ -94,20 +94,16 @@ public class HomeController {
 	@PostMapping("/gerar")
 	public ModelAndView gerarTicket(@RequestParam("placa") String placa, RedirectAttributes attributes)
 	{
-		System.out.println("Entrou no gerar.");
-		System.out.println("Valor: " + placa);
+		
 		//salvamento do ticket novo
 		Veiculo veiculo = this.serviceVeiculo.buscarPorPlaca(placa);
 		
 		if(veiculo == null)
 		{
-			System.out.println("Não encontrou veiculo");
-			
 			attributes.addFlashAttribute("erro", "Veiculo não encontrado. Tente novamente!");
 			return new ModelAndView("redirect:/home");
 		}
 		
-		System.out.println("Encontrou veiculo");
 		String codigo = "";
 		try {
 			codigo = DatatypeConverter.printHexBinary(MessageDigest.getInstance("MD5").digest(placa.getBytes("utf-8")));
@@ -119,7 +115,6 @@ public class HomeController {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Codigo: " + codigo);
 		Ticket ticket = new Ticket();
 		ticket.setPlaca(placa);
 		ticket.setCodigo(codigo);
@@ -131,8 +126,8 @@ public class HomeController {
 		this.service.gerarTicket(ticket);
 		
 		//alertando os observadores (verificar problema)
-//		this.sujeito.anexar(new EntradaSaidaObserver(sujeito));
-//		this.sujeito.setarEstado(this.service.buscarUltimo());
+		this.sujeito.anexar(new EntradaSaidaObserver(sujeito));
+		this.sujeito.setarEstado(this.service.buscarUltimo());
 		
 		
 		ModelAndView mv = new ModelAndView("redirect:/clientes");

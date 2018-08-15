@@ -20,12 +20,9 @@ public class EntradaSaidaObserver extends TicketObserver {
 	@Override
 	public void atualizar() {
 		
-		System.out.println("Entrou atualizar!");
-		
 		HistoricoEntradaSaida hes;
 		if(ess.pegarEstado().getHorarioSaida() != null)
 		{
-			System.out.println("Entrou diferente de null");
 			hes = new HistoricoEntradaSaida(ess.pegarEstado().getCodigo(), ess.pegarEstado().getHorarioChegada(), ess.pegarEstado().getHorarioSaida());
 		}
 		else

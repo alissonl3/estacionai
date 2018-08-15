@@ -5,15 +5,15 @@
  */
 package com.projeto.estacionai.repository;
 
+import static com.projeto.estacionai.util.JdbcUtils.USUARIO_POR_LOGIN;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import com.projeto.estacionai.model.HistoricoEntradaSaida;
+import com.projeto.estacionai.security.Conexao;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -24,22 +24,30 @@ import org.springframework.stereotype.Component;
 public class HistoricoEntradaSaidaRepositoryObserver {
     
     
-	private final String INSERT_SQL = "INSERT INTO historico_entrada_saida(codigo, horario_chegada, ativo, horario_saida) values(:codigo,:horario_chegada,:ativo, :horario_saida)";
+	private final String INSERT_SQL = "INSERT INTO historico_entrada_saida(codigo, horario_chegada, ativo, horario_saida) values(?,?,?,?)";
 
-	@Autowired
-	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	private Connection conn;
 	
 	public HistoricoEntradaSaidaRepositoryObserver()
-	{ }
+	{
+		this.conn = Conexao.getConnection();
+	}
 
 	public void save(HistoricoEntradaSaida hes) {
-		KeyHolder holder = new GeneratedKeyHolder();
-			SqlParameterSource parameters = new MapSqlParameterSource()
-					.addValue("codigo", hes.getCodigo())
-					.addValue("horario_chegada", hes.getHorarioChegada())
-					.addValue("ativo", hes.getAtivo())
-					.addValue("horario_saida", hes.getHorarioSaida());
-			namedParameterJdbcTemplate.update(INSERT_SQL, parameters, holder);
+		try {
+			PreparedStatement ps = this.conn.prepareStatement(INSERT_SQL);
+			ps.setString(1, hes.getCodigo());
+			ps.setString(2, hes.getHorarioChegada().toString());
+			ps.setBoolean(3, hes.getAtivo());
+			ps.setString(4, hes.getHorarioSaida().toString());
+			
+			ps.executeUpdate();			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+			
+	}
 
 }
