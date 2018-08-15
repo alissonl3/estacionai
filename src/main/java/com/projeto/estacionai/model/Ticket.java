@@ -13,11 +13,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.projeto.estacionai.util.LocalDateTimeAttributeConverter;
@@ -29,12 +31,12 @@ import com.projeto.estacionai.util.LocalDateTimeAttributeConverter;
 @Entity
 public class Ticket {
 
-    public Ticket(@NotBlank String codigo, @NotBlank String placa, @NotNull Vaga vaga,
+    public Ticket(@NotBlank String placa, @NotNull Cliente cliente,
 			@NotNull LocalDateTime horarioChegada, LocalDateTime horarioSaida, Double total) {
 		super();
-		this.codigo = codigo;
+		this.codigo = MD5Encoder.encode(placa.getBytes());
+		this.cliente = cliente;
 		this.placa = placa;
-		this.vaga = vaga;
 		this.horarioChegada = horarioChegada;
 		this.horarioSaida = horarioSaida;
 		this.total = total;
@@ -55,7 +57,8 @@ public class Ticket {
 	
 	@NotNull
 	@OneToOne
-	private Vaga vaga;
+	@JoinColumn(name="cliente_id")
+	private Cliente cliente;
 	
 	@NotNull
 	@DateTimeFormat(pattern="dd/MM/yyyy")
@@ -72,18 +75,6 @@ public class Ticket {
         
 	
 	public Ticket(){}    
-	
-	
-
-	public Ticket(@NotBlank String placa, @NotNull Vaga vaga, @NotNull LocalDateTime horarioChegada,
-			LocalDateTime horarioSaida, Double total) {
-		super();
-		this.placa = placa;
-		this.vaga = vaga;
-		this.horarioChegada = horarioChegada;
-		this.horarioSaida = horarioSaida;
-		this.total = total;
-	}
 
 
 
@@ -101,15 +92,6 @@ public class Ticket {
 
 	public void setPlaca(String placa) {
 		this.placa = placa;
-	}
-
-	public Vaga getVaga() {
-		return vaga;
-	}
-
-
-	public void setVaga(Vaga vaga) {
-		this.vaga = vaga;
 	}
 
 
@@ -149,15 +131,6 @@ public class Ticket {
 	}
 
 
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-	
-	
-
-
-
 		public Boolean getAtivo() {
 		return ativo;
 	}
@@ -166,6 +139,16 @@ public class Ticket {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+		public Cliente getCliente() {
+		return cliente;
+	}
+
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 

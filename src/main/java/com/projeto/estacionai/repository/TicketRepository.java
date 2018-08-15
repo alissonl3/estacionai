@@ -25,5 +25,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     public Ticket findLastByCodigoLike(String codigo);
     
     public List<Ticket> findByAtivoTrue();
+    
+    public Ticket findFirstByOrderByIdDesc();
 
 }

@@ -31,6 +31,16 @@ public class TicketService {
 		return this.repository.findLastByPlacaLike(placa);
 	}
 	
+	public void gerarTicket(Ticket ticket)
+	{
+		this.repository.save(ticket);	
+	}
+	
+	public Ticket buscarUltimo()
+	{
+		return this.repository.findFirstByOrderByIdDesc();
+	}
+	
 	public void validarTicket(String placa)
 	{
 		Ticket ticket = repository.findLastByPlacaLike(placa);
@@ -38,7 +48,6 @@ public class TicketService {
 		LocalDateTime horarioSaida = LocalDateTime.now();
 		ticket.setHorarioSaida(horarioSaida);
 		ticket.setTotal(calcularTotal(ticket));
-		ticket.setCodigo(MD5Encoder.encode(placa.getBytes()));
 		
 		//atualiza com o horario de saida e total a pagar
 		repository.save(ticket);

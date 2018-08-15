@@ -36,16 +36,20 @@
 					    <hr />
 					    <div class="row">
 					    <div class="col-md-12">
-					    	<form method="POST" class="form-vertical">
+					    	<form method="POST" th:action="@{/home/gerar}" class="form-vertical">
 						
+						<div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${erro} != null" >
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+			
+									<i class="fa fa-exclamation-circle"></i>									
+									<span th:text="${erro}">Mensagem erro.</span>
+							</div>
 						
-<!-- 							<div class="form-group"> -->
-<!-- 								<label>Renavam</label> -->
-<!-- 								<input type="text" class="form-control" placeholder="Digite a numero do renavam"/> -->
-<!-- 							</div> -->
 							<div class="form-group">
 								<label>Placa</label>		
-								<input id="placa" type="text" class="form-control js-placa" placeholder="Digite a placa"/>
+								<input id="placa" type="text" name="placa" class="form-control js-placa" placeholder="Digite a placa"/>
 								<small class="form-text text-muted">
 						      	Exemplo: AAA-9999
 								</small>
