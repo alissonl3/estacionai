@@ -7,6 +7,7 @@ package com.projeto.estacionai.controller;
 
 import java.time.LocalDateTime;
 
+import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -103,8 +104,11 @@ public class HomeController {
 		
 		System.out.println("Encontrou veiculo");
 		Ticket ticket = new Ticket();
+		ticket.setPlaca(placa);
+		ticket.setCodigo(MD5Encoder.encode(placa.getBytes()));
 		ticket.setAtivo(true);
 		ticket.setHorarioChegada(LocalDateTime.now());
+		ticket.setHorarioSaida(LocalDateTime.now());
 		ticket.setTotal(this.service.calcularTotal(ticket));
 		ticket.setCliente(veiculo.getCliente());
 		this.service.gerarTicket(ticket);

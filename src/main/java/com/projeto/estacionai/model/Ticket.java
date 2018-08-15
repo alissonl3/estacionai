@@ -31,16 +31,32 @@ import com.projeto.estacionai.util.LocalDateTimeAttributeConverter;
 @Entity
 public class Ticket {
 
-    public Ticket(@NotBlank String placa, @NotNull Cliente cliente,
+    public Ticket(@NotBlank String placa, String codigo, @NotNull Cliente cliente,
 			@NotNull LocalDateTime horarioChegada, LocalDateTime horarioSaida, Double total) {
 		super();
-		this.codigo = MD5Encoder.encode(placa.getBytes());
+		this.codigo = codigo;
 		this.cliente = cliente;
 		this.placa = placa;
 		this.horarioChegada = horarioChegada;
 		this.horarioSaida = horarioSaida;
 		this.total = total;
 	}
+    
+    
+
+	public Ticket(String codigo, @NotBlank String placa, @NotNull Cliente cliente,
+			@NotNull LocalDateTime horarioChegada, LocalDateTime horarioSaida, Double total, Boolean ativo) {
+		super();
+		this.codigo = codigo;
+		this.placa = placa;
+		this.cliente = cliente;
+		this.horarioChegada = horarioChegada;
+		this.horarioSaida = horarioSaida;
+		this.total = total;
+		this.ativo = ativo;
+	}
+
+
 
 	@Transient
 	private static DecimalFormat df2 = new DecimalFormat(".##");
@@ -49,7 +65,6 @@ public class Ticket {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
 	private String codigo;
 	
 	@NotBlank
@@ -121,7 +136,7 @@ public class Ticket {
 
 
 	public void setTotal(Double total) {	
-		this.total = Double.parseDouble(df2.format(total));
+		this.total = Double.parseDouble(df2.format(total).replace(",", "."));
 	}
 
 	
@@ -130,8 +145,13 @@ public class Ticket {
 		return codigo;
 	}
 
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
 
-		public Boolean getAtivo() {
+
+
+	public Boolean getAtivo() {
 		return ativo;
 	}
 
