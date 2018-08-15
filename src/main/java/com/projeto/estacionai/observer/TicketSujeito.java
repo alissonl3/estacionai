@@ -2,11 +2,15 @@ package com.projeto.estacionai.observer;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.projeto.estacionai.model.Ticket;
 
+@Component
 public class TicketSujeito {
 	
-	private ArrayList<TicketObserver> observadores;
+	private ArrayList<TicketObserver> observadores;	
 	private Ticket ticket;
 	
 	

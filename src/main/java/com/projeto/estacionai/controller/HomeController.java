@@ -5,9 +5,13 @@
  */
 package com.projeto.estacionai.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
-import org.apache.tomcat.util.security.MD5Encoder;
+import javax.xml.bind.DatatypeConverter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.projeto.estacionai.model.Cliente;
 import com.projeto.estacionai.model.Ticket;
 import com.projeto.estacionai.model.Veiculo;
 import com.projeto.estacionai.observer.EntradaSaidaObserver;
@@ -38,6 +41,8 @@ public class HomeController {
 	private TicketService service;
 	@Autowired
 	private VeiculoService serviceVeiculo;
+	@Autowired
+	private TicketSujeito sujeito;
 	
 	
 	@GetMapping
@@ -103,9 +108,21 @@ public class HomeController {
 		}
 		
 		System.out.println("Encontrou veiculo");
+		String codigo = "";
+		try {
+			codigo = DatatypeConverter.printHexBinary(MessageDigest.getInstance("MD5").digest(placa.getBytes("utf-8")));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("Codigo: " + codigo);
 		Ticket ticket = new Ticket();
 		ticket.setPlaca(placa);
-		ticket.setCodigo(MD5Encoder.encode(placa.getBytes()));
+		ticket.setCodigo(codigo);
 		ticket.setAtivo(true);
 		ticket.setHorarioChegada(LocalDateTime.now());
 		ticket.setHorarioSaida(LocalDateTime.now());
@@ -113,10 +130,9 @@ public class HomeController {
 		ticket.setCliente(veiculo.getCliente());
 		this.service.gerarTicket(ticket);
 		
-		//alertando os observadores 
-		TicketSujeito sujeito = new TicketSujeito();
-		sujeito.anexar(new EntradaSaidaObserver(sujeito));
-		sujeito.setarEstado(this.service.buscarUltimo());
+		//alertando os observadores (verificar problema)
+//		this.sujeito.anexar(new EntradaSaidaObserver(sujeito));
+//		this.sujeito.setarEstado(this.service.buscarUltimo());
 		
 		
 		ModelAndView mv = new ModelAndView("redirect:/clientes");

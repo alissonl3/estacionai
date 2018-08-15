@@ -13,7 +13,7 @@
 		<section layout:fragment="content">
 			<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
-			    <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+			    <li class="breadcrumb-item"><a th:href="@{/home}">Inicio</a></li>
 			    <li class="breadcrumb-item"><a th:href="@{/clientes}">Clientes</a></li>
 			    <li class="breadcrumb-item active" aria-current="page" th:if="${cliente.id == null}">Cadastro</li>
 			    <li class="breadcrumb-item active" aria-current="page" th:if="${cliente.id != null}" th:text="${cliente.nome}">Editar</li>
