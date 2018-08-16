@@ -133,7 +133,7 @@
 			
 			
 			<div class="row" style="padding-top: 10px;">
-				<div class="col-md-6">
+				<div class="col-md-4">
 				<div class="card text-center" >
 					<div class="card-body" style="min-height: 250px;">
 					<div class="row">
@@ -178,7 +178,7 @@
 					</div>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-8">
 				<div class="card text-center" >
 					<div class="card-body" style="min-height: 250px;">
 					    <div class="row">
@@ -202,55 +202,55 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td class="text-center">293847529384392</td>
+							<tr th:each="historico : ${historicos}">
+								<td class="text-center" th:text=${historico.codigo}>293847529384392</td>
 
-								<td class="text-center">10/10/2018 17:30
+								<td class="text-center"  th:text=${historico.horarioChegada}>10/10/2018 17:30
 								</td>
 
-								<td class="text-center">10/10/2018 19:30</td>
+								<td class="text-center" th:text=${historico.horarioSaida}>10/10/2018 19:30</td>
 
 
 								
 							</tr>
-							<tr>
-								<td class="text-center">29384928349</td>
+<!-- 							<tr> -->
+<!-- 								<td class="text-center">29384928349</td> -->
 
-								<td class="text-center">10/10/2018 10:40
-								</td>
+<!-- 								<td class="text-center">10/10/2018 10:40 -->
+<!-- 								</td> -->
 
-								<td class="text-center">---</td>
+<!-- 								<td class="text-center">---</td> -->
 
 
 								
-							</tr>
-							<tr>
-								<td class="text-center">29384529389289</td>
+<!-- 							</tr> -->
+<!-- 							<tr> -->
+<!-- 								<td class="text-center">29384529389289</td> -->
 
-								<td class="text-center">10/10/2018 11:30
-								</td>
+<!-- 								<td class="text-center">10/10/2018 11:30 -->
+<!-- 								</td> -->
 
-								<td class="text-center">10/10/2018 12:30</td>
+<!-- 								<td class="text-center">10/10/2018 12:30</td> -->
 		
-							</tr>
-							<tr>
-								<td class="text-center">29384529389289</td>
+<!-- 							</tr> -->
+<!-- 							<tr> -->
+<!-- 								<td class="text-center">29384529389289</td> -->
 
-								<td class="text-center">10/10/2018 11:30
-								</td>
+<!-- 								<td class="text-center">10/10/2018 11:30 -->
+<!-- 								</td> -->
 
-								<td class="text-center">10/10/2018 12:30</td>
+<!-- 								<td class="text-center">10/10/2018 12:30</td> -->
 		
-							</tr>
-							<tr>
-								<td class="text-center">29384529389289</td>
+<!-- 							</tr> -->
+<!-- 							<tr> -->
+<!-- 								<td class="text-center">29384529389289</td> -->
 
-								<td class="text-center">10/10/2018 11:30
-								</td>
+<!-- 								<td class="text-center">10/10/2018 11:30 -->
+<!-- 								</td> -->
 
-								<td class="text-center">10/10/2018 12:30</td>
+<!-- 								<td class="text-center">10/10/2018 12:30</td> -->
 		
-							</tr>
+<!-- 							</tr> -->
 
 						</tbody>
 					</table>

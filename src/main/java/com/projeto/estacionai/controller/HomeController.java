@@ -27,6 +27,7 @@ import com.projeto.estacionai.model.Ticket;
 import com.projeto.estacionai.model.Veiculo;
 import com.projeto.estacionai.observer.EntradaSaidaObserver;
 import com.projeto.estacionai.observer.TicketSujeito;
+import com.projeto.estacionai.service.HistoricoEntradaSaidaService;
 import com.projeto.estacionai.service.TicketService;
 import com.projeto.estacionai.service.VeiculoService;
 
@@ -44,12 +45,15 @@ public class HomeController {
 	private VeiculoService serviceVeiculo;
 	@Autowired
 	private TicketSujeito sujeito;
+	@Autowired
+	private HistoricoEntradaSaidaService serviceHistorico;
 	
 	
 	@GetMapping
 	public ModelAndView index()
 	{		
 		ModelAndView mv = new ModelAndView("home/v-home");
+		mv.addObject("historicos", this.serviceHistorico.buscarUltimos5());
 		return mv;
 	}
 	
