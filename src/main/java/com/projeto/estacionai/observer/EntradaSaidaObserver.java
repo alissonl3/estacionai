@@ -19,17 +19,8 @@ public class EntradaSaidaObserver extends TicketObserver {
 
 	@Override
 	public void atualizar() {
-		
-		HistoricoEntradaSaida hes;
-		if(ess.pegarEstado().getHorarioSaida() != null)
-		{
-			hes = new HistoricoEntradaSaida(ess.pegarEstado().getCodigo(), ess.pegarEstado().getHorarioChegada(), ess.pegarEstado().getHorarioSaida());
-		}
-		else
-		{
-			hes = new HistoricoEntradaSaida(ess.pegarEstado().getCodigo(), ess.pegarEstado().getHorarioChegada(), ess.pegarEstado().getHorarioSaida());
-		}
-		
+	
+		HistoricoEntradaSaida hes = new HistoricoEntradaSaida(ess.pegarEstado().getCodigo(), ess.pegarEstado().getHorarioChegada(), ess.pegarEstado().getHorarioSaida());		
 		this.service.salvar(hes);
 		
 	}

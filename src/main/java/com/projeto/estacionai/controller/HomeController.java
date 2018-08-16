@@ -74,20 +74,27 @@ public class HomeController {
 	
 	
 	@PostMapping("/validar")
-	public ModelAndView validarTicket(String placa, BindingResult result, RedirectAttributes attributes)
+	public ModelAndView validarTicket(@RequestParam("placa") String placa, RedirectAttributes attributes)
 	{
+		Veiculo veiculo = this.serviceVeiculo.buscarPorPlaca(placa);
 		
-		Ticket ticket = this.service.buscarTicket(placa);
-		if(ticket.equals(null))
+		if(veiculo == null)
 		{
-			
+			attributes.addFlashAttribute("erro", "Veiculo não encontrado. Tente novamente!");
+			return new ModelAndView("redirect:/home");
 		}
 		
-		
-		TicketSujeito sujeito = new TicketSujeito();
-		sujeito.anexar(new EntradaSaidaObserver(sujeito));	
-		
-		ModelAndView mv = new ModelAndView("redirect:/");
+		Ticket ticket = this.service.buscarTicket(placa);
+		ticket.setHorarioSaida(LocalDateTime.now());
+		ticket.setTotal(this.service.calcularTotal(ticket));
+		this.service.validarTicket(ticket);
+
+		//alertando os observadores (verificar problema)
+		this.sujeito.anexar(new EntradaSaidaObserver(sujeito));
+		this.sujeito.setarEstado(this.service.buscarUltimo());
+				
+		attributes.addFlashAttribute("sucesso", "Ticket validado com sucesso!");
+		ModelAndView mv = new ModelAndView("redirect:/home");
 		return mv;
 	}
 	
@@ -129,8 +136,8 @@ public class HomeController {
 		this.sujeito.anexar(new EntradaSaidaObserver(sujeito));
 		this.sujeito.setarEstado(this.service.buscarUltimo());
 		
-		
-		ModelAndView mv = new ModelAndView("redirect:/clientes");
+		attributes.addFlashAttribute("sucesso", "Ticket gerado com sucesso! Clique aqui para ver.");
+		ModelAndView mv = new ModelAndView("redirect:/home");
 		return mv;
 	}
 	

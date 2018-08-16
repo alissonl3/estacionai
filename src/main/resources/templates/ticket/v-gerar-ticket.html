@@ -48,7 +48,7 @@
 				</div>
 				
 				
-				<div class="alert  alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+				<div class="alert  alert-success alert-dismissible" role="alert"  th:if="${!#strings.isEmpty(mensagem)}">
 					<i class="fa fa-check-circle"></i>
 
 					<span th:text="${mensagem}">Mensagem sucesso!</span>

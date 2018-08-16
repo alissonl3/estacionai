@@ -25,10 +25,14 @@ public class TicketService {
 	@Autowired
 	private TicketRepository repository;
 	
+	public Ticket buscarTicket(Long id)
+	{
+		return this.repository.getOne(id);
+	}
 	
 	public Ticket buscarTicket(String placa)
 	{
-		return this.repository.findLastByPlacaLike(placa);
+		return this.repository.findFirstByPlacaOrderByIdDesc(placa);
 	}
 	
 	public void gerarTicket(Ticket ticket)
@@ -41,17 +45,22 @@ public class TicketService {
 		return this.repository.findFirstByOrderByIdDesc();
 	}
 	
-	public void validarTicket(String placa)
+	public void validarTicket(Ticket ticket)
 	{
-		Ticket ticket = repository.findLastByPlacaLike(placa);
-		ticket.setAtivo(true);
-		LocalDateTime horarioSaida = LocalDateTime.now();
-		ticket.setHorarioSaida(horarioSaida);
-		ticket.setTotal(calcularTotal(ticket));
-		
-		//atualiza com o horario de saida e total a pagar
-		repository.save(ticket);
+		this.repository.save(ticket);
 	}
+	
+//	public void validarTicket(String placa)
+//	{
+//		Ticket ticket = repository.findLastByPlacaLike(placa);
+//		ticket.setAtivo(true);
+//		LocalDateTime horarioSaida = LocalDateTime.now();
+//		ticket.setHorarioSaida(horarioSaida);
+//		ticket.setTotal(calcularTotal(ticket));
+//		
+//		//atualiza com o horario de saida e total a pagar
+//		repository.save(ticket);
+//	}
 	
 	public Double calcularTotal(Ticket ticket)
 	{

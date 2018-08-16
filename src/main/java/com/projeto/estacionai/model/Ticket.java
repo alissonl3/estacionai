@@ -21,6 +21,7 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 
 import com.projeto.estacionai.util.LocalDateTimeAttributeConverter;
 
