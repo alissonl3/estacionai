@@ -46,6 +46,11 @@ public class VagaService {
     {
         return this.repository.findByOcupadaFalse();
     }
+    
+    public Integer buscarPorTipo(Integer tipo)
+    {
+    	return this.repository.findByOcupadaFalseAndAtivoTrueAndTipo(tipo);
+    }
 	
     public Vaga buscar(Long id)
     {
