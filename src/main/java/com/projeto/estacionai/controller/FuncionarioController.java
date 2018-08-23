@@ -1,8 +1,14 @@
 package com.projeto.estacionai.controller;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,8 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.projeto.estacionai.model.Funcionario;
+import com.projeto.estacionai.model.Permissao;
 import com.projeto.estacionai.repository.FuncionarioRepositorySearch;
 import com.projeto.estacionai.service.FuncionarioService;
+import com.projeto.estacionai.service.PermissaoService;
 
 @Controller
 @RequestMapping("/funcionarios")
@@ -24,6 +32,8 @@ public class FuncionarioController {
 		@Autowired
 		private FuncionarioService service;
 		@Autowired
+		private PermissaoService servicePermissao;
+		@Autowired
 		private FuncionarioRepositorySearch search;
 		
 		@GetMapping
@@ -31,22 +41,6 @@ public class FuncionarioController {
 		{
 			
 			ModelAndView mv = new ModelAndView("funcionarios/v-lista-funcionario");
-//			if((filtro.getCpf() == null || filtro.getCpf().trim().equals("")) && 
-//				(filtro.getPis() == null || filtro.getPis().trim().equals("")) && 
-//				(filtro.getNome() == null || filtro.getNome().trim().equals("")) && 
-//				(filtro.getFuncao() == null || filtro.getFuncao().trim().equals("")) && 
-//				(filtro.getTelefone() == null || filtro.getTelefone().trim().equals("")) &&
-//				(filtro.getNivelPermissao() == null || filtro.getNivelPermissao() < 0))
-//			{
-//				mv.addObject("funcionarios", service.buscarTodos());
-//				mv.addObject("filtro", new Funcionario());
-//			}
-//			else
-//			{
-//				
-//				mv.addObject("funcionario", search.filtrar(filtro));
-//				mv.addObject("filtro", filtro);
-//			}
 			filtro.setAtivo(true);
 			mv.addObject("funcionarios", search.filtrar(filtro));
 			mv.addObject("filtro", filtro);
@@ -93,8 +87,20 @@ public class FuncionarioController {
 				return novo(funcionario);
 			}
 			
+			Set<Permissao> permissoes = new HashSet<>();
 			
-				
+			if(funcionario.getNivelPermissao() == 1)
+			{
+				permissoes.add(servicePermissao.buscar(1L));
+			}
+			else
+			{
+				permissoes.add(servicePermissao.buscar(2L));
+			}		
+			
+			
+			funcionario.setSenha(BCrypt.hashpw(funcionario.getSenha(), BCrypt.gensalt()));
+			funcionario.setPermissoes(permissoes);	
 			if(funcionario.getId() == null)
 			{
 				

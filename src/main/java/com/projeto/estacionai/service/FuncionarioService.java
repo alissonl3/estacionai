@@ -43,4 +43,9 @@ public class FuncionarioService {
 	{
 		return this.repository.getOne(id);
 	}
+	
+	public Funcionario buscarUltimo()
+	{
+		return this.repository.findFirstByOrderByIdDesc();
+	}
 }

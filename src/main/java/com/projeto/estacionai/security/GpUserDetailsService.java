@@ -36,7 +36,6 @@ public class GpUserDetailsService implements UserDetailsService {
 		Connection connection = null;
 
 		try {
-			//connection = Conexao.getConnection();
 			connection = dataSource.getConnection();
 
 			GpUserDetails userDetails = buscarUsuario(connection, login);
@@ -44,11 +43,7 @@ public class GpUserDetailsService implements UserDetailsService {
 			Collection<GrantedAuthority> permissoesPorUsuario = buscarPermissoes(connection,
 					login, PERMISSOES_POR_USUARIO);
 
-//			Collection<GrantedAuthority> permissoesPorGrupo = buscarPermissoes(connection,
-//					login, PERMISSOES_POR_GRUPO);
-
 			userDetails.getAuthorities().addAll(permissoesPorUsuario);
-			//userDetails.getAuthorities().addAll(permissoesPorGrupo);
 
 			return userDetails;
 		} catch (Exception e) {

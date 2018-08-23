@@ -75,14 +75,23 @@
 							<input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o Nome" />
 						</div>
 						<div class="form-group col-md-6">
+							<label >*Login</label>
+						      <input type="tel" class="form-control" th:field="*{login}" placeholder="Digite o Login">		  
+						 <small class="form-text text-muted">
+						      	Exemplo: fulano123
+							  </small>	
+						 </div>
+					 </div>
+					 <div class="form-row">
+					 
+						<div class="form-group col-md-6">
 							<label >*Telefone</label>
 						      <input type="tel" class="form-control js-tel" th:field="*{telefone}" placeholder="Digite o Telefone">		  
 						 <small class="form-text text-muted">
 						      	Exemplo: (99) 9999-9999
 							  </small>	
 						 </div>
-					 </div>
-					 <div class="form-row">
+						 
 						 <div class="form-group col-md-6">
 						 <label >*Função</label>
 						      <input type="text" class="form-control" th:field="*{funcao}" placeholder="Digite a Função">		  
@@ -90,16 +99,18 @@
 						      	Exemplo: Caixa, Cobrador...
 							  </small>	
 						 </div>
-						 <div class="form-group col-md-6">
+						 
+						 
+					 </div>
+					 <div class="form-row">
+					 	<div class="form-group col-md-5">
 						 <label >*CPF</label>
 						      <input type="text" class="form-control js-cpf" th:field="*{cpf}" placeholder="Digite o Cpf">		  
 						 	<small class="form-text text-muted">
 						      	Exemplo: 999.999.999-99
 							  </small>	
 						 </div>
-					 </div>
-					 <div class="form-row">
-						 <div class="form-group col-md-6">
+						 <div class="form-group col-md-5">
 						 	<label>*PIS:</label>
 							 <input type="text" class="form-control js-cpf" th:field="*{pis}" placeholder="Digite o PIS">
 					    	<small class="form-text text-muted">
@@ -107,7 +118,7 @@
 							  </small>	
 					    </div>
 					    
-						 <div class="form-group col-md-6">
+						 <div class="form-group col-md-2">
 						 <label >*Nível de Permissão</label>
 						 <select id="nivelPermissao" th:field="*{nivelPermissao}" class="form-control">
 						    	<option value="1" selected="selected">Normal</option>
