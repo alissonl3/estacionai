@@ -14,9 +14,7 @@ import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.projeto.estacionai.model.Ticket;
 import com.projeto.estacionai.model.Veiculo;
+import com.projeto.estacionai.observer.ClienteMovimentoObserver;
 import com.projeto.estacionai.observer.EntradaSaidaObserver;
 import com.projeto.estacionai.observer.TicketSujeito;
 import com.projeto.estacionai.service.HistoricoEntradaSaidaService;
@@ -96,12 +95,22 @@ public class HomeController {
 		}
 		
 		Ticket ticket = this.service.buscarTicket(placa);
+		
+		if(ticket == null)
+		{
+			attributes.addFlashAttribute("erro", "Não existe ticket para este veiculo. Tente novamente!");
+			return new ModelAndView("redirect:/home");
+		}
+		
 		ticket.setHorarioSaida(LocalDateTime.now());
 		ticket.setTotal(this.service.calcularTotal(ticket));
 		this.service.validarTicket(ticket);
 
-		//alertando os observadores (verificar problema)
+		//desanexando os que já tem
+		this.sujeito.getObservadores().clear();
+		//anexando e alertando os observadores
 		this.sujeito.anexar(new EntradaSaidaObserver(sujeito));
+		this.sujeito.anexar(new ClienteMovimentoObserver(sujeito));
 		this.sujeito.setarEstado(this.service.buscarUltimo());
 				
 		attributes.addFlashAttribute("sucesso", "Ticket validado com sucesso!");
@@ -143,8 +152,11 @@ public class HomeController {
 		ticket.setCliente(veiculo.getCliente());
 		this.service.gerarTicket(ticket);
 		
-		//alertando os observadores (verificar problema)
+		//desanexando os que já tem
+		this.sujeito.getObservadores().clear();
+		//alertando os observadores 
 		this.sujeito.anexar(new EntradaSaidaObserver(sujeito));
+		this.sujeito.anexar(new ClienteMovimentoObserver(sujeito));
 		this.sujeito.setarEstado(this.service.buscarUltimo());
 		
 		attributes.addFlashAttribute("sucesso", "Ticket gerado com sucesso! Clique aqui para ver.");

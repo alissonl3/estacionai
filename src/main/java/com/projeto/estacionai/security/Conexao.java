@@ -15,7 +15,7 @@ public class Conexao {
 	
 private static Connection connection;
     
-    private static String dsn = "jdbc:mysql://localhost:3306/estacionai?useSSL=false&zeroDateTimeBehavior=convertToNull";
+    private static String dsn = "jdbc:mysql://localhost:3306/estacionai2?useSSL=false&zeroDateTimeBehavior=convertToNull";
     private static String username = "root";
     private static String password = "";
     

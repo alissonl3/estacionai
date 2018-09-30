@@ -44,4 +44,10 @@ public class TicketSujeito {
 	    return ticket;
 	}
 
+	public ArrayList<TicketObserver> getObservadores() {
+		return observadores;
+	}
+	
+	
+
 }
