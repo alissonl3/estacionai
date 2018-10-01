@@ -47,6 +47,7 @@ public class GpUserDetailsService implements UserDetailsService {
 
 			return userDetails;
 		} catch (Exception e) {
+			System.out.println("Probleminha com a tentativa de conexão: " + e);
 			logger.log(Level.SEVERE, "Problemas com a tentativa de conexão!", e);
 			throw new UsernameNotFoundException("Problemas com a tentativa de conexão!", e);
 		} finally {
