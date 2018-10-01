@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,16 +52,38 @@ public class HomeController {
 	@Autowired
 	private VagaService serviceVaga;
 	
+	private Authentication authentication;
+	private String regra;
+
+	
+	
 	
 	@GetMapping
 	public ModelAndView index()
-	{		
+	{				
+		System.out.println("Gerente: " + verificarGerente());
 		ModelAndView mv = new ModelAndView("home/v-home");
 		mv.addObject("countMoto", this.serviceVaga.buscarPorTipo(1));
 		mv.addObject("countCarro", this.serviceVaga.buscarPorTipo(2));
 		mv.addObject("countDeficiente", this.serviceVaga.buscarPorTipo(3));
 		mv.addObject("historicos", this.serviceHistorico.buscarUltimos5());
+		mv.addObject("isGerente", this.verificarGerente());
 		return mv;
+	}
+	
+	public Boolean verificarGerente()
+	{
+		this.authentication = SecurityContextHolder.getContext().getAuthentication();
+		authentication.getAuthorities().forEach(a -> regra = a.toString());
+		
+		if(regra.equals("ROLE_GERENTE"))
+		{
+			return  true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public ModelAndView index(String erro)
