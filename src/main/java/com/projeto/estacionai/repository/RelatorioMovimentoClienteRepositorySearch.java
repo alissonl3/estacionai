@@ -34,7 +34,7 @@ public class RelatorioMovimentoClienteRepositorySearch {
 		CriteriaBuilder builder =  manager.getCriteriaBuilder();
 		CriteriaQuery<MovimentoCliente> criteria = builder.createQuery(MovimentoCliente.class);
 		
-		Root<ContaPagar> root = criteria.from(ContaPagar.class);
+		Root<MovimentoCliente> root = criteria.from(MovimentoCliente.class);
 		
 		Predicate[] predicates = restricoes(movimento, builder, root);
 		criteria.where(predicates);
@@ -44,7 +44,7 @@ public class RelatorioMovimentoClienteRepositorySearch {
 		return query.getResultList(); 
 	}
 	
-	private Predicate[] restricoes(MovimentoCliente movimento, CriteriaBuilder builder, Root<ContaPagar> root) {
+	private Predicate[] restricoes(MovimentoCliente movimento, CriteriaBuilder builder, Root<MovimentoCliente> root) {
 		List<Predicate> predicates	= new ArrayList<>();
 			
 		if(movimento.getDataInicio() != null && movimento.getDataFim() != null)	
