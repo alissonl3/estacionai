@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_movimento_cliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d6426cf8-485e-4da1-81b4-5e20034dc457">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_movimento_cliente" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d6426cf8-485e-4da1-81b4-5e20034dc457">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="DATA_INICIO" class="java.util.Date"/>
+	<parameter name="DATA_FIM" class="java.util.Date"/>
 	<queryString>
 		<![CDATA[SELECT
-     movimento_cliente.`cpf` AS cpf,
      movimento_cliente.`data_movimento` AS data,
      movimento_cliente.`tipo_veiculo` AS tipo,
      movimento_cliente.`nome` AS nome
 FROM
      `movimento_cliente` movimento_cliente
 WHERE
-     movimento_cliente.`ativo` = 1
+     movimento_cliente.`ativo` = 1 AND
+     movimento_cliente.`data_movimento` BETWEEN  $P{DATA_INICIO} AND $P{DATA_FIM}
 ORDER BY
      movimento_cliente.`nome` ASC]]>
 	</queryString>
-	<field name="cpf" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<field name="data" class="java.sql.Date"/>
 	<field name="tipo" class="java.lang.Integer"/>
 	<field name="nome" class="java.lang.String">
@@ -70,11 +69,11 @@ ORDER BY
 				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="cd978aaa-63e9-4800-a9bd-90a5e1f0369c"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="0" width="138" height="20" uuid="e37b40fd-2e68-453e-a77e-fc1d3c5a6ab5"/>
+				<reportElement x="0" y="0" width="276" height="20" uuid="e37b40fd-2e68-453e-a77e-fc1d3c5a6ab5"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nome do cliente]]></text>
+				<text><![CDATA[Ticket do cliente]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="414" y="0" width="138" height="20" uuid="9093d377-8e33-4097-8931-888dba81ae49"/>
@@ -89,13 +88,6 @@ ORDER BY
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tipo do veiculo]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="138" y="0" width="138" height="20" uuid="dd92157e-2a78-4ac5-8a6a-2818e3f5ef61"/>
-				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Cpf]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -112,14 +104,9 @@ ORDER BY
 				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="138" height="20" uuid="6f94f08e-c33f-405d-b559-51cfe3ae1292"/>
+				<reportElement x="0" y="0" width="276" height="20" uuid="6f94f08e-c33f-405d-b559-51cfe3ae1292"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="138" y="0" width="138" height="20" uuid="9ebd9b95-e41e-42e8-998b-b897ab7b6eac"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
