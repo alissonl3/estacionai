@@ -1,7 +1,7 @@
 # Modelagem do Estacionaí
 
 ## O que é
-O Estacionaí é um software voltando para o gerenciamento de estabelecimentos de estacionamentos, busca otimizar o sistema desde o controle de vagas ao controle financeiro.
+O Estacionaí é um software voltado para o gerenciamento de estabelecimentos de estacionamentos, busca otimizar o sistema desde o controle de vagas ao controle financeiro.
 
 ## Autores
 
